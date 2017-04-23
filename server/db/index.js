@@ -42,9 +42,9 @@ const seed = () => {
     {
       genreName: 'Rock Music'
     },
-  ]
+  ];
 
-  const reviewToAdd =[
+  const reviewToAdd = [
     {
       rating: '5'
     },
@@ -54,15 +54,15 @@ const seed = () => {
     {
       content: 'The title says it all, i simply love this band and this album. Bought this for my collection.'
     }
-  ]
+  ];
 
 
   return sync(true)
     .then(() => {
       const artistPromises = artistToAdd.map(artist => Artists.create(artist));
       const userPromises = usersToAdd.map(user => Users.create(user));
-      const genrePromises = genreToAdd.map(genre = Genres.create(genre));
-      const reviewPromises = reviewToAdd.map(review = Review.create(review));
+      const genrePromises = genreToAdd.map(genre => Genres.create(genre));
+      const reviewPromises = reviewToAdd.map(review => Review.create(review));
       return Promise.all([artistPromises, userPromises]);
     })
     .then(() =>
