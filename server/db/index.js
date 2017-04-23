@@ -53,10 +53,10 @@ const seed = () => {
   ];
 
   return sync(true).then(() => {
-    const artistPromises = artistsToAdd.map(artist => Artists.create(artist));
-    const userPromises = usersToAdd.map(user => Users.create(user));
-    const orderPromises = ordersToAdd.map(order => Orders.create(order));
-    const paymentsPromises = paymentsToAdd.map(payment => Payments.create(payment));
+    const artistPromises = Artists.bulkCreate(artistsToAdd);
+    const userPromises = Users.bulkCreate(usersToAdd);
+    const orderPromises = Orders.bulkCreate(ordersToAdd);
+    const paymentsPromises = Payments.bulkCreate(paymentsToAdd);
     return Promise.all([artistPromises, userPromises, orderPromises, paymentsPromises]);
   });
 };
