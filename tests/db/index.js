@@ -52,7 +52,9 @@ describe('Database Objects', function(){
 
   });
   require('./user');
-  // require('./artist');
+  require('./artist');
   // require('./review');
+  require('./album.model.test');
+  require('./song.model.test');
 });
 

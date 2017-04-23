@@ -1,8 +1,9 @@
 const conn = require('./conn');
 const Orders = require('./Orders');
-const Song = require('./Song');
-const Album = require('./Album');
-const User = require('./User');
+const Songs = require('./Song');
+const Albums = require('./Album');
+const Users = require('./User');
+
 
 const sync = (force) => conn.sync({ force });
 
@@ -18,6 +19,8 @@ module.exports = {
   seed,
   models: {
     Orders,
-    User
+    Users
+    Songs,
+    Albums
   }
 };
