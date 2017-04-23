@@ -62,7 +62,7 @@ const seed = () => {
       const artistPromises = artistToAdd.map(artist => Artists.create(artist));
       const userPromises = usersToAdd.map(user => Users.create(user));
       const genrePromises = Genres.bulkCreate(genresToAdd);
-      const reviewPromises = Reviews.bulkCreate(reviewToAdd);
+      const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
       return Promise.all([artistPromises, userPromises, genrePromises, reviewPromises]);
     })
     .then(() =>
