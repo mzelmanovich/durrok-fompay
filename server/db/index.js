@@ -38,18 +38,18 @@ const seed = () => {
     { completedDate: Date.now(), orderPrice: 1.99, tax: 1.99 * 0.07 },
     {}
   ];
-  
-    const genresToAdd = [
-    {
-      genreName: 'Jazz'
-    },
-    {
-      genreName: 'Pop Music'
-    },
-    {
-      genreName: 'Rock Music'
-    },
-  ];
+
+  const genresToAdd = [
+      {
+        genreName: 'Jazz'
+      },
+      {
+        genreName: 'Pop Music'
+      },
+      {
+        genreName: 'Rock Music'
+      },
+    ];
 
   const reviewsToAdd = [
     {
@@ -95,7 +95,7 @@ module.exports = {
     Artists,
     Songs,
     Albums,
-    Genres
+    Genres,
     Payments
   }
 };
