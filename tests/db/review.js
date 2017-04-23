@@ -9,5 +9,22 @@ describe('review Model', () => {
     expect(attributes.title).to.be.a('object');
     expect(attributes.content).to.be.a('object');
   });
-
+  it('Saves review as expected', done => {
+    db.models.Reviews
+      .findAll()
+      .then(results => {
+        expect(results.length).to.equal(1);
+        expect(results[0].rating).to.equal('5');
+        expect(results[0].title).to.equal('Best Album Ever!')
+        done();
+      })
+      .catch(done);
+  });
 });
+
+
+
+
+
+
+
