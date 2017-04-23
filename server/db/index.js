@@ -44,7 +44,7 @@ const seed = () => {
     },
   ];
 
-  const reviewToAdd = [
+  const reviewsToAdd = [
     {
       rating: '5'
     },
@@ -62,8 +62,8 @@ const seed = () => {
       const artistPromises = artistToAdd.map(artist => Artists.create(artist));
       const userPromises = usersToAdd.map(user => Users.create(user));
       const genrePromises = Genres.bulkCreate(genresToAdd);
-      const reviewPromises = reviewToAdd.map(review => Review.create(review));
-      return Promise.all([artistPromises, userPromises, genrePromises]);
+      const reviewPromises = Reviews.bulkCreate(reviewToAdd);
+      return Promise.all([artistPromises, userPromises, genrePromises, reviewPromises]);
     })
     .then(() =>
       Orders.bulkCreate([
