@@ -5,11 +5,12 @@ const Albums = require('./Album');
 const Users = require('./User');
 const Reviews = require('./Review');
 const Artists = require('./Artist');
+const Payments = require('./Payment');
 
 const sync = force => conn.sync({ force });
 
 const seed = () => {
-  const artistToAdd = [
+  const artistsToAdd = [
     {
       firstName: 'Nsync',
       imgURL: 'test.jpg'
@@ -31,18 +32,33 @@ const seed = () => {
     }
   ];
 
-  return sync(true)
-    .then(() => {
-      const artistPromises = artistToAdd.map(artist => Artists.create(artist));
-      const userPromises = usersToAdd.map(user => Users.create(user));
-      return Promise.all([artistPromises, userPromises]);
-    })
-    .then(() =>
-      Orders.bulkCreate([
-        { completedDate: Date.now(), orderPrice: 1.99, tax: 1.99 * 0.07 },
-        {}
-      ])
-    );
+  const ordersToAdd = [
+    { completedDate: Date.now(), orderPrice: 1.99, tax: 1.99 * 0.07 },
+    {}
+  ];
+
+  const paymentsToAdd = [
+    {
+      cardType: 'mastercard',
+      creditCardNumber: 123456789,
+      name: 'Fake 123',
+      expDate: new Date('01/01/2017')
+    },
+    {
+      cardType: 'visa',
+      creditCardNumber: 123456,
+      name: 'Faker 123',
+      expDate: new Date('01/01/2016')
+    }
+  ];
+
+  return sync(true).then(() => {
+    const artistPromises = Artists.bulkCreate(artistsToAdd);
+    const userPromises = Users.bulkCreate(usersToAdd);
+    const orderPromises = Orders.bulkCreate(ordersToAdd);
+    const paymentsPromises = Payments.bulkCreate(paymentsToAdd);
+    return Promise.all([artistPromises, userPromises, orderPromises, paymentsPromises]);
+  });
 };
 
 module.exports = {
@@ -54,6 +70,7 @@ module.exports = {
     Reviews,
     Artists,
     Songs,
-    Albums
+    Albums,
+    Payments
   }
 };
