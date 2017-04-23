@@ -41,11 +41,13 @@ const seed = () => {
     {
       cardType: 'mastercard',
       creditCardNumber: 123456789,
+      name: 'Fake 123',
       expDate: new Date('01/01/2017')
     },
     {
       cardType: 'visa',
       creditCardNumber: 123456,
+      name: 'Faker 123',
       expDate: new Date('01/01/2016')
     }
   ];
