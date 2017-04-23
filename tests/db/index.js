@@ -46,11 +46,15 @@ describe('Database Objects', function(){
         expect(results[1].completedDate).to.be.null;
         done();
       })
+    
       .catch(done);
     });
 
   });
-
+  require('./user');
+  require('./artist');
+  // require('./review');
   require('./album.model.test');
   require('./song.model.test');
 });
+
