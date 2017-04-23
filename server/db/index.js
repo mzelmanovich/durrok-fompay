@@ -32,7 +32,7 @@ const seed = () => {
     }
   ];
 
-  const genreToAdd = [
+  const genresToAdd = [
     {
       genreName: 'Jazz'
     },
@@ -61,9 +61,9 @@ const seed = () => {
     .then(() => {
       const artistPromises = artistToAdd.map(artist => Artists.create(artist));
       const userPromises = usersToAdd.map(user => Users.create(user));
-      const genrePromises = genreToAdd.map(genre => Genres.create(genre));
+      const genrePromises = Genres.bulkCreate(genresToAdd);
       const reviewPromises = reviewToAdd.map(review => Review.create(review));
-      return Promise.all([artistPromises, userPromises]);
+      return Promise.all([artistPromises, userPromises, genrePromises]);
     })
     .then(() =>
       Orders.bulkCreate([
