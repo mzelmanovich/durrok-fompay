@@ -6,11 +6,12 @@ const Users = require('./User');
 const Reviews = require('./Review');
 const Artists = require('./Artist');
 const Genres = require('./Genre');
+const Payments = require('./Payment');
 
 const sync = force => conn.sync({ force });
 
 const seed = () => {
-  const artistToAdd = [
+  const artistsToAdd = [
     {
       firstName: 'Nsync',
       imgURL: 'test.jpg'
@@ -32,7 +33,13 @@ const seed = () => {
     }
   ];
 
-  const genresToAdd = [
+
+  const ordersToAdd = [
+    { completedDate: Date.now(), orderPrice: 1.99, tax: 1.99 * 0.07 },
+    {}
+  ];
+  
+    const genresToAdd = [
     {
       genreName: 'Jazz'
     },
@@ -52,21 +59,30 @@ const seed = () => {
     }
   ];
 
+  const paymentsToAdd = [
+    {
+      cardType: 'mastercard',
+      creditCardNumber: 123456789,
+      name: 'Fake 123',
+      expDate: new Date('01/01/2017')
+    },
+    {
+      cardType: 'visa',
+      creditCardNumber: 123456,
+      name: 'Faker 123',
+      expDate: new Date('01/01/2016')
+    }
+  ];
 
-  return sync(true)
-    .then(() => {
-      const artistPromises = artistToAdd.map(artist => Artists.create(artist));
-      const userPromises = usersToAdd.map(user => Users.create(user));
-      const genrePromises = Genres.bulkCreate(genresToAdd);
-       const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
-      return Promise.all([artistPromises, userPromises, genrePromises, reviewPromises]);
-    })
-    .then(() =>
-      Orders.bulkCreate([
-        { completedDate: Date.now(), orderPrice: 1.99, tax: 1.99 * 0.07 },
-        {}
-      ])
-    );
+  return sync(true).then(() => {
+    const artistPromises = Artists.bulkCreate(artistsToAdd);
+    const userPromises = Users.bulkCreate(usersToAdd);
+    const orderPromises = Orders.bulkCreate(ordersToAdd);
+    const genrePromises = Genres.bulkCreate(genresToAdd);
+    const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
+    const paymentsPromises = Payments.bulkCreate(paymentsToAdd);
+    return Promise.all([artistPromises, userPromises, orderPromises, paymentsPromises, genrePromises, reviewPromises]);
+  });
 };
 
 module.exports = {
@@ -80,5 +96,6 @@ module.exports = {
     Songs,
     Albums,
     Genres
+    Payments
   }
 };
