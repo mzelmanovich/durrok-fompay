@@ -14,7 +14,6 @@
   },
   "scripts": {
     "test": "node_modules/.bin/mocha ./tests"
-    //DATABASE_URL=postgres://localhost/durrok_fompay_db 
   },
   "repository": {
     "type": "git",
