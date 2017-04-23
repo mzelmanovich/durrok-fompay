@@ -41,9 +41,10 @@ describe('Database Objects', function() {
         .catch(done);
     });
   });
-  require('./user');
-  require('./artist');
-  require('./review');
+  require('./user.model.test');
+  require('./artist.model.test');
+  require('./review.model.test');
+  require('./genre.model.test');
   require('./album.model.test');
   require('./song.model.test');
 });
