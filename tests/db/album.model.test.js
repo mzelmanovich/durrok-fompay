@@ -8,5 +8,6 @@ describe('Album Model', () => {
     expect(attributes.name).to.be.a('object');
     expect(attributes.year).to.be.a('object');
     expect(attributes.genre).to.be.a('object');
+    expect(attributes.imgURL).to.be.a('object');
   });
 });

@@ -13,6 +13,10 @@ const Album = conn.define('album', {
   genre: {
     type: Sequelize.STRING,
     defaultValue: null
+  },
+  imgURL: {
+    type: Sequelize.STRING,
+    defaultValue: null
   }
 });
 

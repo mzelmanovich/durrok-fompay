@@ -21,6 +21,10 @@ const Song = conn.define('song', {
   description: {
     type: Sequelize.TEXT,
     defaultValue: null
+  },
+  imgURL: {
+    type: Sequelize.STRING,
+    defaultValue: null
   }
 });
 

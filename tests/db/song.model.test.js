@@ -10,5 +10,6 @@ describe('Song Model', () => {
     expect(attributes.duration).to.be.a('object');
     expect(attributes.price).to.be.a('object');
     expect(attributes.description).to.be.a('object');
+    expect(attributes.imgURL).to.be.a('object');
   });
 });
