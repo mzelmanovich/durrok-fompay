@@ -1,9 +1,9 @@
 const { expect } = require('chai');
 const db = require('../../server/db');
 
-describe('user Model', () => {
+describe('Payment Model', () => {
 
-  it('Saves user as expected', done => {
+  it('Saves Payment as expected', done => {
     db.models.Payments
       .findAll()
       .then(results => {
