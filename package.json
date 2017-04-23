@@ -13,7 +13,7 @@
     "chai": "^3.5.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha ./tests"
+    "test": "DATABASE_URL=postgres://localhost/durrok_fompay_db node_modules/.bin/mocha ./tests"
   },
   "repository": {
     "type": "git",

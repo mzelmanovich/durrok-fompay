@@ -46,12 +46,8 @@ const seed = () => {
 
   const reviewsToAdd = [
     {
-      rating: '5'
-    },
-    {
-      title: 'Best Music Ever!'
-    },
-    {
+      rating: '5',
+      title: 'Best Album Ever!',
       content: 'The title says it all, i simply love this band and this album. Bought this for my collection.'
     }
   ];
@@ -62,8 +58,8 @@ const seed = () => {
       const artistPromises = artistToAdd.map(artist => Artists.create(artist));
       const userPromises = usersToAdd.map(user => Users.create(user));
       const genrePromises = Genres.bulkCreate(genresToAdd);
-      // const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
-      return Promise.all([artistPromises, userPromises, genrePromises]);
+       const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
+      return Promise.all([artistPromises, userPromises, genrePromises, reviewPromises]);
     })
     .then(() =>
       Orders.bulkCreate([

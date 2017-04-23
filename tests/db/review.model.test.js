@@ -14,7 +14,7 @@ describe('review Model', () => {
       .findAll()
       .then(results => {
         expect(results.length).to.equal(1);
-        expect(results[0].rating).to.equal('5');
+        expect(results[0].rating).to.equal(5);
         expect(results[0].title).to.equal('Best Album Ever!')
         done();
       })
