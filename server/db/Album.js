@@ -14,6 +14,10 @@ const Album = conn.define('album', {
     type: Sequelize.STRING,
     defaultValue: null
   },
+  description: {
+    type: Sequelize.TEXT,
+    defaultValue: null
+  },
   imgURL: {
     type: Sequelize.STRING,
     defaultValue: null

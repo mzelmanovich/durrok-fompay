@@ -18,10 +18,6 @@ const Song = conn.define('song', {
     type: Sequelize.DECIMAL,
     defaultValue: null
   },
-  description: {
-    type: Sequelize.TEXT,
-    defaultValue: null
-  },
   imgURL: {
     type: Sequelize.STRING,
     defaultValue: null
