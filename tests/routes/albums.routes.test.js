@@ -19,8 +19,9 @@ describe('/albums', () => {
   it('albums/:id returns 404', (done) => {
     server.get('api/albums/10')
     .expect(404)
-    .then( () => {
+    .then(() => {
       done();
-    });
+    })
+    .catch(done);
   });
 });
