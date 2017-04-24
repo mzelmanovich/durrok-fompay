@@ -6,7 +6,7 @@ const server = request(app);
 describe('/albums', () => {
 
   it('albums/:id returns an album', (done) => {
-    server.get('/albums/1')
+    server.get('/api/albums/1')
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
@@ -17,7 +17,7 @@ describe('/albums', () => {
   });
 
   it('albums/:id returns 404', (done) => {
-    server.get('/albums/10')
+    server.get('api/albums/10')
     .expect(404)
     .then( () => {
       done();
