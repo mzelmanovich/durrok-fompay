@@ -9,7 +9,7 @@ describe('/albums', () => {
     server.get('/albums/1')
     .expect('Content-Type', /json/)
     .expect(200)
-    .end( (body) => {
+    .end( ({body}) => {
       expect(body.id * 1).to.equal(1);
       done();
     });
