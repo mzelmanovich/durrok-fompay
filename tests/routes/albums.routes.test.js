@@ -9,20 +9,18 @@ describe('/albums', () => {
     server.get('/albums/1')
     .expect('Content-Type', /json/)
     .expect(200)
-    .end( (err, {body})  => {
-      if (err){
-        return done(err);
-      }
+    .then( ({body})  => {
       expect(body.id * 1).to.equal(1);
       done();
-    });
+    })
+    .catch(done);
   });
 
   it('albums/:id returns 404', (done) => {
     server.get('/albums/10')
     .expect('Content-Type', /json/)
     .expect(404)
-    .end( () => {
+    .then( () => {
       done();
     });
   });
