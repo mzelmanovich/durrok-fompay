@@ -9,9 +9,29 @@ const Genres = require('./Genre');
 const Payments = require('./Payment');
 
 
-// put assoiations here
 
-//put assiations here
+// User Associations
+Users.hasMany( Orders );
+Users.hasMany( Payments );
+Users.hasMany( Reviews );
+
+
+//Review Association
+ Reviews.belongsTo( Albums );
+ Reviews.belongsTo( Songs );
+ Reviews.belongsTo(Users, {through: 'userReview'} ) ;
+
+
+// //Artist Association
+// Artists.hasMany( Songs );
+// Artists.hasMany( Albums );
+// Artists.hasMany( Genres );
+// Artists.belongsTo(Artists, {as: 'Band'});
+
+// //Payment Association
+// Payments.belongsTo( Users );
+// Payments.belongsTo( Orders );
+
 
 
 const sync = force => conn.sync({ force });

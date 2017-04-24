@@ -20,6 +20,15 @@ describe('review Model', () => {
       })
       .catch(done);
   });
+    it('Has User association', () => {
+    expect(attributes.userId).to.be.a('object');
+  });
+    it('Has Album association', () => {
+    expect(attributes.albumId).to.be.a('object');
+  });
+      it('Has Song association', () => {
+    expect(attributes.songId).to.be.a('object');
+  });
 });
 
 

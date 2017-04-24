@@ -25,6 +25,10 @@ describe('Database Objects', function() {
       expect(attributes.tax).to.be.a('object');
     });
 
+    it('Has User association',() =>{
+      expect(attributes.userId).to.be.a('object');
+    });
+
     it('Saves data as expected', done => {
       db.models.Orders
         .findAll()
@@ -48,6 +52,8 @@ describe('Database Objects', function() {
     xit('Has ass2 as expected', done => {
       //my tests
     });
+
+    
 
   });
 

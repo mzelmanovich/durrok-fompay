@@ -1,5 +1,8 @@
-const { expect } = require('chai');
+const chai = require('chai');
+const expect = require('chai').expect;
 const db = require('../../server/db');
+chai.use(require('chai-bookshelf'));
+
 
 describe('user Model', () => {
   const { attributes } = db.models.Users;
