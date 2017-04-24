@@ -36,6 +36,7 @@ const seed = () => {
       name: 'Talkie Walkie',
       year: '2004',
       genre: 'Electronica',
+      price: 15,
       description: 'Best album from Air',
       imgURL: null
     },
@@ -43,6 +44,7 @@ const seed = () => {
       name: 'Zoot Woman',
       year: '2003',
       genre: 'Rock',
+      price: 15,
       description: 'Best album from Zoot Woman',
       imgURL: null
     }

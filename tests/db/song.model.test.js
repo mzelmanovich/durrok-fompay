@@ -21,7 +21,7 @@ describe('Song Model', () => {
         expect(results[0].year).to.equal('2004');
         expect(results[0].imgURL).to.be.null;
         expect(results[1].duration).to.equal(244);
-        expect(results[1].price).to.equal(1.99 * 1);
+        expect(results[1].price * 1).to.equal(1.99);
         expect(results[1].imgURL).to.be.null;
         done();
       })
