@@ -53,14 +53,14 @@ const seed = () => {
       name:'Calmer',
       year: '2004',
       duration: 238,
-      price: 1.99,
+      price: 1.99*1,
       imgURL: null
     },
     {
       name: 'Venus',
       year: '2004',
       duration: 244,
-      price: 1.99,
+      price: 1.99*1,
       imgURL: null
     }
   ];
