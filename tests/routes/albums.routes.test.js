@@ -7,8 +7,8 @@ describe('/albums', () => {
 
   it('albums/:id returns an album', (done) => {
     server.get('/albums/1')
-    .expect('Content-Type', /json/)
     .expect(200)
+    .expect('Content-Type', /json/)
     .then( ({body})  => {
       expect(body.id * 1).to.equal(1);
       done();
@@ -18,7 +18,6 @@ describe('/albums', () => {
 
   it('albums/:id returns 404', (done) => {
     server.get('/albums/10')
-    .expect('Content-Type', /json/)
     .expect(404)
     .then( () => {
       done();
