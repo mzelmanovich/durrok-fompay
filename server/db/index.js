@@ -5,11 +5,13 @@ const Albums = require('./Album');
 const Users = require('./User');
 const Reviews = require('./Review');
 const Artists = require('./Artist');
+const Genres = require('./Genre');
+const Payments = require('./Payment');
 
 const sync = force => conn.sync({ force });
 
 const seed = () => {
-  const artistToAdd = [
+  const artistsToAdd = [
     {
       firstName: 'Nsync',
       imgURL: 'test.jpg'
@@ -31,7 +33,48 @@ const seed = () => {
     }
   ];
 
-  const albumToAdd = [
+
+  const ordersToAdd = [
+    { completedDate: Date.now(), orderPrice: 1.99, tax: 1.99 * 0.07 },
+    {}
+  ];
+
+  const genresToAdd = [
+      {
+        genreName: 'Jazz'
+      },
+      {
+        genreName: 'Pop Music'
+      },
+      {
+        genreName: 'Rock Music'
+      },
+    ];
+
+  const reviewsToAdd = [
+    {
+      rating: '5',
+      title: 'Best Album Ever!',
+      content: 'The title says it all, i simply love this band and this album. Bought this for my collection.'
+    }
+  ];
+
+  const paymentsToAdd = [
+    {
+      cardType: 'mastercard',
+      creditCardNumber: 123456789,
+      name: 'Fake 123',
+      expDate: new Date('01/01/2017')
+    },
+    {
+      cardType: 'visa',
+      creditCardNumber: 123456,
+      name: 'Faker 123',
+      expDate: new Date('01/01/2016')
+    }
+  ];
+  
+  const albumsToAdd = [
     {
       name: 'Talkie Walkie',
       year: '2004',
@@ -50,7 +93,7 @@ const seed = () => {
     }
   ];
 
-  const songToAdd = [
+  const songsToAdd = [
     {
       name: 'Calmer',
       year: '2004',
@@ -67,14 +110,26 @@ const seed = () => {
     }
   ];
 
-  return sync(true)
-    .then(() => {
-      const artistPromises = artistToAdd.map(artist => Artists.create(artist));
-      const userPromises = usersToAdd.map(user => Users.create(user));
-      const albumPromises = Albums.bulkCreate(albumToAdd);
-      const songPromises = Songs.bulkCreate(songToAdd);
-      return Promise.all([artistPromises, userPromises, songPromises, albumPromises]);
-    });
+  return sync(true).then(() => {
+    const artistPromises = Artists.bulkCreate(artistsToAdd);
+    const userPromises = Users.bulkCreate(usersToAdd);
+    const orderPromises = Orders.bulkCreate(ordersToAdd);
+    const genrePromises = Genres.bulkCreate(genresToAdd);
+    const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
+    const paymentsPromises = Payments.bulkCreate(paymentsToAdd);
+    const songPromises = Songs.bulkCreate(songsToAdd);
+    const albumPromises = Albums.bulkCreate(albumsToAdd);
+    return Promise.all([
+      artistPromises,
+      userPromises,
+      orderPromises, 
+      paymentsPromises,
+      genrePromises,
+      reviewPromises,
+      songPromises, 
+      albumPromises
+    ]);
+  });
 };
 
 module.exports = {
@@ -86,6 +141,8 @@ module.exports = {
     Reviews,
     Artists,
     Songs,
-    Albums
+    Albums,
+    Genres,
+    Payments
   }
 };
