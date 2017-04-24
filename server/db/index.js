@@ -8,9 +8,16 @@ const Artists = require('./Artist');
 const Genres = require('./Genre');
 const Payments = require('./Payment');
 
+
+// put assoiations here
+
+//put assiations here
+
+
 const sync = force => conn.sync({ force });
 
 const seed = () => {
+
   const artistsToAdd = [
     {
       firstName: 'Nsync',
@@ -40,16 +47,16 @@ const seed = () => {
   ];
 
   const genresToAdd = [
-      {
-        genreName: 'Jazz'
-      },
-      {
-        genreName: 'Pop Music'
-      },
-      {
-        genreName: 'Rock Music'
-      },
-    ];
+    {
+      genreName: 'Jazz'
+    },
+    {
+      genreName: 'Pop Music'
+    },
+    {
+      genreName: 'Rock Music'
+    },
+  ];
 
   const reviewsToAdd = [
     {
@@ -73,7 +80,7 @@ const seed = () => {
       expDate: new Date('01/01/2016')
     }
   ];
-  
+
   const albumsToAdd = [
     {
       name: 'Talkie Walkie',
@@ -122,13 +129,17 @@ const seed = () => {
     return Promise.all([
       artistPromises,
       userPromises,
-      orderPromises, 
+      orderPromises,
       paymentsPromises,
       genrePromises,
       reviewPromises,
-      songPromises, 
+      songPromises,
       albumPromises
     ]);
+  })
+  .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
+    //make ass. seed data here using sequelize ass methods
+
   });
 };
 
