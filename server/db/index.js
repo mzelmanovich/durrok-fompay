@@ -73,6 +73,42 @@ const seed = () => {
       expDate: new Date('01/01/2016')
     }
   ];
+  
+  const albumsToAdd = [
+    {
+      name: 'Talkie Walkie',
+      year: '2004',
+      genre: 'Electronica',
+      price: 15,
+      description: 'Best album from Air',
+      imgURL: null
+    },
+    {
+      name: 'Zoot Woman',
+      year: '2003',
+      genre: 'Rock',
+      price: 15,
+      description: 'Best album from Zoot Woman',
+      imgURL: null
+    }
+  ];
+
+  const songsToAdd = [
+    {
+      name: 'Calmer',
+      year: '2004',
+      duration: 238,
+      price: 1.99 * 1,
+      imgURL: null
+    },
+    {
+      name: 'Venus',
+      year: '2004',
+      duration: 244,
+      price: 1.99 * 1,
+      imgURL: null
+    }
+  ];
 
   return sync(true).then(() => {
     const artistPromises = Artists.bulkCreate(artistsToAdd);
@@ -81,7 +117,18 @@ const seed = () => {
     const genrePromises = Genres.bulkCreate(genresToAdd);
     const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
     const paymentsPromises = Payments.bulkCreate(paymentsToAdd);
-    return Promise.all([artistPromises, userPromises, orderPromises, paymentsPromises, genrePromises, reviewPromises]);
+    const songPromises = Songs.bulkCreate(songsToAdd);
+    const albumPromises = Albums.bulkCreate(albumsToAdd);
+    return Promise.all([
+      artistPromises,
+      userPromises,
+      orderPromises, 
+      paymentsPromises,
+      genrePromises,
+      reviewPromises,
+      songPromises, 
+      albumPromises
+    ]);
   });
 };
 
