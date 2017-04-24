@@ -5,7 +5,7 @@ const server = request(app);
 
 describe('/albums', () => {
 
-  it('can find via id (albums/:id', (done) => {
+  it('albums/:id returns an album', (done) => {
     server.get('/albums/1')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -15,7 +15,7 @@ describe('/albums', () => {
     });
   });
 
-  it('returns 404', (done) => {
+  it('albums/:id returns 404', (done) => {
     server.get('/albums/10')
     .expect('Content-Type', /json/)
     .expect(404)
