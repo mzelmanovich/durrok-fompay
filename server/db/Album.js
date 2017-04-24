@@ -18,10 +18,9 @@ const Album = conn.define('album', {
     type: Sequelize.TEXT,
     defaultValue: null
   },
-  price:{
-    type:Sequelize.DECIMAL,
-    defaultValue:15*1
-  }
+  price: {
+    type: Sequelize.DECIMAL
+  },
   imgURL: {
     type: Sequelize.STRING,
     defaultValue: null

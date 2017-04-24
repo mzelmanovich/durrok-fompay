@@ -33,7 +33,7 @@ const seed = () => {
 
   const albumToAdd = [
     {
-      name:'Talkie Walkie',
+      name: 'Talkie Walkie',
       year: '2004',
       genre: 'Electronica',
       description: 'Best album from Air',
@@ -50,17 +50,17 @@ const seed = () => {
 
   const songToAdd = [
     {
-      name:'Calmer',
+      name: 'Calmer',
       year: '2004',
       duration: 238,
-      price: 1.99*1,
+      price: 1.99 * 1,
       imgURL: null
     },
     {
       name: 'Venus',
       year: '2004',
       duration: 244,
-      price: 1.99*1,
+      price: 1.99 * 1,
       imgURL: null
     }
   ];
@@ -69,18 +69,9 @@ const seed = () => {
     .then(() => {
       const artistPromises = artistToAdd.map(artist => Artists.create(artist));
       const userPromises = usersToAdd.map(user => Users.create(user));
-      return Promise.all([artistPromises, userPromises]);
-    })
-    .then(() =>
-      Orders.bulkCreate([
-        { completedDate: Date.now(), orderPrice: 1.99, tax: 1.99 * 0.07 },
-        {}
-      ])
-    )
-    .then(()=>{
-      const albumPromises = albumToAdd.map(album=> Albums.create(album));
-      const songPromises = songToAdd.map(song=> Songs.create(song));
-      return Promise.all([albumPromises,songPromises]);
+      const albumPromises = Albums.bulkCreate(albumToAdd);
+      const songPromises = Songs.bulkCreate(songToAdd);
+      return Promise.all([artistPromises, userPromises, songPromises, albumPromises]);
     });
 };
 
