@@ -21,7 +21,7 @@ Songs.belongsTo(Genres);
 
 Albums.belongsTo(Orders);
 Albums.hasMany(Reviews);
-Albums.hasMany(Artists);
+Albums.belongsTo(Artists);
 Albums.belongsTo(Genres);
 
 // User Associations
