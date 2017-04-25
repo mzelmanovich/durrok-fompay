@@ -45,16 +45,6 @@ describe('Database Objects', function() {
         .catch(done);
     });
 
-    xit('Has ass1 as expected', done => {
-      //my tests
-    });
-
-    xit('Has ass2 as expected', done => {
-      //my tests
-    });
-
-    
-
   });
 
   require('./user.model.test');
