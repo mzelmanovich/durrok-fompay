@@ -5,7 +5,7 @@ describe('genre Model', () => {
   const { attributes } = db.models.Genres;
 
   it('Has fields as expected', () => {
-    expect(attributes.genreName).to.be.a('object');
+    expect(attributes.name).to.be.a('object');
   });
 
   it('Saves genre as expected', done => {
@@ -13,7 +13,7 @@ describe('genre Model', () => {
       .findAll()
       .then(results => {
         expect(results.length).to.equal(3);
-        expect(results[0].genreName).to.equal('Jazz');
+        expect(results[0].name).to.equal('Jazz');
         done();
       })
       .catch(done);

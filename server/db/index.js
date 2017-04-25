@@ -74,9 +74,9 @@ const seed = () => {
   ];
 
   const genresToAdd = [
-    {genreName: 'Jazz'},
-    {genreName: 'Pop Music'},
-    {genreName: 'Rock Music'}
+    {name: 'Jazz'},
+    {name: 'Pop Music'},
+    {name: 'Rock Music'}
   ];
 
   const reviewsToAdd = [
