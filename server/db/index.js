@@ -156,7 +156,7 @@ const seed = () => {
     const songartist = artists[0].addSongs(songs[0])//Songs.belongsTo(Artist);
     const songOrder = completedOrder.setSongs(songs[0]);
     const albumOrder = completedOrder.addAlbums(albums[0]);
-    const paymentOrder = completedOrder.setPayments(payments[0]);
+    const paymentOrder = completedOrder.setPayment(payments[0]);
 
     return Promise.all(userorder,reviewalbum,reviewuser,paymentuser,songartist,songOrder,albumOrder,paymentOrder);
 
