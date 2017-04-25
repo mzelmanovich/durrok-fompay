@@ -17,10 +17,12 @@ Orders.belongsTo(Users);
 Songs.belongsTo(Orders);
 Songs.hasMany(Reviews);
 Songs.belongsTo(Artists);
+Songs.belongsTo(Albums);
 Songs.belongsTo(Genres);
 
 Albums.belongsTo(Orders);
 Albums.hasMany(Reviews);
+Albums.hasMany(Songs);
 Albums.belongsTo(Artists);
 Albums.belongsTo(Genres);
 
