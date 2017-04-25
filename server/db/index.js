@@ -18,7 +18,7 @@ Orders.belongsTo(Users);
 
 Songs.belongsTo(Orders);
 Songs.hasMany(Reviews);
-Songs.hasMany(Artists);
+Songs.belongsTo(Artists);
 Songs.hasMany(Genres);
 
 Albums.belongsTo(Orders);
