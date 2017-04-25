@@ -12,19 +12,17 @@ const Payments = require('./Payment');
 Orders.hasOne( Payments );
 Orders.hasMany( Songs );
 Orders.hasMany( Albums );
-Orders.hasMany( Albums );
 Orders.belongsTo(Users);
-
 
 Songs.belongsTo(Orders);
 Songs.hasMany(Reviews);
 Songs.belongsTo(Artists);
-Songs.hasMany(Genres);
+Songs.belongsTo(Genres);
 
 Albums.belongsTo(Orders);
 Albums.hasMany(Reviews);
 Albums.hasMany(Artists);
-Albums.hasMany(Genres);
+Albums.belongsTo(Genres);
 
 // User Associations
 Users.hasMany(Orders);
@@ -42,11 +40,11 @@ Reviews.belongsTo(Users);
 Artists.hasMany( Songs );
 Artists.hasMany( Albums );
 Artists.belongsTo(Artists, {as: 'Band'});
-Artists.hasMany( Genres );
+Artists.belongsTo( Genres );
 
-Genres.belongsTo( Artists );
-Genres.belongsTo( Songs );
-Genres.belongsTo( Albums );
+Genres.hasMany( Artists );
+Genres.hasMany( Songs );
+Genres.hasMany( Albums );
 
 //Payment Association
 Payments.belongsTo( Users );
