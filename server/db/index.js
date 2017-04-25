@@ -125,23 +125,23 @@ const seed = () => {
   ];
 
   return sync(true).then(() => {
-    const artistPromises = artistsToAdd.map(art => Artists.create(art));
-    const userPromises = usersToAdd.map(user => Users.create(user));
-    const orderPromises = ordersToAdd.map(order => Orders.create(order));
-    const genrePromises = genresToAdd.map(gen => Genres.create(gen));
-    const reviewPromises = reviewsToAdd.map(rev => Reviews.create(rev));
-    const paymentsPromises = paymentsToAdd.map(pay => Payments.create(pay));
-    const songPromises = songsToAdd.map(song => Songs.create(song));
-    const albumPromises = albumsToAdd.map(alb => Albums.create(alb));
+    const artistPromises = artistsToAdd.map(art => Artists.bulkCreate(art));
+    const userPromises = Users.bulkCreate(usersToAdd);
+    const orderPromises = Orders.bulkCreate(ordersToAdd);
+    const genrePromises = Genres.bulkCreate(genresToAdd);
+    const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
+    const paymentsPromises = Payments.bulkCreate(paymentsToAdd);
+    const songPromises = Songs.bulkCreate(songsToAdd);
+    const albumPromises = Albums.bulkCreate(albumsToAdd);
     return Promise.all([
       Promise.all(artistPromises),
-      Promise.all(userPromises),
-      Promise.all(orderPromises),
-      Promise.all(paymentsPromises),
-      Promise.all(genrePromises),
-      Promise.all(reviewPromises),
-      Promise.all(songPromises),
-      Promise.all(albumPromises)
+      userPromises,
+      orderPromises,
+      paymentsPromises,
+      genrePromises,
+      reviewPromises,
+      songPromises,
+      albumPromises
     ]);
   })
   .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
