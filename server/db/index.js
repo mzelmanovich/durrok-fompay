@@ -154,7 +154,7 @@ const seed = () => {
     const reviewuser = users[0].setReviews(reviews[0]); // Reviews.belongsTo(Users);
     const paymentuser = users[0].addPayments(payments[0]);//Payments.belongsTo( Users );
     const songartist = artists[0].addSongs(songs[0])//Songs.belongsTo(Artist);
-    const songOrder = completedOrder[0].addSongs(songs[0]);
+    const songOrder = completedOrder[0].setSong(songs[0]);
     const albumOrder = completedOrder[0].addAlbums(albums[0]);
     const paymentOrder = completedOrder[0].setPayments(payments[0]);
 
