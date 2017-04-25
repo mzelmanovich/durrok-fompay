@@ -28,12 +28,11 @@
 
    it('Has associations as expected', done => {
      db.models.Orders
-        .findAll({include:[{all:true}]})
-        .then(results => {
-          expect(results.length).to.equal(2);
-          expect(results[0].songs[0].id).to.equal(1);
-          expect(results[0].albums[0].id).to.equal(1);
-          expect(results[0].paymentId).to.equal(1);
+        .findById(1, {include:[{all:true}]})
+        .then(order => {
+          expect(order.songs[0].id).to.equal(1);
+          expect(order.albums[0].id).to.equal(1);
+          expect(order.paymentId).to.equal(1);
           done();
         })
         .catch(done);
