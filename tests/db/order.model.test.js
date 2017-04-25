@@ -26,10 +26,11 @@
         .catch(done);
    });
 
-   it('Has associations as expected', done => {
+   it.only('Has associations as expected', done => {
      db.models.Orders
         .findById(1, {include: [{all: true}]})
         .then(order => {
+          console.log(order);
           expect(order.songs[0].id).to.equal(1);
           expect(order.albums[0].id).to.equal(1);
           expect(order.paymentId).to.equal(1);
