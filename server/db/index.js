@@ -134,14 +134,14 @@ const seed = () => {
     const songPromises = songsToAdd.map(song => Songs.create(song));
     const albumPromises = albumsToAdd.map(alb => Albums.create(alb));
     return Promise.all([
-      artistPromises,
-      userPromises,
-      orderPromises,
-      paymentsPromises,
-      genrePromises,
-      reviewPromises,
-      songPromises,
-      albumPromises
+      Promise.all(artistPromises),
+      Promise.all(userPromises),
+      Promise.all(orderPromises),
+      Promise.all(paymentsPromises),
+      Promise.all(genrePromises),
+      Promise.all(reviewPromises),
+      Promise.all(songPromises),
+      Promise.all(albumPromises)
     ]);
   })
   .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
