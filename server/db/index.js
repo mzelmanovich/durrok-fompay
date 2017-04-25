@@ -150,10 +150,9 @@ const seed = () => {
     const reviewuser = users[0].setReviews(reviews[0]); // Reviews.belongsTo(Users);
     const paymentuser = users[0].addPayment(payments[0]);//Payments.belongsTo( Users );
     const songartist = artists[0].addSongs(songs[0]);//Songs.belongsTo(Artist);
-    console.log(songs[0]);
-    const songOrder = completedOrder.addSong(songs[0]);
-    const albumOrder = completedOrder.addAlbum(albums[0]);
-    const paymentOrder = completedOrder.setPayment(payments[0]);
+    const songOrder = completedOrder.setSongs(1);
+    const albumOrder = completedOrder.setAlbums(1);
+    const paymentOrder = completedOrder.setPayment(1);
 
     return Promise.all([userorder, reviewalbum, reviewuser, paymentuser, songartist, songOrder, albumOrder, paymentOrder]);
 
