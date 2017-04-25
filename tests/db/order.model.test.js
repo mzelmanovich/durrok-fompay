@@ -26,7 +26,7 @@
         .catch(done);
    });
 
-   it.only('Has associations as expected', done => {
+   it('Has associations as expected', done => {
      db.models.Orders
         .findById(1, {include: [{all: true}]})
         .then(order => {
