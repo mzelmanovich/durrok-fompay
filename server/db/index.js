@@ -145,13 +145,13 @@ const seed = () => {
     ]);
   })
   .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
-    const userorder = users[0].setOrders([completedOrder, emptyCart]); //order belongs to user
+    const userorder = users[0].addOrder(completedOrder); //order belongs to user
     const reviewalbum = albums[0].setReviews(reviews[0]) ; //review belongs to album
     const reviewuser = users[0].setReviews(reviews[0]); // Reviews.belongsTo(Users);
-    const paymentuser = users[0].addPayments(payments[0]);//Payments.belongsTo( Users );
+    const paymentuser = users[0].addPayment(payments[0]);//Payments.belongsTo( Users );
     const songartist = artists[0].addSongs(songs[0]);//Songs.belongsTo(Artist);
-    const songOrder = completedOrder.setSongs(songs[0]);
-    const albumOrder = completedOrder.addAlbums(albums[0]);
+    const songOrder = completedOrder.addSong(songs[0]);
+    const albumOrder = completedOrder.addAlbum(albums[0]);
     const paymentOrder = completedOrder.setPayment(payments[0]);
 
     return Promise.all([userorder, reviewalbum, reviewuser, paymentuser, songartist, songOrder, albumOrder, paymentOrder]);
