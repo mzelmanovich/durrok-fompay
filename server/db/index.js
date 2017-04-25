@@ -158,7 +158,7 @@ const seed = () => {
     const albumOrder = completedOrder.addAlbums(albums[0]);
     const paymentOrder = completedOrder.setPayment(payments[0]);
 
-    return Promise.all(userorder,reviewalbum,reviewuser,paymentuser,songartist,songOrder,albumOrder,paymentOrder);
+    return Promise.all([userorder,reviewalbum,reviewuser,paymentuser,songartist,songOrder,albumOrder,paymentOrder]);
 
   });
 };
