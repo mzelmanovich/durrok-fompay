@@ -10,10 +10,6 @@ const Album = conn.define('album', {
     type: Sequelize.STRING,
     defaultValue: null
   },
-  genre: {
-    type: Sequelize.STRING,
-    defaultValue: null
-  },
   description: {
     type: Sequelize.TEXT,
     defaultValue: null

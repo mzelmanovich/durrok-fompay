@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const conn = require('./conn');
 
 const Genre = conn.define('genre', {
-  genreName: {
+  name: {
     type: Sequelize.STRING,
     unique: true
   }

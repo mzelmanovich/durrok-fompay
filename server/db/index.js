@@ -8,44 +8,49 @@ const Artists = require('./Artist');
 const Genres = require('./Genre');
 const Payments = require('./Payment');
 
+//Order Association
+Orders.hasOne( Payments );
+Orders.hasMany( Songs );
+Orders.hasMany( Albums );
+Orders.belongsTo(Users);
 
+Songs.belongsTo(Orders);
+Songs.hasMany(Reviews);
+Songs.belongsTo(Artists);
+Songs.belongsTo(Albums);
+Songs.belongsTo(Genres);
+
+Albums.belongsTo(Orders);
+Albums.hasMany(Reviews);
+Albums.hasMany(Songs);
+Albums.belongsTo(Artists);
+Albums.belongsTo(Genres);
 
 // User Associations
-Orders.belongsTo(Users);
-Users.hasMany( Orders );
-
-Users.hasMany( Payments );
-Users.hasMany( Reviews );
-
+Users.hasMany(Orders);
+Users.hasMany(Payments);
+Users.hasMany(Reviews);
 
 
 //Review Association
- Reviews.belongsTo( Albums );
- Albums.hasMany(Reviews);
-
- Reviews.belongsTo( Songs );
- Songs.hasMany(Reviews);
-
- Reviews.belongsTo(Users);
- Users.hasMany(Reviews) ;
+Reviews.belongsTo( Albums );
+Reviews.belongsTo( Songs );
+Reviews.belongsTo(Users);
 
 
 //Artist Association
 Artists.hasMany( Songs );
-Songs.belongsTo(Artists);
-
 Artists.hasMany( Albums );
-Albums.belongsTo(Artists);
-
-Artists.hasMany( Genres );
-Genres.belongsTo( Artists );
-
 Artists.belongsTo(Artists, {as: 'Band'});
+Artists.belongsTo( Genres );
+
+Genres.hasMany( Artists );
+Genres.hasMany( Songs );
+Genres.hasMany( Albums );
 
 //Payment Association
 Payments.belongsTo( Users );
 Payments.belongsTo( Orders );
-
 
 
 const sync = force => conn.sync({ force });
@@ -58,9 +63,9 @@ const seed = () => {
   ];
 
   const usersToAdd = [
-    {userName: 'summerguan',firstName: 'Summer',lastName: 'Guan',email: 'summergun10@gmail.com', salt: '1234'},
-    {userName: 'danniwang',firstName: 'Danni',lastName: 'Wang',email: 'danni@gmail.com', salt: '1234'},
-    {userName: 'mazelmanovich',firstName: 'Mitch',lastName: 'Zelmanovich', email: '', salt: '1234'}
+    {userName: 'summerguan', firstName: 'Summer', lastName: 'Guan', email: 'summergun10@gmail.com', salt: '1234'},
+    {userName: 'danniwang', firstName: 'Danni', lastName: 'Wang', email: 'danni@gmail.com', salt: '1234'},
+    {userName: 'mazelmanovich', firstName: 'Mitch', lastName: 'Zelmanovich', email: '', salt: '1234'}
 
   ];
 
@@ -71,9 +76,9 @@ const seed = () => {
   ];
 
   const genresToAdd = [
-    {genreName: 'Jazz'},
-    {genreName: 'Pop Music'},
-    {genreName: 'Rock Music'}
+    {name: 'Jazz'},
+    {name: 'Pop Music'},
+    {name: 'Rock Music'}
   ];
 
   const reviewsToAdd = [
@@ -81,15 +86,14 @@ const seed = () => {
   ];
 
   const paymentsToAdd = [
-    {cardType: 'mastercard', creditCardNumber: 123456789, name: 'Fake 123',expDate: new Date('01/01/2017')},
-    {cardType: 'visa', creditCardNumber: 123456,name: 'Faker 123',expDate: new Date('01/01/2016')}
+    {cardType: 'mastercard', creditCardNumber: 123456789, name: 'Fake 123', expDate: new Date('01/01/2017')},
+    {cardType: 'visa', creditCardNumber: 123456, name: 'Faker 123', expDate: new Date('01/01/2016')}
   ];
 
   const albumsToAdd = [
     {
       name: 'Talkie Walkie',
       year: '2004',
-      genre: 'Electronica',
       price: 15,
       description: 'Best album from Air',
       imgURL: null
@@ -97,7 +101,6 @@ const seed = () => {
     {
       name: 'Zoot Woman',
       year: '2003',
-      genre: 'Rock',
       price: 15,
       description: 'Best album from Zoot Woman',
       imgURL: null
@@ -142,13 +145,16 @@ const seed = () => {
     ]);
   })
   .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
-    const userorder = users[0].setOrders([completedOrder, emptyCart]); //order belongs to user
+    const userorder = users[0].addOrder(completedOrder); //order belongs to user
     const reviewalbum = albums[0].setReviews(reviews[0]) ; //review belongs to album
     const reviewuser = users[0].setReviews(reviews[0]); // Reviews.belongsTo(Users);
-    const paymentuser = users[0].addPayments(payments[0]);//Payments.belongsTo( Users );
-    const songartist = artists[0].addSongs(songs[0])//Songs.belongsTo(Artist);
+    const paymentuser = users[0].addPayment(payments[0]);//Payments.belongsTo( Users );
+    const songartist = artists[0].addSongs(songs[0]);//Songs.belongsTo(Artist);
+    const songOrder = completedOrder.setSongs(songs[0]);
+    const albumOrder = completedOrder.setAlbums(albums[0]);
+    const paymentOrder = completedOrder.setPayment(payments[0]);
 
-    return (userorder,reviewalbum,reviewuser,paymentuser,songartist);
+    return Promise.all([userorder, reviewalbum, reviewuser, paymentuser, songartist, songOrder, albumOrder, paymentOrder]);
 
   });
 };
@@ -167,6 +173,4 @@ module.exports = {
     Payments
   }
 };
-
-
 

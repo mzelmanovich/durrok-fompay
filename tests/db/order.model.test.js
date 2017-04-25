@@ -25,4 +25,16 @@
         })
         .catch(done);
    });
+
+   it('Has associations as expected', done => {
+     db.models.Orders
+        .findById(1, {include: [{all: true}]})
+        .then(order => {
+          expect(order.songs).to.be.a('array');
+          expect(order.albums).to.be.a('array');
+          expect(order.payment).to.equal(null);
+          done();
+        })
+        .catch(done);
+   });
  });

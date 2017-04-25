@@ -7,7 +7,6 @@ describe('Album Model', () => {
   it('Has fields as expected', () => {
     expect(attributes.name).to.be.a('object');
     expect(attributes.year).to.be.a('object');
-    expect(attributes.genre).to.be.a('object');
     expect(attributes.description).to.be.a('object');
     expect(attributes.imgURL).to.be.a('object');
   });
@@ -21,7 +20,6 @@ describe('Album Model', () => {
         expect(results[0].year).to.equal('2004');
         expect(results[0].price * 1).to.be.equal(15);
         expect(results[0].imgURL).to.be.null;
-        expect(results[1].genre).to.equal('Rock');
         expect(results[1].description).to.equal('Best album from Zoot Woman');
         expect(results[1].price * 1).to.be.equal(15);
         expect(results[1].imgURL).to.be.null;
