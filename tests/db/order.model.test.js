@@ -25,4 +25,17 @@
         })
         .catch(done);
    });
+
+   it('Has associations as expected', done => {
+     db.models.Orders
+        .findAll()
+        .then(results => {
+          expect(results.length).to.equal(2);
+          expect(results[0].songId).to.equal(1);
+          expect(results[0].albumId).to.equal(1);
+          expect(results[0].paymentId).to.equal(1);
+          done();
+        })
+        .catch(done);
+   });
  });

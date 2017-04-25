@@ -8,6 +8,13 @@ const Artists = require('./Artist');
 const Genres = require('./Genre');
 const Payments = require('./Payment');
 
+//Order Association
+Orders.hasOne( Payments );
+Orders.hasMany( Songs );
+Songs.belongsTo( Orders );
+Orders.hasMany( Albums );
+Albums.belongsTo( Orders );
+
 
 
 // User Associations
@@ -147,8 +154,11 @@ const seed = () => {
     const reviewuser = users[0].setReviews(reviews[0]); // Reviews.belongsTo(Users);
     const paymentuser = users[0].addPayments(payments[0]);//Payments.belongsTo( Users );
     const songartist = artists[0].addSongs(songs[0])//Songs.belongsTo(Artist);
+    const songOrder = orders[0].setSongs(songs[0]);
+    const albumOrder = orders[0].setAlbums(albums[0]);
+    const paymentOrder = orders[0].setPayments(payments[0]);
 
-    return (userorder,reviewalbum,reviewuser,paymentuser,songartist);
+    return Promise.all(userorder,reviewalbum,reviewuser,paymentuser,songartist,songOrder,albumOrder,paymentOrder);
 
   });
 };
