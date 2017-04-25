@@ -30,3 +30,4 @@ describe('Album Model', () => {
       .catch(done);
   });
 });
+

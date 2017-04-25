@@ -1,5 +1,8 @@
-const { expect } = require('chai');
+const chai = require('chai');
+const expect = require('chai').expect;
 const db = require('../../server/db');
+
+
 
 describe('user Model', () => {
   const { attributes } = db.models.Users;
@@ -11,11 +14,18 @@ describe('user Model', () => {
     expect(attributes.email).to.be.a('object');
   });
 
+  it('creating a user who exists', () => {
+      it('the user will not get created', (done) => {
+        db.models.User.create({ userName: 'summerguan'})
+          .catch( (e)=> done());
+      });
+    });
+
   it('Saves user as expected', done => {
     db.models.Users
       .findAll()
       .then(results => {
-        expect(results.length).to.equal(1);
+        expect(results.length).to.equal(3);
         expect(results[0].userName).to.equal('summerguan');
         expect(results[0].firstName).to.equal('Summer');
         expect(results[0].lastName).to.equal('Guan');
@@ -26,3 +36,4 @@ describe('user Model', () => {
       .catch(done);
   });
 });
+

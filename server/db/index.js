@@ -8,29 +8,60 @@ const Artists = require('./Artist');
 const Genres = require('./Genre');
 const Payments = require('./Payment');
 
+
+
+// User Associations
+Orders.belongsTo(Users);
+Users.hasMany( Orders );
+
+Users.hasMany( Payments );
+Users.hasMany( Reviews );
+
+
+
+//Review Association
+ Reviews.belongsTo( Albums );
+ Albums.hasMany(Reviews);
+
+ Reviews.belongsTo( Songs );
+ Songs.hasMany(Reviews);
+
+ Reviews.belongsTo(Users);
+ Users.hasMany(Reviews) ;
+
+
+//Artist Association
+Artists.hasMany( Songs );
+Songs.belongsTo(Artists);
+
+Artists.hasMany( Albums );
+Albums.belongsTo(Artists);
+
+Artists.hasMany( Genres );
+Genres.belongsTo( Artists );
+
+Artists.belongsTo(Artists, {as: 'Band'});
+
+//Payment Association
+Payments.belongsTo( Users );
+Payments.belongsTo( Orders );
+
+
+
 const sync = force => conn.sync({ force });
 
 const seed = () => {
+
   const artistsToAdd = [
-    {
-      firstName: 'Nsync',
-      imgURL: 'test.jpg'
-    },
-    {
-      firstName: 'Justin',
-      lastName: 'Timberlake',
-      imgURL: 'test2.tiff'
-    }
+    {firstName: 'Nsync', imgURL: 'test.jpg'},
+    {firstName: 'Justin', lastName: 'Timberlake', imgURL: 'test2.tiff'}
   ];
 
   const usersToAdd = [
-    {
-      userName: 'summerguan',
-      firstName: 'Summer',
-      lastName: 'Guan',
-      email: 'summergun10@gmail.com',
-      salt: '1234'
-    }
+    {userName: 'summerguan',firstName: 'Summer',lastName: 'Guan',email: 'summergun10@gmail.com', salt: '1234'},
+    {userName: 'danniwang',firstName: 'Danni',lastName: 'Wang',email: 'danni@gmail.com', salt: '1234'},
+    {userName: 'mazelmanovich',firstName: 'Mitch',lastName: 'Zelmanovich', email: '', salt: '1234'}
+
   ];
 
 
@@ -40,40 +71,20 @@ const seed = () => {
   ];
 
   const genresToAdd = [
-      {
-        genreName: 'Jazz'
-      },
-      {
-        genreName: 'Pop Music'
-      },
-      {
-        genreName: 'Rock Music'
-      },
-    ];
+    {genreName: 'Jazz'},
+    {genreName: 'Pop Music'},
+    {genreName: 'Rock Music'}
+  ];
 
   const reviewsToAdd = [
-    {
-      rating: '5',
-      title: 'Best Album Ever!',
-      content: 'The title says it all, i simply love this band and this album. Bought this for my collection.'
-    }
+    {rating: '5', title: 'Best Album Ever!', content: 'The title says it all, i simply love this band and this album. Bought this for my collection.'}
   ];
 
   const paymentsToAdd = [
-    {
-      cardType: 'mastercard',
-      creditCardNumber: 123456789,
-      name: 'Fake 123',
-      expDate: new Date('01/01/2017')
-    },
-    {
-      cardType: 'visa',
-      creditCardNumber: 123456,
-      name: 'Faker 123',
-      expDate: new Date('01/01/2016')
-    }
+    {cardType: 'mastercard', creditCardNumber: 123456789, name: 'Fake 123',expDate: new Date('01/01/2017')},
+    {cardType: 'visa', creditCardNumber: 123456,name: 'Faker 123',expDate: new Date('01/01/2016')}
   ];
-  
+
   const albumsToAdd = [
     {
       name: 'Talkie Walkie',
@@ -122,13 +133,23 @@ const seed = () => {
     return Promise.all([
       artistPromises,
       userPromises,
-      orderPromises, 
+      orderPromises,
       paymentsPromises,
       genrePromises,
       reviewPromises,
-      songPromises, 
+      songPromises,
       albumPromises
     ]);
+  })
+  .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
+    const userorder = users[0].setOrders([completedOrder, emptyCart]); //order belongs to user
+    const reviewalbum = albums[0].setReviews(reviews[0]) ; //review belongs to album
+    const reviewuser = users[0].setReviews(reviews[0]); // Reviews.belongsTo(Users);
+    const paymentuser = users[0].addPayments(payments[0]);//Payments.belongsTo( Users );
+    const songartist = artists[0].addSongs(songs[0])//Songs.belongsTo(Artist);
+
+    return (userorder,reviewalbum,reviewuser,paymentuser,songartist);
+
   });
 };
 
@@ -146,3 +167,6 @@ module.exports = {
     Payments
   }
 };
+
+
+

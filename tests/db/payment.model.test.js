@@ -2,6 +2,10 @@ const { expect } = require('chai');
 const db = require('../../server/db');
 
 describe('Payment Model', () => {
+const { attributes } = db.models.Payments;
+ it('Has Payment association', () => {
+    expect(attributes.userId).to.be.a('object');
+  });
 
   it('Saves Payment as expected', done => {
     db.models.Payments
