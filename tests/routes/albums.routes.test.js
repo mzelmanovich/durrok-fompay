@@ -38,6 +38,21 @@ describe('/albums', () => {
     .catch(done);
   });
 
+  it('albums/:id/songs adds songs', (done) => {
+    request(app).put('/api/albums/1/songs')
+    .send({id: 3})
+    .expect(204)
+    .then( ()  => {
+      return request(app).get('/api/albums/1/songs')
+      .then(({body}) => {
+        expect(body.length).to.equal(3);
+        expect(body[2].name).to.equal('Miss You');
+        done();
+      });
+    })
+    .catch(done);
+  });
+
   it('albums/:id/artist returns an artist', (done) => {
     request(app).get('/api/albums/1/artist')
     .expect(200)

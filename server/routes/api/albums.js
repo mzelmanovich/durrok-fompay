@@ -22,6 +22,34 @@ router.get('/albums/:id/songs', (req, res, next) => {
   .catch(next);
 });
 
+router.put('/albums/:id/songs', (req, res, next) => {
+  const {id} = req.params;
+  const song = req.body.id;
+  db.models.Albums.findById(id)
+  .then(album => {
+    if (!album){
+      return res.sendStatus(404);
+    }
+    return album.addSong(song)
+    .then( () => res.sendStatus(204));
+  })
+  .catch(next);
+});
+
+router.delete('/albums/:id/songs', (req, res, next) => {
+  const {id} = req.params;
+  const song = req.body;
+  db.models.Albums.findById(id)
+  .then(album => {
+    if (!album){
+      return res.sendStatus(404);
+    }
+    return album.removeSong(song)
+    .then( () => res.sendStatus(204));
+  })
+  .catch(next);
+});
+
 router.get('/albums/:id/genre', (req, res, next) => {
   const {id} = req.params;
   db.models.Albums.findById(id, {include: [{all: true}]})
