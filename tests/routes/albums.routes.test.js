@@ -39,7 +39,7 @@ describe('/albums', () => {
   });
 
   it('albums/:id/artist returns an artist', (done) => {
-    request(app).get('/api/albums/1/songs')
+    request(app).get('/api/albums/1/artist')
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
