@@ -166,6 +166,7 @@ const seed = () => {
     const albumOrder = completedOrder.setAlbums(albums[0]);
     const paymentOrder = completedOrder.setPayment(payments[0]);
     const albumGenre = albums[0].setGenre(genres[0]);
+    const albumSongs = Promise.all([albums[0].addSongs(songs[0]), albums[0].addSongs(songs[1])]);
 
     return Promise.all([
       userorder,
@@ -176,7 +177,8 @@ const seed = () => {
       songOrder,
       albumOrder,
       paymentOrder,
-      albumGenre
+      albumGenre,
+      albumSongs
     ]);
 
   });
