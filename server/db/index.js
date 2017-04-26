@@ -126,16 +126,16 @@ const seed = () => {
 
   return sync(true).then(() => {
     const artistPromises = artistsToAdd.map(art => Artists.create(art));
-    const userPromises = usersToAdd.map(user => Users.create(user));
-    const orderPromises = ordersToAdd.map(order => Orders.create(order));
+    const userPromises = Users.bulkCreate(usersToAdd);
+    const orderPromises = Orders.bulkCreate(ordersToAdd);
     const genrePromises = Genres.bulkCreate(genresToAdd);
     const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
     const paymentsPromises = Payments.bulkCreate(paymentsToAdd);
     const songPromises = Songs.bulkCreate(songsToAdd);
     const albumPromises = Albums.bulkCreate(albumsToAdd);
     return Promise.all([
-      Promise.all(artistPromises),
-      Promise.all(userPromises),
+      artistPromises,
+      userPromises,
       orderPromises,
       paymentsPromises,
       genrePromises,
