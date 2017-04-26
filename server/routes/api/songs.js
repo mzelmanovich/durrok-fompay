@@ -2,15 +2,13 @@ const router = require('express').Router();
 const db = require('../../db');
 
 router.get('/song/:id', (req, res, next) => {
-  const {id} = req.params;
-  db.models.Songs.findById(id)
+  db.models.Songs.findById(req.params.id)
   .then(song => ( song ? res.json(song) : res.sendStatus(404)))
   .catch(next);
 });
 
-router.get('/song/:id/artist', (req, res, next) => {
-  const {id} = req.params;
-  db.models.Songs.findById(id)
+router.get('/song/:id/artist', (req, res, next) => 
+  db.models.Songs.findById(req.params.id)
   .then(song => {
   	db.models.Artists.findById(song.artistId)
   })
