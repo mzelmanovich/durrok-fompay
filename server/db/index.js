@@ -126,7 +126,7 @@ const seed = () => {
 
   return sync(true).then(() => {
     const artistPromises = Promise.all(artistsToAdd.map(art => Artists.create(art)));
-    const userPromises = Users.bulkCreate(usersToAdd);
+    const userPromises = Promise.all(usersToAdd.map(us => Users.create(us)));
     const orderPromises = Orders.bulkCreate(ordersToAdd);
     const genrePromises = Genres.bulkCreate(genresToAdd);
     const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
