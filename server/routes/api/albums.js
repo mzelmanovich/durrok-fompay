@@ -8,6 +8,19 @@ router.get('/albums/:id', (req, res, next) => {
   .catch(next);
 });
 
+router.post('/albums', (req, res, next) => {
+  const art = req.body;
+  db.models.Albums.create(art)
+  .then(album => ( album ? res.status(201).json(album) : res.sendStatus(404)))
+  .catch(next);
+});
+
+router.get('/albums', (req, res, next) => {
+  db.models.Albums.findAll()
+  .then(albums => ( albums ? res.json(albums) : res.sendStatus(404)))
+  .catch(next);
+});
+
 router.delete('/albums/:id', (req, res, next) => {
   const {id} = req.params;
   db.models.Albums.destroy({where: {id}})
@@ -88,6 +101,33 @@ router.get('/albums/:id/artist', (req, res, next) => {
   const {id} = req.params;
   db.models.Albums.findById(id, {include: [{all: true}]})
   .then(album => ( album ? res.json(album.artist) : res.sendStatus(404)))
+  .catch(next);
+});
+
+router.put('/albums/:id/artist', (req, res, next) => {
+  const {id} = req.params;
+  const artist = req.body.id;
+  db.models.Albums.findById(id)
+  .then(album => {
+    if (!album){
+      return res.sendStatus(404);
+    }
+    return album.setArtist(artist)
+    .then( () => res.sendStatus(204));
+  })
+  .catch(next);
+});
+
+router.delete('/albums/:id/artist', (req, res, next) => {
+  const {id} = req.params;
+  db.models.Albums.findById(id)
+  .then(album => {
+    if (!album){
+      return res.sendStatus(404);
+    }
+    return album.setArtist(null)
+    .then( () => res.sendStatus(204));
+  })
   .catch(next);
 });
 
