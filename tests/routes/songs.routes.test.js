@@ -9,7 +9,6 @@ describe('/songs', () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
-      console.log(body)
       expect(body.id * 1).to.equal(1);
       done();
     })
@@ -30,6 +29,7 @@ describe('/songs', () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
+      console.log(body)
       expect(body.id * 1).to.equal(1);
       done();
     })
