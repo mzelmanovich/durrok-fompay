@@ -50,6 +50,17 @@ describe('/albums', () => {
     .catch(done);
   });
 
+  it('albums/:id can delete', (done) => {
+    request(app).delete('/api/albums/1')
+    .expect(204)
+    .then( () => {
+      return request(app).get('/api/albums/1')
+      .expect(404)
+      .then(() => done());
+    })
+    .catch(done);
+  });
+
   it('albums/:id returns 404', (done) => {
     request(app).get('/api/albums/10')
     .expect(404)

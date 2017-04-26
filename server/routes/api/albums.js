@@ -8,6 +8,13 @@ router.get('/albums/:id', (req, res, next) => {
   .catch(next);
 });
 
+router.delete('/albums/:id', (req, res, next) => {
+  const {id} = req.params;
+  db.models.Albums.destroy({where: {id}})
+  .then(check => ( check ? res.sendStatus(204) : res.sendStatus(404)))
+  .catch(next);
+});
+
 router.get('/albums/:id/songs', (req, res, next) => {
   const {id} = req.params;
   db.models.Albums.findById(id, {include: [{all: true}]})
