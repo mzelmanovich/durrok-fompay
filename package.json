@@ -30,6 +30,8 @@
   },
   "scripts": {
     "test": "node_modules/.bin/mocha ./tests",
+    "postinstall": "npm run webpack",
+    "webpack": "./node_modules/webpack/bin/webpack.js",
     "test:local": " DATABASE_URL=postgres://localhost/durrok node_modules/.bin/mocha ./tests",
     "start:local": " DATABASE_URL=postgres://localhost/durrok nodemon ./index"
   },
