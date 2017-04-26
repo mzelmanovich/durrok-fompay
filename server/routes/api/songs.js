@@ -4,8 +4,9 @@ const db = require('../../db');
 router.get('/songs/:id/artist', (req, res, next) => {
   db.models.Songs.findById(req.params.id)
   .then(song => {
-  	console.log(song)
-  	db.models.Artists.findById(song.dataValues.artistId)
+  	const newSong= song.get();
+  	console.log(newSong)
+  	db.models.Artists.findById(newSong.artistId)
   })
   .then(artist=>( artist ? res.json(artist) : res.sendStatus(404)))
   .catch(next);
