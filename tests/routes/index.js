@@ -13,5 +13,6 @@ describe('Routes', function() {
   describe('api', () => {
     require('./albums.routes.test');
     require('./genres.routes.test');
+    require('./songs.routes.test');
   });
 });

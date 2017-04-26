@@ -1,21 +1,32 @@
 const router = require('express').Router();
 const db = require('../../db');
 
-router.get('/songs/:id', (req, res, next) => {
-  const {id} = req.params;
-  db.models.Songs.findById(id)
-  .then(song => ( song ? res.json(song) : res.sendStatus(404)))
+router.get('/songs/:id/artist', (req, res, next) => {
+  db.models.Songs.findById(req.params.id)
+  .then(song => {
+  	if(!song){
+  		res.sendStatus(404)
+  	}
+  	else{
+  		const newSong= song.get();
+  		return db.models.Artists.findById(newSong.artistId)
+  	}
+  })
+  .then(artist =>res.json(artist))
   .catch(next);
 });
 
-router.get('/songs/:id/artist', (req, res, next) => {
-  const {id} = req.params;
-  db.models.Songs.findById(id)
-  .then(song => {
-  	db.models.Artists.findById(song.artistId)
+router.get('/songs/:id', (req, res, next) => {
+  db.models.Songs.findById(req.params.id)
+  .then(song =>{
+  	if(!song){
+  		res.sendStatus(404)
+  	}
+  	res.json(song)
   })
-  .then(artist=>( artist ? res.json(artist) : res.sendStatus(404)))
   .catch(next);
 });
+
+
 
 module.exports = router;
