@@ -2,9 +2,9 @@ const { expect } = require('chai');
 const request = require('supertest');
 const app = require('../../server/app');
 
-describe('/songs', () => {
+describe('/song', () => {
 
-  it('songs/:id returns an song', (done) => {
+  it('song/:id returns an song', (done) => {
     request(app).get('/api/song/1')
     .expect(200)
     .expect('Content-Type', /json/)
