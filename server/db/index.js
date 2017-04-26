@@ -165,8 +165,19 @@ const seed = () => {
     const songOrder = completedOrder.setSongs(songs[0]);
     const albumOrder = completedOrder.setAlbums(albums[0]);
     const paymentOrder = completedOrder.setPayment(payments[0]);
+    const albumGenre = albums[0].setGenre(genres[0]);
 
-    return Promise.all([userorder, reviewalbum, reviewuser, paymentuser, songartist, songOrder, albumOrder, paymentOrder]);
+    return Promise.all([
+      userorder,
+      reviewalbum,
+      reviewuser,
+      paymentuser,
+      songartist,
+      songOrder,
+      albumOrder,
+      paymentOrder,
+      albumGenre
+    ]);
 
   });
 };
