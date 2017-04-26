@@ -3,13 +3,7 @@ const db = require('../../db');
 
 router.get('/song/:id', (req, res, next) => {
   db.models.Songs.findById(req.params.id)
-  .then(song => {
-  	console.log(song);
-  	if(!song){
-  		res.sendStatus(404)
-  	}
-  	res.json(song)
-  })
+  .then(song => ( song ? res.json(song) : res.sendStatus(404)))
   .catch(next);
 });
 
