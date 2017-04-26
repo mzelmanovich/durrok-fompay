@@ -125,9 +125,9 @@ const seed = () => {
   ];
 
   return sync(true).then(() => {
-    const artistPromises = Promise.all(artistsToAdd.map(art => Artists.create(art)));
+    const artistPromises = Artists.bulkCreate(artistsToAdd);
     const userPromises = Users.bulkCreate(usersToAdd);
-    const orderPromises = Promise.all(ordersToAdd.map(ord => Orders.create(ord)));
+    const orderPromises = Orders.bulkCreate(ordersToAdd);
     const genrePromises = Genres.bulkCreate(genresToAdd);
     const reviewPromises = Reviews.bulkCreate(reviewsToAdd);
     const paymentsPromises = Payments.bulkCreate(paymentsToAdd);
@@ -142,6 +142,18 @@ const seed = () => {
       reviewPromises,
       songPromises,
       albumPromises
+    ]);
+  })
+  .then(() => {
+    return Promise.all([
+      Artists.findAll(),
+      Users.findAll(),
+      Orders.findAll(),
+      Payments.findAll(),
+      Genres.findAll(),
+      Reviews.findAll(),
+      Songs.findAll(),
+      Albums.findAll()
     ]);
   })
   .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
