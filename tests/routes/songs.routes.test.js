@@ -24,7 +24,7 @@ describe('/songs', () => {
     .catch(done);
   });
 
-  it('songs/:id/artist returns an song', (done) => {
+  it('songs/:id/artist returns an artist', (done) => {
     request(app).get('/api/song/1/artist')
     .expect(200)
     .expect('Content-Type', /json/)
