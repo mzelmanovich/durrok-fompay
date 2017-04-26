@@ -58,47 +58,47 @@ const sync = force => conn.sync({ force });
 const seed = () => {
 
   const artistsToAdd = [
-    {firstName: 'Nsync', imgURL: 'test.jpg'},
-    {firstName: 'Justin', lastName: 'Timberlake', imgURL: 'test2.tiff'}
+    {id: 1, firstName: 'Nsync', imgURL: 'test.jpg'},
+    {id: 2, firstName: 'Justin', lastName: 'Timberlake', imgURL: 'test2.tiff'}
   ];
 
   const usersToAdd = [
-    {userName: 'summerguan', firstName: 'Summer', lastName: 'Guan', email: 'summergun10@gmail.com', salt: '1234'},
-    {userName: 'danniwang', firstName: 'Danni', lastName: 'Wang', email: 'danni@gmail.com', salt: '1234'},
-    {userName: 'mazelmanovich', firstName: 'Mitch', lastName: 'Zelmanovich', email: '', salt: '1234'}
+    {id: 1, userName: 'summerguan', firstName: 'Summer', lastName: 'Guan', email: 'summergun10@gmail.com', salt: '1234'},
+    {id: 2, userName: 'danniwang', firstName: 'Danni', lastName: 'Wang', email: 'danni@gmail.com', salt: '1234'},
+    {id: 3, userName: 'mazelmanovich', firstName: 'Mitch', lastName: 'Zelmanovich', email: '', salt: '1234'}
 
   ];
 
 
   const ordersToAdd = [
-    { completedDate: Date.now(), orderPrice: 1.99, tax: 1.99 * 0.07 },
-    {}
+    { id: 1, completedDate: Date.now(), orderPrice: 1.99, tax: 1.99 * 0.07 },
+    {id: 2 }
   ];
 
   const genresToAdd = [
-    {name: 'Jazz'},
-    {name: 'Pop Music'},
-    {name: 'Rock Music'}
+    {id: 1, name: 'Jazz'},
+    {id: 2, name: 'Pop Music'},
+    {id: 3, name: 'Rock Music'}
   ];
 
   const reviewsToAdd = [
-    {rating: '5', title: 'Best Album Ever!', content: 'The title says it all, i simply love this band and this album. Bought this for my collection.'}
+    {id: 1, rating: '5', title: 'Best Album Ever!', content: 'The title says it all, i simply love this band and this album. Bought this for my collection.'}
   ];
 
   const paymentsToAdd = [
-    {cardType: 'mastercard', creditCardNumber: 123456789, name: 'Fake 123', expDate: new Date('01/01/2017')},
-    {cardType: 'visa', creditCardNumber: 123456, name: 'Faker 123', expDate: new Date('01/01/2016')}
+    {id: 1, cardType: 'mastercard', creditCardNumber: 123456789, name: 'Fake 123', expDate: new Date('01/01/2017')},
+    {id: 2, cardType: 'visa', creditCardNumber: 123456, name: 'Faker 123', expDate: new Date('01/01/2016')}
   ];
 
   const albumsToAdd = [
-    {
+    {id: 1,
       name: 'Talkie Walkie',
       year: '2004',
       price: 15,
       description: 'Best album from Air',
       imgURL: null
     },
-    {
+    {id: 2,
       name: 'Zoot Woman',
       year: '2003',
       price: 15,
@@ -108,17 +108,24 @@ const seed = () => {
   ];
 
   const songsToAdd = [
-    {
+    {id: 1,
       name: 'Calmer',
       year: '2004',
       duration: 238,
       price: 1.99 * 1,
       imgURL: null
     },
-    {
+    {id: 2,
       name: 'Venus',
       year: '2004',
       duration: 244,
+      price: 1.99 * 1,
+      imgURL: null
+    },
+    {id: 3,
+      name: 'Miss You',
+      year: '2003',
+      duration: 250,
       price: 1.99 * 1,
       imgURL: null
     }
@@ -144,16 +151,27 @@ const seed = () => {
       albumPromises
     ]);
   })
+  //following is needed cause our test data sets ids on their own and can mess up the seq
+  .then(() => Promise.all([
+    conn.query(`ALTER SEQUENCE albums_id_seq RESTART WITH ${albumsToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE artists_id_seq RESTART WITH ${artistsToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE users_id_seq RESTART WITH ${usersToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE orders_id_seq RESTART WITH ${ordersToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE genres_id_seq RESTART WITH ${genresToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE reviews_id_seq RESTART WITH ${reviewsToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE payments_id_seq RESTART WITH ${paymentsToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE songs_id_seq RESTART WITH ${songsToAdd.length + 1}`)
+  ]))
   .then(() => {
     return Promise.all([
-      Artists.findAll(),
-      Users.findAll(),
-      Orders.findAll(),
-      Payments.findAll(),
-      Genres.findAll(),
-      Reviews.findAll(),
-      Songs.findAll(),
-      Albums.findAll()
+      Artists.findAll({order: ['id']}),
+      Users.findAll({order: ['id']}),
+      Orders.findAll({order: ['id']}),
+      Payments.findAll({order: ['id']}),
+      Genres.findAll({order: ['id']}),
+      Reviews.findAll({order: ['id']}),
+      Songs.findAll({order: ['id']}),
+      Albums.findAll({order: ['id']})
     ]);
   })
   .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
@@ -165,8 +183,23 @@ const seed = () => {
     const songOrder = completedOrder.setSongs(songs[0]);
     const albumOrder = completedOrder.setAlbums(albums[0]);
     const paymentOrder = completedOrder.setPayment(payments[0]);
+    const albumGenre = albums[0].setGenre(genres[0]);
+    const albumSongs = Promise.all([albums[0].addSongs(songs[0]), albums[0].addSongs(songs[1])]);
+    const albumArtist = albums[0].setArtist(artists[0]);
 
-    return Promise.all([userorder, reviewalbum, reviewuser, paymentuser, songartist, songOrder, albumOrder, paymentOrder]);
+    return Promise.all([
+      userorder,
+      reviewalbum,
+      reviewuser,
+      paymentuser,
+      songartist,
+      songOrder,
+      albumOrder,
+      paymentOrder,
+      albumGenre,
+      albumSongs,
+      albumArtist
+    ]);
 
   });
 };
