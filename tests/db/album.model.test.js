@@ -16,13 +16,13 @@ describe('Album Model', () => {
       .findAll()
       .then(results => {
         expect(results.length).to.equal(2);
-        expect(results[0].name).to.equal('Talkie Walkie');
-        expect(results[0].year).to.equal('2004');
-        expect(results[0].price * 1).to.be.equal(15);
-        expect(results[0].imgURL).to.be.null;
-        expect(results[1].description).to.equal('Best album from Zoot Woman');
+        expect(results[1].name).to.equal('Talkie Walkie');
+        expect(results[1].year).to.equal('2004');
         expect(results[1].price * 1).to.be.equal(15);
         expect(results[1].imgURL).to.be.null;
+        expect(results[0].description).to.equal('Best album from Zoot Woman');
+        expect(results[0].price * 1).to.be.equal(15);
+        expect(results[0].imgURL).to.be.null;
         done();
       })
       .catch(done);

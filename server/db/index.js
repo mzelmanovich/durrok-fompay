@@ -144,6 +144,18 @@ const seed = () => {
       albumPromises
     ]);
   })
+  .then(() => {
+    return Promise.all([
+      Artists.findAll(),
+      Users.findAll(),
+      Orders.findAll(),
+      Payments.findAll(),
+      Genres.findAll(),
+      Reviews.findAll(),
+      Songs.findAll(),
+      Albums.findAll()
+    ]);
+  })
   .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
     const userorder = users[0].addOrder(completedOrder); //order belongs to user
     const reviewalbum = albums[0].setReviews(reviews[0]) ; //review belongs to album
