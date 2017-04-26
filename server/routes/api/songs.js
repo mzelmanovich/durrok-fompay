@@ -6,7 +6,7 @@ router.get('/songs/:id/artist', (req, res, next) => {
   .then(song => {
   	const newSong= song.get();
   	console.log(newSong)
-  	db.models.Artists.findById(newSong.artistId)
+  	return db.models.Artists.findById(newSong.artistId)
   })
   .then(artist=>( artist ? res.json(artist) : res.sendStatus(404)))
   .catch(next);
