@@ -29,7 +29,9 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha ./tests"
+    "test": "node_modules/.bin/mocha ./tests",
+    "test:local": " DATABASE_URL=postgres://localhost/durrok node_modules/.bin/mocha ./tests",
+    "start:local": " DATABASE_URL=postgres://localhost/durrok nodemon ./index"
   },
   "repository": {
     "type": "git",
