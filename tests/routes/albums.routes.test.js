@@ -27,6 +27,21 @@ describe('/albums', () => {
     .catch(done);
   });
 
+  it.only('albums/:id/genre can change genre', (done) => {
+    request(app).put('/api/albums/1/genre')
+    .send({id: 3})
+    .expect(204)
+    .then( ()  => {
+      return request(app).get('/api/albums/1/genre')
+      .then(({body}) => {
+        expect(body.id * 1).to.equal(3);
+        expect(body.name).to.equal('Rock Music');
+        done();
+      });
+    })
+    .catch(done);
+  });
+
   it('albums/:id/songs returns songs', (done) => {
     request(app).get('/api/albums/1/songs')
     .expect(200)
@@ -53,7 +68,7 @@ describe('/albums', () => {
     .catch(done);
   });
 
-  it.only('albums/:id/songs removes songs', (done) => {
+  it('albums/:id/songs removes songs', (done) => {
     request(app).delete('/api/albums/1/songs')
     .send({id: 2})
     .expect(204)

@@ -57,6 +57,20 @@ router.get('/albums/:id/genre', (req, res, next) => {
   .catch(next);
 });
 
+router.put('/albums/:id/genre', (req, res, next) => {
+  const {id} = req.params;
+  const genre = req.body.id;
+  db.models.Albums.findById(id)
+  .then(album => {
+    if (!album){
+      return res.sendStatus(404);
+    }
+    return album.setGenre(genre)
+    .then( () => res.sendStatus(204));
+  })
+  .catch(next);
+});
+
 router.get('/albums/:id/artist', (req, res, next) => {
   const {id} = req.params;
   db.models.Albums.findById(id, {include: [{all: true}]})
