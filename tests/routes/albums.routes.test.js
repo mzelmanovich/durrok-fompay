@@ -38,6 +38,17 @@ describe('/albums', () => {
     .catch(done);
   });
 
+  it('albums/:id/artist returns an artist', (done) => {
+    request(app).get('/api/albums/1/songs')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then( ({body})  => {
+      expect(body.id).to.equal(1);
+      expect(body.firstName).to.equal('Nsync');
+      done();
+    })
+    .catch(done);
+  });
 
   it('albums/:id returns 404', (done) => {
     request(app).get('/api/albums/10')
