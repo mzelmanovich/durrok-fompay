@@ -17,12 +17,12 @@ describe('Song Model', () => {
       .findAll()
       .then(results => {
         expect(results.length).to.equal(2);
-        expect(results[0].name).to.equal('Calmer');
-        expect(results[0].year).to.equal('2004');
-        expect(results[0].imgURL).to.be.null;
-        expect(results[1].duration).to.equal(244);
-        expect(results[1].price * 1).to.equal(1.99);
+        expect(results[1].name).to.equal('Calmer');
+        expect(results[1].year).to.equal('2004');
         expect(results[1].imgURL).to.be.null;
+        expect(results[0].duration).to.equal(244);
+        expect(results[0].price * 1).to.equal(1.99);
+        expect(results[0].imgURL).to.be.null;
         done();
       })
       .catch(done);
