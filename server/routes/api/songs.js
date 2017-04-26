@@ -4,15 +4,15 @@ const db = require('../../db');
 router.get('/songs/:id/artist', (req, res, next) => {
   db.models.Songs.findById(req.params.id)
   .then(song => {
-  	const newSong= song.get();
-  	return db.models.Artists.findById(newSong.artistId)
-  })
-  .then(artist =>{
-  	if(!artist){
+  	if(!song){
   		res.sendStatus(404)
   	}
-  	res.json(artist)
+  	else{
+  		const newSong= song.get();
+  		return db.models.Artists.findById(newSong.artistId)
+  	}
   })
+  .then(artist =>res.json(artist))
   .catch(next);
 });
 
