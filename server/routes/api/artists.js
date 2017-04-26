@@ -15,4 +15,11 @@ router.get('/artists/:id/songs', (req, res, next) => {
   .catch(next);
 })
 
+router.get('/artists/:id/albums', (req, res, next) => {
+  const {id} = req.params;
+  db.models.Artists.findbyId(id)
+  .then(artist => ( res.json(artist.albums) : res.sendStatus(404)))
+  .catch(next);
+})
+
 module.exports = router;
