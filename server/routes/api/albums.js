@@ -8,5 +8,25 @@ router.get('/albums/:id', (req, res, next) => {
   .catch(next);
 });
 
+router.get('/albums/:id/songs', (req, res, next) => {
+  const {id} = req.params;
+  db.models.Albums.findById(id, {include: [{all: true}]})
+  .then(album => ( album ? res.json(album.songs) : res.sendStatus(404)))
+  .catch(next);
+});
+
+router.get('/albums/:id/genre', (req, res, next) => {
+  const {id} = req.params;
+  db.models.Albums.findById(id, {include: [{all: true}]})
+  .then(album => ( album ? res.json(album.genre) : res.sendStatus(404)))
+  .catch(next);
+});
+
+router.get('/albums/:id/artist', (req, res, next) => {
+  const {id} = req.params;
+  db.models.Albums.findById(id, {include: [{all: true}]})
+  .then(album => ( album ? res.json(album.artist) : res.sendStatus(404)))
+  .catch(next);
+});
 
 module.exports = router;
