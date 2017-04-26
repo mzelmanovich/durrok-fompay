@@ -15,12 +15,12 @@
         .findAll()
         .then(results => {
           expect(results.length).to.equal(2);
-          expect(results[0].orderPrice).to.equal('1.99');
-          expect(results[0].tax).to.equal(`${1.99 * 0.07}`);
-          expect(results[0].completedDate).to.be.an.instanceOf(Date);
-          expect(results[1].orderPrice).to.be.null;
-          expect(results[1].tax).to.be.null;
-          expect(results[1].completedDate).to.be.null;
+          expect(results[1].orderPrice).to.equal('1.99');
+          expect(results[1].tax).to.equal(`${1.99 * 0.07}`);
+          expect(results[1].completedDate).to.be.an.instanceOf(Date);
+          expect(results[0].orderPrice).to.be.null;
+          expect(results[0].tax).to.be.null;
+          expect(results[0].completedDate).to.be.null;
           done();
         })
         .catch(done);
@@ -32,7 +32,7 @@
         .then(order => {
           expect(order.songs).to.be.a('array');
           expect(order.albums).to.be.a('array');
-          expect(order.payment).to.equal(null);
+          expect(order.payment.id).to.equal(1);
           done();
         })
         .catch(done);
