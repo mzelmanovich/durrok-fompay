@@ -53,6 +53,20 @@ describe('/albums', () => {
     .catch(done);
   });
 
+  it.only('albums/:id/songs removes songs', (done) => {
+    request(app).delete('/api/albums/1/songs')
+    .send({id: 2})
+    .expect(204)
+    .then( ()  => {
+      return request(app).get('/api/albums/1/songs')
+      .then(({body}) => {
+        expect(body.length).to.equal(1);
+        done();
+      });
+    })
+    .catch(done);
+  });
+
   it('albums/:id/artist returns an artist', (done) => {
     request(app).get('/api/albums/1/artist')
     .expect(200)

@@ -38,7 +38,7 @@ router.put('/albums/:id/songs', (req, res, next) => {
 
 router.delete('/albums/:id/songs', (req, res, next) => {
   const {id} = req.params;
-  const song = req.body;
+  const song = req.body.id;
   db.models.Albums.findById(id)
   .then(album => {
     if (!album){
