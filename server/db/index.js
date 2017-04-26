@@ -151,6 +151,7 @@ const seed = () => {
       albumPromises
     ]);
   })
+  //following is needed cause our test data sets ids on their own and can mess up the seq
   .then(() => Promise.all([
     conn.query(`ALTER SEQUENCE albums_id_seq RESTART WITH ${albumsToAdd.length + 1}`),
     conn.query(`ALTER SEQUENCE artists_id_seq RESTART WITH ${artistsToAdd.length + 1}`),
