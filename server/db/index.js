@@ -151,6 +151,16 @@ const seed = () => {
       albumPromises
     ]);
   })
+  .then(() => Promise.all([
+    conn.query(`ALTER SEQUENCE albums_id_seq RESTART WITH ${albumsToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE artists_id_seq RESTART WITH ${artistsToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE users_id_seq RESTART WITH ${usersToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE orders_id_seq RESTART WITH ${ordersToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE genres_id_seq RESTART WITH ${genresToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE reviews_id_seq RESTART WITH ${reviewsToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE payments_id_seq RESTART WITH ${paymentsToAdd.length + 1}`),
+    conn.query(`ALTER SEQUENCE songs_id_seq RESTART WITH ${songsToAdd.length + 1}`)
+  ]))
   .then(() => {
     return Promise.all([
       Artists.findAll({order: ['id']}),

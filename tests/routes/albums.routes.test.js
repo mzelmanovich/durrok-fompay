@@ -18,7 +18,6 @@ describe('/albums', () => {
   it('albums/ post new albums', (done) => {
     request(app).post('/api/albums')
     .send({
-      id: 3,
       name: 'Who is next',
       year: 1988,
       price: 12,
