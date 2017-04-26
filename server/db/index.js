@@ -66,6 +66,7 @@ const seed = () => {
     {userName: 'summerguan', firstName: 'Summer', lastName: 'Guan', email: 'summergun10@gmail.com', salt: '1234'},
     {userName: 'danniwang', firstName: 'Danni', lastName: 'Wang', email: 'danni@gmail.com', salt: '1234'},
     {userName: 'mazelmanovich', firstName: 'Mitch', lastName: 'Zelmanovich', email: '', salt: '1234'}
+
   ];
 
 
@@ -142,20 +143,20 @@ const seed = () => {
       songPromises,
       albumPromises
     ]);
+  })
+  .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
+    const userorder = users[0].addOrder(completedOrder); //order belongs to user
+    const reviewalbum = albums[0].setReviews(reviews[0]) ; //review belongs to album
+    const reviewuser = users[0].setReviews(reviews[0]); // Reviews.belongsTo(Users);
+    const paymentuser = users[0].addPayment(payments[0]);//Payments.belongsTo( Users );
+    const songartist = artists[0].addSongs(songs[0]);//Songs.belongsTo(Artist);
+    const songOrder = completedOrder.setSongs(songs[0]);
+    const albumOrder = completedOrder.setAlbums(albums[0]);
+    const paymentOrder = completedOrder.setPayment(payments[0]);
+
+    return Promise.all([userorder, reviewalbum, reviewuser, paymentuser, songartist, songOrder, albumOrder, paymentOrder]);
+
   });
-  // .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
-  //   const userorder = users[0].addOrder(completedOrder); //order belongs to user
-  //   const reviewalbum = albums[0].setReviews(reviews[0]) ; //review belongs to album
-  //   const reviewuser = users[0].setReviews(reviews[0]); // Reviews.belongsTo(Users);
-  //   const paymentuser = users[0].addPayment(payments[0]);//Payments.belongsTo( Users );
-  //   const songartist = artists[0].addSongs(songs[0]);//Songs.belongsTo(Artist);
-  //   const songOrder = completedOrder.setSongs(songs[0]);
-  //   const albumOrder = completedOrder.setAlbums(albums[0]);
-  //   const paymentOrder = completedOrder.setPayment(payments[0]);
-
-  //   return Promise.all([userorder, reviewalbum, reviewuser, paymentuser, songartist, songOrder, albumOrder, paymentOrder]);
-
-  // });
 };
 
 module.exports = {
