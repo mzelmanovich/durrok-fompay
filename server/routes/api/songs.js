@@ -12,7 +12,12 @@ router.get('/songs/:id/artist', (req, res, next) =>
 
 router.get('/songs/:id', (req, res, next) => {
   db.models.Songs.findById(req.params.id)
-  .then(song => ( song ? res.json(song) : res.sendStatus(404)))
+  .then(song =>{
+  	if(!song){
+  		res.sendStatus(404)
+  	}
+  	res.json(song)
+  })
   .catch(next);
 });
 
