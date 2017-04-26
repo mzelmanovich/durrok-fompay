@@ -121,6 +121,13 @@ const seed = () => {
       duration: 244,
       price: 1.99 * 1,
       imgURL: null
+    },
+    {id: 3,
+      name: 'Miss You',
+      year: '2003',
+      duration: 250,
+      price: 1.99 * 1,
+      imgURL: null
     }
   ];
 
