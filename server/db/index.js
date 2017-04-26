@@ -146,14 +146,14 @@ const seed = () => {
   })
   .then(() => {
     return Promise.all([
-      Artists.findAll(),
-      Users.findAll(),
-      Orders.findAll(),
-      Payments.findAll(),
-      Genres.findAll(),
-      Reviews.findAll(),
-      Songs.findAll(),
-      Albums.findAll()
+      Artists.findAll({order: ['id']}),
+      Users.findAll({order: ['id']}),
+      Orders.findAll({order: ['id']}),
+      Payments.findAll({order: ['id']}),
+      Genres.findAll({order: ['id']}),
+      Reviews.findAll({order: ['id']}),
+      Songs.findAll({order: ['id']}),
+      Albums.findAll({order: ['id']})
     ]);
   })
   .then(([artists, users, [completedOrder, emptyCart], payments, genres, reviews, songs, albums]) => {
