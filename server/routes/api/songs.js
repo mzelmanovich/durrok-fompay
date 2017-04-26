@@ -7,7 +7,7 @@ router.get('/songs/:id/artist', (req, res, next) =>
   	db.models.Artists.findById(song.artistId)
   })
   .then(artist=>( artist ? res.json(artist) : res.sendStatus(404)))
-  .catch(next);
+  .catch(e=>console.log(e));
 });
 
 router.get('/songs/:id', (req, res, next) => {
@@ -18,7 +18,7 @@ router.get('/songs/:id', (req, res, next) => {
   	}
   	res.json(song)
   })
-  .catch(next);
+  .catch(e=>console.log(e));
 });
 
 
