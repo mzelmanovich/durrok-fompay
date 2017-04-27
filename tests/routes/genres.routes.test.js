@@ -3,14 +3,16 @@ const request = require('supertest');
 const app = require('../../server/app');
 
 describe('/genres routes test', () => {
-    it('/genres GET REQUEST list all genres', () => {
+    it('/genres GET REQUEST list all genres', (done) => {
 			request(app)
 			.get('/api/genres')
 			.expect(200)
 			.then(res => {
 				expect(res.body).to.be.an('array');
-				expect(res.body.length).to.be.equal(0);
-			}) 
+				expect(res.body.length).to.be.equal(3);
+        done();
+			})
+      .catch(done);
 		});
 
   it('genres/:id GET REQUEST-get info for an individual genre', (done) => {
