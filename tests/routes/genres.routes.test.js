@@ -3,17 +3,17 @@ const request = require('supertest');
 const app = require('../../server/app');
 
 describe('/genres routes test', () => {
-    it('/genres GET REQUEST list all genres', (done) => {
-			request(app)
+  it('/genres GET REQUEST list all genres', (done) => {
+    request(app)
 			.get('/api/genres')
 			.expect(200)
 			.then(res => {
-				expect(res.body).to.be.an('array');
-				expect(res.body.length).to.be.equal(3);
-        done();
-			})
+  expect(res.body).to.be.an('array');
+  expect(res.body.length).to.be.equal(3);
+  done();
+})
       .catch(done);
-		});
+  });
 
   it('genres/:id GET REQUEST-get info for an individual genre', (done) => {
     request(app).get('/api/genres/1')
@@ -40,13 +40,24 @@ describe('/genres routes test', () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
-      expect(body.length).to.equal(1)
+      expect(body.length).to.equal(1);
       done();
     })
     .catch(done);
   });
 
-   it('/genres POST REQUEST add a new genre', (done) => {
+  it('genres/:id/songs GET REQUEST albums under 1 specifc genre', (done) => {
+    request(app).get('/api/genres/1/songs')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then( ({body})  => {
+      expect(body.length).to.equal(1);
+      done();
+    })
+    .catch(done);
+  });
+
+  it('/genres POST REQUEST add a new genre', (done) => {
     request(app).post('/api/genres')
     .send({
       name: 'POST ROCK'
@@ -77,7 +88,7 @@ describe('/genres routes test', () => {
   //   .catch(done);
   // });
 
-    it('genres/:id DELETE delete a genre', (done) => {
+  it('genres/:id DELETE delete a genre', (done) => {
     request(app).delete('/api/genres/1')
     .send({id: 2})
     .expect(204)
@@ -92,6 +103,4 @@ describe('/genres routes test', () => {
   });
 
 });
-
-
 
