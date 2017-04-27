@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const db = require('../../db');
-const Album = db.models.Albums;
 const Genre = db.models.Genres;
 
 
