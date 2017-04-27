@@ -4,26 +4,6 @@ const app = require('../../server/app');
 
 describe('/songs', () => {
 
-  it('songs/:id returns an song', (done) => {
-    request(app).get('/api/songs/1')
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .then( ({body})  => {
-      expect(body.id * 1).to.equal(1);
-      done();
-    })
-    .catch(done);
-  });
-
-  it('songs/:id returns 404', (done) => {
-    request(app).get('/api/songs/10')
-    .expect(404)
-    .then(() => {
-      done();
-    })
-    .catch(done);
-  });
-
   it('songs/:id/artist returns an artist', (done) => {
     request(app).get('/api/songs/1/artist')
     .expect(200)
@@ -36,12 +16,43 @@ describe('/songs', () => {
     .catch(done);
   });
 
-  it('songs/:id/artist returns 404', (done) => {
-    request(app).get('/api/songs/10/artist')
-    .expect(404)
-    .then(() => {
+  it('songs/:id/artist updates an artist', (done) => {
+    request(app).put('/api/songs/1/artist')
+    .send({id:2})
+    .expect(204)
+    .then( ()  => {
+      return request(app).get('/api/songs/1/artist')
+      .then(({body}) => {
+        expect(body.lastName).to.equal('Timberlake');
+        done();
+      });
+    })
+    .catch(done);
+  });
+
+  it('songs/:id/artist deletes an artist', (done) => {
+    request(app).delete('/api/songs/1/artist')
+    .expect(204)
+    .then( ()  => {
+      return request(app).get('/api/songs/1/artist')
+      .then(({body}) => {
+        expect(body).to.equal(null);
+        done();
+      });
+    })
+    .catch(done);
+  });
+
+  it('songs/:id returns an song', (done) => {
+    request(app).get('/api/songs/1')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then( ({body})  => {
+      expect(body.id * 1).to.equal(1);
       done();
     })
     .catch(done);
   });
+
+
 });
