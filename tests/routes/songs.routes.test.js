@@ -49,7 +49,7 @@ describe('/songs', () => {
     .expect('Content-Type', /json/)
     .then( ({body})  => {
       console.log(body)
-      expect(body.id * 1).to.equal(1);
+      expect(body[0].id * 1).to.equal(1);
       done();
     })
     .catch(done);
@@ -62,7 +62,7 @@ describe('/songs', () => {
     .then( ()  => {
       return request(app).get('/api/songs/1/genres')
       .then(({body}) => {
-        expect(body.name).to.equal('Pop Music');
+        expect(body[0].name).to.equal('Pop Music');
         done();
       });
     })
@@ -75,7 +75,7 @@ describe('/songs', () => {
     .then( ()  => {
       return request(app).get('/api/songs/1/genres')
       .then(({body}) => {
-        expect(body).to.equal(null);
+        expect(body).to.equal([]);
         done();
       });
     })
