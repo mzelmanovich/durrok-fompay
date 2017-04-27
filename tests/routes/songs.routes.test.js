@@ -15,7 +15,7 @@ describe('/songs', () => {
     .catch(done);
   });
 
-  it('songs/:id returns 404', (done) => {
+  it.only('songs/:id returns 404', (done) => {
     request(app).get('/api/songs/10')
     .expect(404)
     .then(() => {
@@ -29,7 +29,7 @@ describe('/songs', () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
-      console.log(body)
+      console.log(body);
       expect(body.id * 1).to.equal(1);
       done();
     })
