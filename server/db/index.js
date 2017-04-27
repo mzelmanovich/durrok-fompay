@@ -9,7 +9,7 @@ const Genres = require('./Genre');
 const Payments = require('./Payment');
 
 //Order Association
-Orders.hasOne( Payments );
+Orders.belongsTo( Payments );
 Orders.belongsToMany( Songs, {through: 'OrderSongs'} );
 Orders.belongsToMany( Albums, {through: 'OrderAlbums'} );
 Orders.belongsTo(Users);
@@ -50,7 +50,7 @@ Genres.hasMany( Albums );
 
 //Payment Association
 Payments.belongsTo( Users );
-Payments.belongsToMany( Orders, {through: 'OrderPayment'} );
+Payments.hasOne( Orders );
 
 
 const sync = force => conn.sync({ force });

@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const app = require('../../server/app');
 
-describe('/orders', () => {
+describe.only('/orders', () => {
 
   it('orders/ returns orders', (done) => {
     request(app).get('/api/orders')
@@ -55,6 +55,34 @@ describe('/orders', () => {
       return request(app).get('/api/orders/1')
       .then(({body}) => {
         expect(body.songs.length).to.equal(0);
+        done();
+      });
+    })
+    .catch(done);
+  });
+
+  it('orders/:id/songs can add song', (done) => {
+    request(app).put('/api/orders/1/songs')
+    .send({id: 2})
+    .expect(204)
+    .then( () => {
+      return request(app).get('/api/orders/1')
+      .then(({body}) => {
+        expect(body.songs.length).to.equal(2);
+        done();
+      });
+    })
+    .catch(done);
+  });
+
+  it.only('orders/:id/payment can changes payment', (done) => {
+    request(app).put('/api/orders/1/payment')
+    .send({id: 2})
+    .expect(204)
+    .then( () => {
+      return request(app).get('/api/orders/1')
+      .then(({body}) => {
+        expect(body.payment.id * 1).to.equal(2);
         done();
       });
     })
