@@ -24,7 +24,6 @@ router.put('/songs/:id/artist', (req, res, next) => {
   			res.sendStatus(404)
   		}
   		return song.setArtist(artist)
-  		}
   	})
   	.then(() =>res.sendStatus(204))
   	.catch(next);
@@ -37,7 +36,6 @@ router.delete('/songs/:id/artist', (req, res, next) => {
   			res.sendStatus(404)
   		}
   		return song.setArtist(null)
-  		}
   	})
   	.then(() =>res.sendStatus(204))
   	.catch(next);
