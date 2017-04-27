@@ -10,7 +10,7 @@ const Payments = require('./Payment');
 
 //Order Association
 Orders.hasOne( Payments );
-Orders.hasMany( Songs, {through: 'OrderSongs'} );
+Orders.belongsToMany( Songs, {through: 'OrderSongs'} );
 Orders.hasMany( Albums );
 Orders.belongsTo(Users);
 
