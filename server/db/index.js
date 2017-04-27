@@ -11,7 +11,7 @@ const Payments = require('./Payment');
 //Order Association
 Orders.hasOne( Payments );
 Orders.belongsToMany( Songs, {through: 'OrderSongs'} );
-Orders.hasMany( Albums );
+Orders.belongsToMany( Albums, {through: 'OrderAlbums'} );
 Orders.belongsTo(Users);
 
 Songs.belongsToMany(Orders, {through: 'OrderSongs'});
@@ -20,7 +20,7 @@ Songs.belongsTo(Artists);
 Songs.belongsTo(Albums);
 Songs.belongsTo(Genres);
 
-Albums.belongsTo(Orders);
+Albums.belongsToMany(Orders, {through: 'OrderAlbums'});
 Albums.hasMany(Reviews);
 Albums.hasMany(Songs);
 Albums.belongsTo(Artists);
@@ -50,7 +50,7 @@ Genres.hasMany( Albums );
 
 //Payment Association
 Payments.belongsTo( Users );
-Payments.belongsTo( Orders );
+Payments.belongsToMany( Orders, {through: 'OrderPayment'} );
 
 
 const sync = force => conn.sync({ force });
