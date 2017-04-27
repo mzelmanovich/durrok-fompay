@@ -41,7 +41,45 @@ router.delete('/songs/:id/artist', (req, res, next) => {
   	.catch(next);
 });
 
+router.get('/songs/:id/genres', (req, res, next) => {
+  db.models.Songs.findById(req.params.id)
+  .then(song => {
+  	if(!song){
+  		res.sendStatus(404)
+  	}
+  	else{
+  		const newSong= song.get();
+  		return db.models.Genres.findAll({where:{id:newSong.genreId}})
+  	}
+  })
+  .then(reviews =>res.json(reviews))
+  .catch(next);
+});
 
+router.put('/songs/:id/genres', (req, res, next) => {
+	const genre = req.body.id;
+  	db.models.Songs.findById(req.params.id)
+  	.then(song => {
+  		if(!song){
+  			res.sendStatus(404)
+  		}
+  		return song.setGenre(genre)
+  	})
+  	.then(() =>res.sendStatus(204))
+  	.catch(next);
+});
+
+router.delete('/songs/:id/genres', (req, res, next) => {
+  	db.models.Songs.findById(req.params.id)
+  	.then(song => {
+  		if(!song){
+  			res.sendStatus(404)
+  		}
+  		return song.setGenre(null)
+  	})
+  	.then(() =>res.sendStatus(204))
+  	.catch(next);
+});
 
 
 router.get('/songs/:id', (req, res, next) => {

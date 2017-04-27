@@ -43,6 +43,45 @@ describe('/songs', () => {
     .catch(done);
   });
 
+  it('songs/:id/genres returns genres', (done) => {
+    request(app).get('/api/songs/1/genres')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then( ({body})  => {
+      console.log(body)
+      expect(body.id * 1).to.equal(1);
+      done();
+    })
+    .catch(done);
+  });
+
+  it('songs/:id/genres updates a genre', (done) => {
+    request(app).put('/api/songs/1/genres')
+    .send({id:2})
+    .expect(204)
+    .then( ()  => {
+      return request(app).get('/api/songs/1/genres')
+      .then(({body}) => {
+        expect(body.name).to.equal('Pop Music');
+        done();
+      });
+    })
+    .catch(done);
+  });
+
+  it('songs/:id/genres deletes a genre', (done) => {
+    request(app).delete('/api/songs/1/genres')
+    .expect(204)
+    .then( ()  => {
+      return request(app).get('/api/songs/1/genres')
+      .then(({body}) => {
+        expect(body).to.equal(null);
+        done();
+      });
+    })
+    .catch(done);
+  });
+
   it('songs/:id returns an song', (done) => {
     request(app).get('/api/songs/1')
     .expect(200)
