@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const app = require('../../server/app');
 
-describe.only('/orders', () => {
+describe('/orders', () => {
 
   it('orders/ returns orders', (done) => {
     request(app).get('/api/orders')
@@ -75,7 +75,7 @@ describe.only('/orders', () => {
     .catch(done);
   });
 
-  it.only('orders/:id/payment can changes payment', (done) => {
+  it('orders/:id/payment can changes payment', (done) => {
     request(app).put('/api/orders/1/payment')
     .send({id: 2})
     .expect(204)
@@ -89,5 +89,31 @@ describe.only('/orders', () => {
     .catch(done);
   });
 
+  it('orders/:id/albums can album', (done) => {
+    request(app).delete('/api/orders/1/albums')
+    .send({id: 1})
+    .expect(204)
+    .then( () => {
+      return request(app).get('/api/orders/1')
+      .then(({body}) => {
+        expect(body.albums.length).to.equal(0);
+        done();
+      });
+    })
+    .catch(done);
+  });
 
+  it('orders/:id/albums can add album', (done) => {
+    request(app).put('/api/orders/1/albums')
+    .send({id: 2})
+    .expect(204)
+    .then( () => {
+      return request(app).get('/api/orders/1')
+      .then(({body}) => {
+        expect(body.albums.length).to.equal(2);
+        done();
+      });
+    })
+    .catch(done);
+  });
 });
