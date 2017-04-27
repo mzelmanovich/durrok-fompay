@@ -194,6 +194,7 @@ const seed = () => {
       reviewuser,
       paymentuser,
       songartist,
+      songaGenres,
       songOrder,
       albumOrder,
       paymentOrder,
