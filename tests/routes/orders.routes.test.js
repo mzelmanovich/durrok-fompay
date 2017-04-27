@@ -1,17 +1,14 @@
 const { expect } = require('chai');
 const request = require('supertest');
 const app = require('../../server/app');
+const db = require('../../server/db');
 
 describe('/orders', () => {
 
-  it('orders/ returns orders', (done) => {
+  it('orders/ returns no orders', (done) => {
     request(app).get('/api/orders')
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .then( ({body})  => {
-      expect(body.length).to.equal(2);
-      done();
-    })
+    .expect(403)
+    .then(() => done())
     .catch(done);
   });
 
@@ -23,9 +20,9 @@ describe('/orders', () => {
     .expect('Content-Type', /json/)
     .then( ({body})  => {
       expect(body.id * 1).to.equal(3);
-      return request(app).get('/api/orders')
-      .then((res) => {
-        expect(res.body.length).to.equal(3);
+      return db.models.Orders.findAll()
+      .then((orders) => {
+        expect(orders.length).to.equal(3);
         done();
       });
     })

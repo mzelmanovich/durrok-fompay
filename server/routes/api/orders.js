@@ -16,9 +16,7 @@ router.post('/orders', (req, res, next) => {
 });
 
 router.get('/orders', (req, res, next) => {
-  db.models.Orders.findAll()
-  .then(orders => ( orders ? res.json(orders) : res.sendStatus(404)))
-  .catch(next);
+  res.sendStatus(403);
 });
 
 router.put('/orders/:id/songs', (req, res, next) => {
