@@ -40,7 +40,7 @@ router.post('/genres', (req, res, next) =>
 
 // edit the genre (admin only)
 	router.put('/genres/:id', (req, res, next) => {
-       var id = req.params.id;
+    var {id} = req.params;
 		Genre.findById(id)
 		.then(genre => genre.update(req.body))
 		.then(newGenre => res.send(newGenre))
