@@ -9,18 +9,18 @@ const Genres = require('./Genre');
 const Payments = require('./Payment');
 
 //Order Association
-Orders.hasOne( Payments );
-Orders.hasMany( Songs );
-Orders.hasMany( Albums );
+Orders.belongsTo( Payments );
+Orders.belongsToMany( Songs, {through: 'OrderSongs'} );
+Orders.belongsToMany( Albums, {through: 'OrderAlbums'} );
 Orders.belongsTo(Users);
 
-Songs.belongsTo(Orders);
+Songs.belongsToMany(Orders, {through: 'OrderSongs'});
 Songs.hasMany(Reviews);
 Songs.belongsTo(Artists);
 Songs.belongsTo(Albums);
 Songs.belongsTo(Genres);
 
-Albums.belongsTo(Orders);
+Albums.belongsToMany(Orders, {through: 'OrderAlbums'});
 Albums.hasMany(Reviews);
 Albums.hasMany(Songs);
 Albums.belongsTo(Artists);
@@ -50,7 +50,7 @@ Genres.hasMany( Albums );
 
 //Payment Association
 Payments.belongsTo( Users );
-Payments.belongsTo( Orders );
+Payments.hasOne( Orders );
 
 
 const sync = force => conn.sync({ force });
@@ -188,6 +188,7 @@ const seed = () => {
     const albumGenre = albums[0].setGenre(genres[0]);
     const albumSongs = Promise.all([albums[0].addSongs(songs[0]), albums[0].addSongs(songs[1])]);
     const albumArtist = albums[0].setArtist(artists[0]);
+    const songGenere = songs[0].setGenre(genres[0]);
 
     return Promise.all([
       userorder,
@@ -202,7 +203,8 @@ const seed = () => {
       paymentOrder,
       albumGenre,
       albumSongs,
-      albumArtist
+      albumArtist,
+      songGenere
     ]);
 
   });
