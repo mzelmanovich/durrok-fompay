@@ -178,6 +178,7 @@ const seed = () => {
     const userorder = users[0].addOrder(completedOrder); //order belongs to user
     const reviewalbum = albums[0].setReviews(reviews[0]) ; //review belongs to album
     const reviewuser = users[0].setReviews(reviews[0]); // Reviews.belongsTo(Users);
+    const reviewsong = songs[0].setReviews(reviews[0]); // Reviews.belongsTo(Songs);
     const paymentuser = users[0].addPayment(payments[0]);//Payments.belongsTo( Users );
     const songartist = artists[0].addSongs(songs[0]);//Songs.belongsTo(Artist);
     const songGenres = genres[0].addSongs(songs[0]);//Songs.belongsTo(Genre);
@@ -192,6 +193,7 @@ const seed = () => {
       userorder,
       reviewalbum,
       reviewuser,
+      reviewsong,
       paymentuser,
       songartist,
       songGenres,

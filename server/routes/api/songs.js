@@ -81,6 +81,86 @@ router.delete('/songs/:id/genres', (req, res, next) => {
   	.catch(next);
 });
 
+router.get('/songs/:id/albums', (req, res, next) => {
+  db.models.Songs.findById(req.params.id)
+  .then(song => {
+  	if(!song){
+  		res.sendStatus(404)
+  	}
+  	else{
+  		const newSong= song.get();
+  		return db.models.Albums.findById(newSong.albumId)
+  	}
+  })
+  .then(album =>res.json(album))
+  .catch(next);
+});
+
+router.put('/songs/:id/albums', (req, res, next) => {
+	const album = req.body.id;
+  	db.models.Songs.findById(req.params.id)
+  	.then(song => {
+  		if(!song){
+  			res.sendStatus(404)
+  		}
+  		return song.setAlbums(album)
+  	})
+  	.then(() =>res.sendStatus(204))
+  	.catch(next);
+});
+
+router.delete('/songs/:id/albums', (req, res, next) => {
+  	db.models.Songs.findById(req.params.id)
+  	.then(song => {
+  		if(!song){
+  			res.sendStatus(404)
+  		}
+  		return song.setAlbums(null)
+  	})
+  	.then(() =>res.sendStatus(204))
+  	.catch(next);
+});
+
+router.get('/songs/:id/reviews', (req, res, next) => {
+  db.models.Songs.findById(req.params.id)
+  .then(song => {
+  	if(!song){
+  		res.sendStatus(404)
+  	}
+  	else{
+  		const newSong= song.get();
+  		return db.models.Reviews.findAll({where:{songId:newSong.id}})
+  	}
+  })
+  .then(reviews =>res.json(reviews))
+  .catch(next);
+});
+
+router.post('/songs/:id/reviews', (req, res, next) => {
+	const review = req.body.id;
+  	db.models.Songs.findById(req.params.id)
+  	.then(song => {
+  		if(!song){
+  			res.sendStatus(404)
+  		}
+  		return db.models.Reviews.create(req.body)
+  		.then(review => song.addReviews(review));
+  	})
+  	.then(() =>res.sendStatus(201))
+  	.catch(next);
+});
+
+router.delete('/songs/:id/reviews', (req, res, next) => {
+  	db.models.Songs.findById(req.params.id)
+  	.then(song => {
+  		if(!song){
+  			res.sendStatus(404)
+  		}
+  		return db.models.Reviews.destroy({where:{songId:req.params.id}})
+  	})
+  	.then(() =>res.sendStatus(204))
+  	.catch(next);
+});
 
 router.get('/songs/:id', (req, res, next) => {
   db.models.Songs.findById(req.params.id)
