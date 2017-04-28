@@ -88,7 +88,7 @@ describe('/songs', () => {
     .expect('Content-Type', /json/)
     .then( ({body})  => {
       console.log(body)
-      expect(body[0].id * 1).to.equal(1);
+      expect(body.id * 1).to.equal(1);
       done();
     })
     .catch(done);
@@ -108,18 +108,18 @@ describe('/songs', () => {
     .catch(done);
   });
 
-  it('songs/:id/albums deletes an album', (done) => {
-    request(app).delete('/api/songs/1/albums')
-    .expect(204)
-    .then( ()  => {
-      return request(app).get('/api/songs/1/albums')
-      .then(({body}) => {
-        expect(body.length).to.equal(0);
-        done();
-      });
-    })
-    .catch(done);
-  });
+  // it('songs/:id/albums deletes an album', (done) => {
+  //   request(app).delete('/api/songs/1/albums')
+  //   .expect(204)
+  //   .then( ()  => {
+  //     return request(app).get('/api/songs/1/albums')
+  //     .then(({body}) => {
+  //       expect(body.length).to.equal(0);
+  //       done();
+  //     });
+  //   })
+  //   .catch(done);
+  // });
 
   it('songs/:id/reviews returns reviews', (done) => {
     request(app).get('/api/songs/1/reviews')
