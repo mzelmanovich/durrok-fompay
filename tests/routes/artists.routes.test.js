@@ -78,7 +78,7 @@ describe('/artists', () => {
     .catch(done);
   });
 
-    it.only('artists/:id/songs add the song under 1 artist', (done) => {
+    it('artists/:id/songs add the song under 1 artist', (done) => {
     request(app).put('/api/artists/1/songs')
     .send({id: 2})
     .expect(204)
