@@ -9,7 +9,6 @@ describe('/songs', () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
-      console.log(body)
       expect(body.id * 1).to.equal(1);
       done();
     })
@@ -48,7 +47,6 @@ describe('/songs', () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
-      console.log(body)
       expect(body[0].id * 1).to.equal(1);
       done();
     })
@@ -87,46 +85,17 @@ describe('/songs', () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
-      console.log(body)
       expect(body.id * 1).to.equal(1);
       done();
     })
     .catch(done);
   });
 
-  // it('songs/:id/albums updates an album', (done) => {
-  //   request(app).put('/api/songs/1/albums')
-  //   .send({id:2})
-  //   .expect(204)
-  //   .then( ()  => {
-  //     return request(app).get('/api/songs/1/albums')
-  //     .then(({body}) => {
-  //       expect(body.name).to.equal('Zoot Woman');
-  //       done();
-  //     });
-  //   })
-  //   .catch(done);
-  // });
-
-  // it('songs/:id/albums deletes an album', (done) => {
-  //   request(app).delete('/api/songs/1/albums')
-  //   .expect(204)
-  //   .then( ()  => {
-  //     return request(app).get('/api/songs/1/albums')
-  //     .then(({body}) => {
-  //       expect(body.length).to.equal(0);
-  //       done();
-  //     });
-  //   })
-  //   .catch(done);
-  // });
-
   it('songs/:id/reviews returns reviews', (done) => {
     request(app).get('/api/songs/1/reviews')
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
-      console.log(body)
       expect(body[0].id * 1).to.equal(1);
       done();
     })
