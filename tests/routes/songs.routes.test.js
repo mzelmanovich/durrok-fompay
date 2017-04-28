@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const app = require('../../server/app');
 
-describe('/songs', () => {
+describe.only('/songs', () => {
 
   it('songs/:id/artist returns an artist', (done) => {
     request(app).get('/api/songs/1/artist')
@@ -17,7 +17,7 @@ describe('/songs', () => {
 
   it('songs/:id/artist updates an artist', (done) => {
     request(app).put('/api/songs/1/artist')
-    .send({id:2})
+    .send({id: 2})
     .expect(204)
     .then( ()  => {
       return request(app).get('/api/songs/1/artist')
@@ -29,7 +29,7 @@ describe('/songs', () => {
     .catch(done);
   });
 
-  it('songs/:id/artist deletes an artist', (done) => {
+  it.only('songs/:id/artist deletes an artist', (done) => {
     request(app).delete('/api/songs/1/artist')
     .expect(204)
     .then( ()  => {
@@ -55,7 +55,7 @@ describe('/songs', () => {
 
   it('songs/:id/genres updates a genre', (done) => {
     request(app).put('/api/songs/1/genres')
-    .send({id:2})
+    .send({id: 2})
     .expect(204)
     .then( ()  => {
       return request(app).get('/api/songs/1/genres')
@@ -80,8 +80,8 @@ describe('/songs', () => {
     .catch(done);
   });
 
-  it('songs/:id/albums returns albums', (done) => {
-    request(app).get('/api/songs/1/albums')
+  it('songs/:id/album returns albums', (done) => {
+    request(app).get('/api/songs/1/album')
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
@@ -105,9 +105,9 @@ describe('/songs', () => {
   it('songs/:id/reviews post a review', (done) => {
     request(app).post('/api/songs/1/reviews')
     .send({
-      rating: '3', 
-      title: 'ok!', 
-      content:'Whatever'}) 
+      rating: '3',
+      title: 'ok!',
+      content: 'Whatever'})
     .expect(201)
     .then( ()  => {
       return request(app).get('/api/songs/1/reviews')
