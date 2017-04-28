@@ -14,6 +14,7 @@ describe('Routes', function() {
     require('./albums.routes.test');
     require('./genres.routes.test');
     require('./songs.routes.test');
+    require('./artists.routes.test');
     require('./orders.routes.test');
   });
 });

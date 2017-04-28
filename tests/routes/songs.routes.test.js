@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const app = require('../../server/app');
 
-describe.only('/songs', () => {
+describe('/songs', () => {
 
   it('songs/:id/artist returns an artist', (done) => {
     request(app).get('/api/songs/1/artist')
@@ -29,7 +29,7 @@ describe.only('/songs', () => {
     .catch(done);
   });
 
-  it.only('songs/:id/artist deletes an artist', (done) => {
+  it('songs/:id/artist deletes an artist', (done) => {
     request(app).delete('/api/songs/1/artist')
     .expect(204)
     .then( ()  => {
