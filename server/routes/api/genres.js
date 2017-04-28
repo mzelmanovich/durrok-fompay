@@ -46,10 +46,15 @@ router.post('/genres', (req, res, next) =>
 router.put('/genres/:id', (req, res, next) => {
   var {id} = req.params;
   Genre.findById(id)
-		.then(genre => genre.update(req.body))
+		.then(genre => {
+      genre.name = req.body.name;
+      // console.log(req.body);
+      return genre.save(req.body);
+    })
 		.then(newGenre => res.send(newGenre))
 		.catch(next);
 });
+//http://docs.sequelizejs.com/en/latest/docs/instances/
 
 
 // delete a genre (admin only)

@@ -75,18 +75,18 @@ describe('/genres routes test', () => {
     .catch(done);
   });
 
-  // it('/genres/id PUT REQUEST edit the genre', (done) => {
-  //   request(app).put('/api/genres/1')
-  //   .send({id: 2})
-  //   .then( ()  => {
-  //     return request(app).get('/api/genres/1')
-  //     .then(({body}) => {
-  //       expect(body.name).to.equal('Pop Music');
-  //       done();
-  //     });
-  //   })
-  //   .catch(done);
-  // });
+  it('/genres/id PUT REQUEST edit the genre', (done) => {
+    request(app).put('/api/genres/1')
+    .send({name: 'classical'})
+    .then( ()  => {
+      return request(app).get('/api/genres/1')
+      .then(({body}) => {
+        expect(body.name).to.equal('classical');
+        done();
+      });
+    })
+    .catch(done);
+  });
 
   it('genres/:id DELETE delete a genre', (done) => {
     request(app).delete('/api/genres/1')
