@@ -9,18 +9,18 @@ const Genres = require('./Genre');
 const Payments = require('./Payment');
 
 //Order Association
-Orders.hasOne( Payments );
-Orders.hasMany( Songs );
-Orders.hasMany( Albums );
+Orders.belongsTo( Payments );
+Orders.belongsToMany( Songs, {through: 'OrderSongs'} );
+Orders.belongsToMany( Albums, {through: 'OrderAlbums'} );
 Orders.belongsTo(Users);
 
-Songs.belongsTo(Orders);
+Songs.belongsToMany(Orders, {through: 'OrderSongs'});
 Songs.hasMany(Reviews);
 Songs.belongsTo(Artists);
 Songs.belongsTo(Albums);
 Songs.belongsTo(Genres);
 
-Albums.belongsTo(Orders);
+Albums.belongsToMany(Orders, {through: 'OrderAlbums'});
 Albums.hasMany(Reviews);
 Albums.hasMany(Songs);
 Albums.belongsTo(Artists);
@@ -50,7 +50,7 @@ Genres.hasMany( Albums );
 
 //Payment Association
 Payments.belongsTo( Users );
-Payments.belongsTo( Orders );
+Payments.hasOne( Orders );
 
 
 const sync = force => conn.sync({ force });
@@ -178,8 +178,10 @@ const seed = () => {
     const userorder = users[0].addOrder(completedOrder); //order belongs to user
     const reviewalbum = albums[0].setReviews(reviews[0]) ; //review belongs to album
     const reviewuser = users[0].setReviews(reviews[0]); // Reviews.belongsTo(Users);
+    const reviewsong = songs[0].setReviews(reviews[0]); // Reviews.belongsTo(Songs);
     const paymentuser = users[0].addPayment(payments[0]);//Payments.belongsTo( Users );
     const songartist = artists[0].addSongs(songs[0]);//Songs.belongsTo(Artist);
+    const songGenres = genres[0].addSongs(songs[0]);//Songs.belongsTo(Genre);
     const songOrder = completedOrder.setSongs(songs[0]);
     const albumOrder = completedOrder.setAlbums(albums[0]);
     const paymentOrder = completedOrder.setPayment(payments[0]);
@@ -192,8 +194,10 @@ const seed = () => {
       userorder,
       reviewalbum,
       reviewuser,
+      reviewsong,
       paymentuser,
       songartist,
+      songGenres,
       songOrder,
       albumOrder,
       paymentOrder,
