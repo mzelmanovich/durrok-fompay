@@ -117,5 +117,6 @@ describe('/artists', () => {
     })
     .catch(done);
   });
+});
 
 
