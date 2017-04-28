@@ -96,30 +96,30 @@ router.get('/songs/:id/albums', (req, res, next) => {
   .catch(next);
 });
 
-router.put('/songs/:id/albums', (req, res, next) => {
-	const album = req.body.id;
-  	db.models.Songs.findById(req.params.id)
-  	.then(song => {
-  		if(!song){
-  			res.sendStatus(404)
-  		}
-  		return song.setAlbums(album)
-  	})
-  	.then(() =>res.sendStatus(204))
-  	.catch(next);
-});
+// router.put('/songs/:id/albums', (req, res, next) => {
+// 	const album = req.body.id;
+//   	db.models.Songs.findById(req.params.id)
+//   	.then(song => {
+//   		if(!song){
+//   			res.sendStatus(404)
+//   		}
+//   		return song.setAlbums(album)
+//   	})
+//   	.then(() =>res.sendStatus(204))
+//   	.catch(next);
+// });
 
-router.delete('/songs/:id/albums', (req, res, next) => {
-  	db.models.Songs.findById(req.params.id)
-  	.then(song => {
-  		if(!song){
-  			res.sendStatus(404)
-  		}
-  		return song.setAlbums(null)
-  	})
-  	.then(() =>res.sendStatus(204))
-  	.catch(next);
-});
+// router.delete('/songs/:id/albums', (req, res, next) => {
+//   	db.models.Songs.findById(req.params.id)
+//   	.then(song => {
+//   		if(!song){
+//   			res.sendStatus(404)
+//   		}
+//   		return song.setAlbums(null)
+//   	})
+//   	.then(() =>res.sendStatus(204))
+//   	.catch(next);
+// });
 
 router.get('/songs/:id/reviews', (req, res, next) => {
   db.models.Songs.findById(req.params.id)
@@ -144,9 +144,9 @@ router.post('/songs/:id/reviews', (req, res, next) => {
   			res.sendStatus(404)
   		}
   		return db.models.Reviews.create(req.body)
-  		.then(review => song.addReviews(review));
+  		.then(review => return song.addReviews(review))
+  		.then(() =>res.sendStatus(201))
   	})
-  	.then(() =>res.sendStatus(201))
   	.catch(next);
 });
 

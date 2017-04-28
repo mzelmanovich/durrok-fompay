@@ -94,19 +94,19 @@ describe('/songs', () => {
     .catch(done);
   });
 
-  it('songs/:id/albums updates an album', (done) => {
-    request(app).put('/api/songs/1/albums')
-    .send({id:2})
-    .expect(204)
-    .then( ()  => {
-      return request(app).get('/api/songs/1/albums')
-      .then(({body}) => {
-        expect(body.name).to.equal('Zoot Woman');
-        done();
-      });
-    })
-    .catch(done);
-  });
+  // it('songs/:id/albums updates an album', (done) => {
+  //   request(app).put('/api/songs/1/albums')
+  //   .send({id:2})
+  //   .expect(204)
+  //   .then( ()  => {
+  //     return request(app).get('/api/songs/1/albums')
+  //     .then(({body}) => {
+  //       expect(body.name).to.equal('Zoot Woman');
+  //       done();
+  //     });
+  //   })
+  //   .catch(done);
+  // });
 
   // it('songs/:id/albums deletes an album', (done) => {
   //   request(app).delete('/api/songs/1/albums')
@@ -135,7 +135,10 @@ describe('/songs', () => {
 
   it('songs/:id/reviews post a review', (done) => {
     request(app).post('/api/songs/1/reviews')
-    .send({id: 2}) 
+    .send({
+      rating: '3', 
+      title: 'ok!', 
+      content:'Whatever'}) 
     .expect(201)
     .then( ()  => {
       return request(app).get('/api/songs/1/reviews')
