@@ -144,7 +144,7 @@ router.post('/songs/:id/reviews', (req, res, next) => {
   			res.sendStatus(404)
   		}
   		return db.models.Reviews.create(req.body)
-  		.then(review => return song.addReviews(review))
+  		.then(review => song.addReviews(review))
   		.then(() =>res.sendStatus(201))
   	})
   	.catch(next);
