@@ -15,7 +15,7 @@ describe('Album Model', () => {
   	db.models.Albums
       .findAll()
       .then(results => {
-        expect(results.length).to.equal(2);
+        expect(results.length).to.equal(4);
         expect(results[1].name).to.equal('Talkie Walkie');
         expect(results[1].year).to.equal('2004');
         expect(results[1].price * 1).to.be.equal(15);

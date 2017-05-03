@@ -4,5 +4,5 @@ const http = require('http');
 
 const port = process.env.PORT || 3000;
 
-db.sync().then(() => http.createServer(app).listen(port, () => console.log(`listening on port ${port}`)));
+db.seed(true).then(() => http.createServer(app).listen(port, () => console.log(`listening on port ${port}`)));
 

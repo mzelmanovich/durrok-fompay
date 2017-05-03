@@ -9,7 +9,7 @@ describe('/albums', () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then( ({body})  => {
-      expect(body.length).to.equal(2);
+      expect(body.length).to.equal(4);
       done();
     })
     .catch(done);
@@ -30,7 +30,7 @@ describe('/albums', () => {
       expect(body.price * 1).to.equal(12);
       return request(app).get('/api/albums')
       .then((res) => {
-        expect(res.body.length).to.equal(3);
+        expect(res.body.length).to.equal(5);
         done();
       });
     })
