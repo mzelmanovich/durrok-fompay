@@ -104,7 +104,25 @@ const seed = () => {
       price: 15,
       description: 'Best album from Zoot Woman',
       imgURL: null
-    }
+    },
+    {
+      id: 3,
+      name: 'Monkey Around',
+      jumboImg: 'https://ksassets.timeincuk.net/wp/uploads/sites/55/2017/03/Gorillaz_2017-920x584.jpg',
+      showJumbo: true,
+      year: '2017',
+      price: 9.99,
+      description: 'New Gorilla Album',
+    },
+    {
+      id: 4,
+      jumboImg: 'http://assets.bonappetit.com/photos/59035f282278cd3dbd2c0d99/16:9/w_1200,c_limit/katy-perry-bon-appetit.jpg',
+      showJumbo: true,
+      name: 'Bon Appetit',
+      year: '2017',
+      price: 9.99,
+      description: 'New KP Album'
+    },
   ];
 
   const songsToAdd = [
