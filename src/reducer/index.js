@@ -1,4 +1,4 @@
 import { combineReducers} from 'redux';
-import test from './test';
+import jumbotron from './jumbotron';
 
-export default combineReducers({test});
+export default combineReducers({jumbotron});
