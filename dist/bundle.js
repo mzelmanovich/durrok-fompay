@@ -48449,14 +48449,12 @@ var jumbotron = function jumbotron() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
-  {
-    switch (action.type) {
-      case _constants.SET_JUMBOTRON:
-        state = action.data;
-        break;
-    }
-    return state;
+  switch (action.type) {
+    case _constants.SET_JUMBOTRON:
+      state = action.data;
+      break;
   }
+  return state;
 };
 
 exports.default = jumbotron;
@@ -48499,14 +48497,12 @@ var albums = function albums() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
-  {
-    switch (action.type) {
-      case _constants.SET_ALBUMS:
-        state = action.data;
-        break;
-    }
-    return state;
+  switch (action.type) {
+    case _constants.SET_ALBUMS:
+      state = action.data;
+      break;
   }
+  return state;
 };
 
 exports.default = albums;
@@ -48528,14 +48524,12 @@ var albums = function albums() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
-  {
-    switch (action.type) {
-      case _constants.SET_ALBUMS:
-        state = action.data;
-        break;
-    }
-    return state;
+  switch (action.type) {
+    case _constants.SET_ALBUMS:
+      state = action.data;
+      break;
   }
+  return state;
 };
 
 exports.default = albums;

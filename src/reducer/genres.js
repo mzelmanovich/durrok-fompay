@@ -1,14 +1,12 @@
 import {SET_ALBUMS} from '../constants';
 
 const albums = (state = [], action) => {
-  {
-    switch (action.type){
+  switch (action.type){
     case SET_ALBUMS:
       state = action.data;
       break;
     }
-    return state;
-  }
+  return state;
 };
 
 export default albums;
