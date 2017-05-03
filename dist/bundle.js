@@ -20840,17 +20840,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(145);
-
-var _JumbotronComponent = __webpack_require__(250);
-
-var _JumbotronComponent2 = _interopRequireDefault(_JumbotronComponent);
 
 var _Footer = __webpack_require__(249);
 
@@ -20858,107 +20852,73 @@ var _Footer2 = _interopRequireDefault(_Footer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var AppContainer = function AppContainer(_ref) {
+  var children = _ref.children;
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AppContainer = function (_Component) {
-  _inherits(AppContainer, _Component);
-
-  function AppContainer(props) {
-    _classCallCheck(this, AppContainer);
-
-    var _this = _possibleConstructorReturn(this, (AppContainer.__proto__ || Object.getPrototypeOf(AppContainer)).call(this, props));
-
-    _this.onClick = _this.onClick.bind(_this);
-    // this.onSignUpClick = this.onSignUpClick.bind(this);
-    // this.onLogInClick = this.onLogInClick.bind(this);
-    return _this;
-  }
-
-  _createClass(AppContainer, [{
-    key: "onClick",
-    value: function onClick(value) {
-      _reactRouter.browserHistory.push(value);
-    }
-
-    // onSignUpClick() {
-    //   browserHistory.push("/signup");
-    // }
-
-    // onLogInClick() {
-    //   browserHistory.push("/login");
-    // }
-
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: "container" },
+  return _react2.default.createElement(
+    'div',
+    { className: 'container' },
+    _react2.default.createElement(
+      'div',
+      { className: 'header clearfix' },
+      _react2.default.createElement(
+        'nav',
+        { className: 'homepage-navbar' },
         _react2.default.createElement(
-          "div",
-          { className: "header clearfix" },
+          'ul',
+          { className: 'nav nav-pills pull-right' },
           _react2.default.createElement(
-            "nav",
-            { className: "homepage-navbar" },
+            'li',
+            { role: 'presentation' },
             _react2.default.createElement(
-              "ul",
-              { className: "nav nav-pills pull-right" },
-              _react2.default.createElement(
-                "li",
-                { role: "presentation" },
-                _react2.default.createElement(
-                  "a",
-                  { href: "#" },
-                  "Home"
-                )
-              ),
-              _react2.default.createElement(
-                "li",
-                { role: "presentation" },
-                _react2.default.createElement(
-                  "a",
-                  { href: "/login" },
-                  "Log In"
-                )
-              ),
-              _react2.default.createElement(
-                "li",
-                { role: "presentation" },
-                _react2.default.createElement(
-                  "a",
-                  { href: "/singup" },
-                  "Sign Up"
-                )
-              ),
-              _react2.default.createElement(
-                "li",
-                { role: "presentation" },
-                _react2.default.createElement(
-                  "a",
-                  { href: "/cart" },
-                  "Cart"
-                )
-              )
+              'a',
+              { href: '#' },
+              'Home'
             )
           ),
           _react2.default.createElement(
-            "h3",
-            { className: "homepage-header" },
-            "Durrok Fompay Music store"
+            'li',
+            { role: 'presentation' },
+            _react2.default.createElement(
+              'a',
+              { href: '/login' },
+              'Log In'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            { role: 'presentation' },
+            _react2.default.createElement(
+              'a',
+              { href: '/singup' },
+              'Sign Up'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            { role: 'presentation' },
+            _react2.default.createElement(
+              'a',
+              { href: '/cart' },
+              'Cart'
+            )
           )
-        ),
-        _react2.default.createElement(_JumbotronComponent2.default, null),
-        _react2.default.createElement(_Footer2.default, null)
-      );
-    }
-  }]);
-
-  return AppContainer;
-}(_react.Component);
+        )
+      ),
+      _react2.default.createElement(
+        'h3',
+        { className: 'homepage-header' },
+        'Durrok Fompay Music store'
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      children
+    ),
+    _react2.default.createElement(_Footer2.default, null)
+  );
+};
 
 exports.default = AppContainer;
 
@@ -21005,19 +20965,15 @@ var _AppContainer = __webpack_require__(244);
 
 var _AppContainer2 = _interopRequireDefault(_AppContainer);
 
+var _JumbotronComponent = __webpack_require__(250);
+
+var _JumbotronComponent2 = _interopRequireDefault(_JumbotronComponent);
+
+var _jumbotron = __webpack_require__(540);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var root = document.getElementById('root');
-
-var Test = function Test(_ref) {
-  var children = _ref.children;
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(_AppContainer2.default, null),
-    children
-  );
-};
 
 var Test3 = function Test3() {
   return _react2.default.createElement(
@@ -21027,21 +20983,43 @@ var Test3 = function Test3() {
   );
 };
 
-var Routes = _react2.default.createElement(
-  _reactRouter.Router,
-  { history: _reactRouter.hashHistory },
-  _react2.default.createElement(
-    _reactRouter.Route,
-    { path: '/', component: Test },
-    _react2.default.createElement(_reactRouter.IndexRoute, { component: Test3 }),
-    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: Test3 })
-  )
-);
+var testCaroselData = [{
+  src: 'https://ksassets.timeincuk.net/wp/uploads/sites/55/2017/03/Gorillaz_2017-920x584.jpg',
+  h3: 'Gorillaz',
+  p: '2017 New Album from $9.99'
+}, {
+  src: 'http://assets.bonappetit.com/photos/59035f282278cd3dbd2c0d99/16:9/w_1200,c_limit/katy-perry-bon-appetit.jpg',
+  h3: 'Katty Perry',
+  p: 'Bon Appetit'
+}];
+var Routes = function Routes(_ref) {
+  var init = _ref.init;
+  return _react2.default.createElement(
+    _reactRouter.Router,
+    { history: _reactRouter.hashHistory },
+    _react2.default.createElement(
+      _reactRouter.Route,
+      { path: '/', component: _AppContainer2.default, onEnter: init },
+      _react2.default.createElement(_reactRouter.IndexRoute, { component: _JumbotronComponent2.default }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'login', component: Test3 })
+    )
+  );
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    init: function init() {
+      dispatch((0, _jumbotron.setJumbotronData)(testCaroselData));
+    }
+  };
+};
+
+var RoutesContainer = (0, _reactRedux.connect)(null, mapDispatchToProps)(Routes);
 
 var ProviderSetUp = _react2.default.createElement(
   _reactRedux.Provider,
   { store: _store2.default },
-  Routes
+  _react2.default.createElement(RoutesContainer, null)
 );
 
 (0, _reactDom.render)(ProviderSetUp, root);
@@ -21059,39 +21037,16 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(144);
 
-var _test = __webpack_require__(248);
+var _jumbotron = __webpack_require__(539);
 
-var _test2 = _interopRequireDefault(_test);
+var _jumbotron2 = _interopRequireDefault(_jumbotron);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (0, _redux.combineReducers)({ test: _test2.default });
+exports.default = (0, _redux.combineReducers)({ jumbotron: _jumbotron2.default });
 
 /***/ }),
-/* 248 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var categoriesReducer = function categoriesReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var action = arguments[1];
-
-  switch (action.type) {
-    case 'TEST':
-      state = action.test;
-      break;
-  }
-  return state;
-};
-
-exports.default = categoriesReducer;
-
-/***/ }),
+/* 248 */,
 /* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21138,7 +21093,7 @@ exports.default = Footer;
 
 
 Object.defineProperty(exports, "__esModule", {
-										value: true
+  value: true
 });
 
 var _react = __webpack_require__(1);
@@ -21147,89 +21102,63 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactBootstrap = __webpack_require__(407);
 
+var _reactRedux = __webpack_require__(245);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var JumbotronComponent = function JumbotronComponent() {
-										return _react2.default.createElement(
-																				'div',
-																				{ className: 'jumbotron' },
-																				_react2.default.createElement(
-																														_reactBootstrap.Carousel,
-																														null,
-																														_react2.default.createElement(
-																																								_reactBootstrap.Carousel.Item,
-																																								null,
-																																								_react2.default.createElement(
-																																																		'div',
-																																																		{ className: 'jumbotron-image' },
-																																																		_react2.default.createElement('img', { width: 910, height: 500, alt: '900x500', src: 'https://ksassets.timeincuk.net/wp/uploads/sites/55/2017/03/Gorillaz_2017-920x584.jpg' })
-																																								),
-																																								_react2.default.createElement(
-																																																		_reactBootstrap.Carousel.Caption,
-																																																		null,
-																																																		_react2.default.createElement(
-																																																												'h3',
-																																																												null,
-																																																												'Gorillaz'
-																																																		),
-																																																		_react2.default.createElement(
-																																																												'p',
-																																																												null,
-																																																												'2017 New Album from $9.99'
-																																																		)
-																																								)
-																														),
-																														_react2.default.createElement(
-																																								_reactBootstrap.Carousel.Item,
-																																								null,
-																																								_react2.default.createElement(
-																																																		'div',
-																																																		{ className: 'jumbotron-image' },
-																																																		_react2.default.createElement('img', { width: 950, height: 500, alt: '1000x500', src: 'http://assets.bonappetit.com/photos/59035f282278cd3dbd2c0d99/16:9/w_1200,c_limit/katy-perry-bon-appetit.jpg' })
-																																								),
-																																								_react2.default.createElement(
-																																																		_reactBootstrap.Carousel.Caption,
-																																																		{ className: 'jumbotron-caption' },
-																																																		_react2.default.createElement(
-																																																												'h3',
-																																																												null,
-																																																												'Katy Perry'
-																																																		),
-																																																		_react2.default.createElement(
-																																																												'p',
-																																																												null,
-																																																												'Bon Appetit'
-																																																		)
-																																								)
-																														),
-																														_react2.default.createElement(
-																																								_reactBootstrap.Carousel.Item,
-																																								null,
-																																								_react2.default.createElement(
-																																																		'div',
-																																																		{ className: 'jumbotron-image' },
-																																																		_react2.default.createElement('img', { width: 900, height: 500, alt: '900x500', src: 'https://s-media-cache-ak0.pinimg.com/736x/02/f6/e6/02f6e6495ea7d9813fe5dad14c669379.jpg' })
-																																								),
-																																								_react2.default.createElement(
-																																																		_reactBootstrap.Carousel.Caption,
-																																																		null,
-																																																		_react2.default.createElement(
-																																																												'h3',
-																																																												null,
-																																																												'The Beatles'
-																																																		),
-																																																		_react2.default.createElement(
-																																																												'p',
-																																																												null,
-																																																												'"Sgt. Pepper\'s Lonly Hearts Club Band\'"'
-																																																		)
-																																								)
-																														)
-																				)
-										);
+var JumbotronComponent = function JumbotronComponent(_ref) {
+  var carrouselItems = _ref.carrouselItems;
+
+  carrouselItems = carrouselItems || [];
+  carrouselItems = carrouselItems.map(function (_ref2, i) {
+    var src = _ref2.src,
+        h3 = _ref2.h3,
+        p = _ref2.p;
+
+    return _react2.default.createElement(
+      _reactBootstrap.Carousel.Item,
+      { key: i + 'carrousel' },
+      _react2.default.createElement(
+        'div',
+        { className: 'jumbotron-image' },
+        _react2.default.createElement('img', { width: 910, height: 500, alt: '900x500', src: src })
+      ),
+      _react2.default.createElement(
+        _reactBootstrap.Carousel.Caption,
+        null,
+        _react2.default.createElement(
+          'h3',
+          null,
+          h3
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          p
+        )
+      )
+    );
+  });
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'jumbotron' },
+    _react2.default.createElement(
+      _reactBootstrap.Carousel,
+      null,
+      carrouselItems
+    )
+  );
 };
 
-exports.default = JumbotronComponent;
+var mapStateToProps = function mapStateToProps(_ref3) {
+  var jumbotron = _ref3.jumbotron;
+
+  return {
+    carrouselItems: jumbotron
+  };
+};
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(JumbotronComponent);
 
 /***/ }),
 /* 251 */
@@ -48479,6 +48408,68 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 538 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var SET_JUMBOTRON = exports.SET_JUMBOTRON = 'SET_JUMBOTRON';
+
+/***/ }),
+/* 539 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _constants = __webpack_require__(538);
+
+var jumbotron = function jumbotron() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  {
+    switch (action.type) {
+      case _constants.SET_JUMBOTRON:
+        state = action.data;
+        break;
+    }
+    return state;
+  }
+};
+
+exports.default = jumbotron;
+
+/***/ }),
+/* 540 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setJumbotronData = undefined;
+
+var _constants = __webpack_require__(538);
+
+var setJumbotronData = exports.setJumbotronData = function setJumbotronData(data) {
+  return {
+    type: _constants.SET_JUMBOTRON,
+    data: data
+  };
+};
 
 /***/ })
 /******/ ]);
