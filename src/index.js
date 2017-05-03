@@ -23,6 +23,7 @@ const testCaroselData = [
     p: 'Bon Appetit'
   },
 ];
+
 const Routes = ({init}) => (
   <Router history={ hashHistory }>
     <Route path="/" component={ App } onEnter={ init }>
