@@ -21042,9 +21042,17 @@ var _jumbotron = __webpack_require__(539);
 
 var _jumbotron2 = _interopRequireDefault(_jumbotron);
 
+var _albums = __webpack_require__(541);
+
+var _albums2 = _interopRequireDefault(_albums);
+
+var _genres = __webpack_require__(542);
+
+var _genres2 = _interopRequireDefault(_genres);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (0, _redux.combineReducers)({ jumbotron: _jumbotron2.default });
+exports.default = (0, _redux.combineReducers)({ jumbotron: _jumbotron2.default, albums: _albums2.default, genres: _genres2.default });
 
 /***/ }),
 /* 248 */,
@@ -48421,6 +48429,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var SET_JUMBOTRON = exports.SET_JUMBOTRON = 'SET_JUMBOTRON';
+var SET_ALBUMS = exports.SET_ALBUMS = 'SET_ALBUMS';
+var SET_GENRES = exports.SET_GENRES = 'SET_GENRES';
 
 /***/ }),
 /* 539 */
@@ -48471,6 +48481,64 @@ var setJumbotronData = exports.setJumbotronData = function setJumbotronData(data
     data: data
   };
 };
+
+/***/ }),
+/* 541 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _constants = __webpack_require__(538);
+
+var albums = function albums() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  {
+    switch (action.type) {
+      case _constants.SET_ALBUMS:
+        state = action.data;
+        break;
+    }
+    return state;
+  }
+};
+
+exports.default = albums;
+
+/***/ }),
+/* 542 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _constants = __webpack_require__(538);
+
+var albums = function albums() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  {
+    switch (action.type) {
+      case _constants.SET_ALBUMS:
+        state = action.data;
+        break;
+    }
+    return state;
+  }
+};
+
+exports.default = albums;
 
 /***/ })
 /******/ ]);
