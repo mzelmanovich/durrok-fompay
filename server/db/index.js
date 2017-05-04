@@ -41,7 +41,6 @@ Reviews.belongsTo(Users);
 //Artist Association
 Artists.hasMany( Songs );
 Artists.hasMany( Albums );
-Artists.belongsTo(Artists, {as: 'Band'});
 Artists.belongsTo( Genres );
 
 Genres.hasMany( Artists );

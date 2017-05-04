@@ -1,16 +1,16 @@
 const artistsToAdd = [
-    {id: 1, name: 'Katy Perry', genereId: 2},
-    {id: 2, name: 'Gorillaz', genereId: 3},
-    {id: 3, name: 'Zedd', genereId: 1},
-    {id: 4, name: 'Odeza', genereId: 1},
-    {id: 5, name: 'The Beatles', genereId: 3},
-    {id: 6, name: 'Lady Gaga', genereId: 2},
-    {id: 7, name: 'Justin Bieber', genereId: 2},
-    {id: 8, name: 'Pink Floyd', genereId: 3},
-    {id: 9, name: 'Blur', genereId: 3},
-    {id: 10, name: 'Blake Shelton', genereId: 4},
-    {id: 11, name: 'George StraitBlur', genereId: 4},
-    {id: 12, name: 'Lauren Alaina', genereId: 4},
+    {id: 1, name: 'Katy Perry', genreId: 2},
+    {id: 2, name: 'Gorillaz', genreId: 3},
+    {id: 3, name: 'Zedd', genreId: 1},
+    {id: 4, name: 'Odeza', genreId: 1},
+    {id: 5, name: 'The Beatles', genreId: 3},
+    {id: 6, name: 'Lady Gaga', genreId: 2},
+    {id: 7, name: 'Justin Bieber', genreId: 2},
+    {id: 8, name: 'Pink Floyd', genreId: 3},
+    {id: 9, name: 'Blur', genreId: 3},
+    {id: 10, name: 'Blake Shelton', genreId: 4},
+    {id: 11, name: 'George StraitBlur', genreId: 4},
+    {id: 12, name: 'Lauren Alaina', genreId: 4},
 ];
 
 const usersToAdd = [
@@ -45,7 +45,8 @@ const albumsToAdd = [
     price: 15,
     description: 'True Colors is the second studio album by Russian-German electronic music producer Zedd released on 18 May 2015 by Interscope Records.',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/51S1Gyriq0L._SS500.jpg',
-    genreId: 1
+    genreId: 1,
+    artistId: 3
   },
   {id: 2,
     name: 'In Return',
@@ -53,7 +54,8 @@ const albumsToAdd = [
     price: 8.99,
     description: 'In Return is the second studio album by American electronic music duo Odesza, released on September 9, 2014 by Counter Records and Ninja Tune. The album was released in CD, vinyl, and digital download formats.',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/61Qs0sDP7qL._SX522_.jpg',
-    genreId: 1
+    genreId: 1,
+    artistId: 4
   },
   {
     id: 3,
@@ -63,7 +65,8 @@ const albumsToAdd = [
     price: 9.99,
     description: 'New Gorilla Album',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/512q76cqy4L._SS500.jpg',
-    genreId: 1
+    genreId: 1,
+    artistId: 2
   },
 
   {
@@ -74,7 +77,8 @@ const albumsToAdd = [
     price: 12.99,
     description: 'The Beatles in 2017',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/815LGpEtiwL._SX522_.jpg',
-    genreId: 3
+    genreId: 3,
+    artistId: 5
   },
   {
     id: 6,
@@ -83,7 +87,8 @@ const albumsToAdd = [
     price: 8.99,
     description: 'Joanne is the fifth studio album recorded by American singer Lady Gaga. It was released on October 21, 2016, through Streamline and Interscope Records as a follow-up to Artpop and Cheek to Cheek',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/41WNJweHfkL._SS500.jpg',
-    genreId: 2
+    genreId: 2,
+    artistId: 6
   },
   {
     id: 7,
@@ -92,7 +97,8 @@ const albumsToAdd = [
     price: 12.99,
     description: 'Purpose is the fourth studio album by Canadian singer and songwriter Justin Bieber. It was released on November 13, 2015 by Def Jam Recordings and School Boy Records',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/51eR0TF0KML.jpg',
-    genreId: 2
+    genreId: 2,
+    artistId: 7
   },
   {
     id: 4,
@@ -102,7 +108,8 @@ const albumsToAdd = [
     price: 9.99,
     description: 'New KP Album',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/51XMo-yhnvL._SS500.jpg',
-    genreId: 2
+    genreId: 2,
+    artistId: 1
   },
   {
     id: 8,
@@ -111,7 +118,8 @@ const albumsToAdd = [
     price: 42.99,
     description: "In this visual riff on Pink Floyd's album The Wall, successful but drugged-out musician Pink (Bob Geldof) is looking back on his isolated childhood from the confines of a Los Angeles hotel room.",
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/71XAL%2BtmzbL._SX522_.jpg',
-    genreId: 3
+    genreId: 3,
+    artistId: 8
   },
   {
     id: 9,
@@ -120,7 +128,8 @@ const albumsToAdd = [
     price: 12.99,
     description: 'Blur: The Best Of is a greatest hits compilation album by English Britpop band Blur, first released in late 2000 and is the final Blur album by Food Records.',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/51zNsPeshQL._SS500.jpg',
-    genreId: 3
+    genreId: 3,
+    artistId: 9
   },
   {
     id: 10,
@@ -129,7 +138,8 @@ const albumsToAdd = [
     price: 2.99,
     description: "If I'm Honest is the tenth studio album by American country music singer Blake Shelton. The album was released on May 20, 2016, by Warner Bros. Nashville.",
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/51-Itu%2B58QL._SS500_PJStripe-Robin-Large,TopLeft,0,0.jpg',
-    genreId: 4
+    genreId: 4,
+    artistId: 10,
   },
   {
     id: 11,
@@ -138,7 +148,8 @@ const albumsToAdd = [
     price: 5.99,
     description: 'Cold Beer Conversation is the twenty-ninth studio album by American country music artist George Strait. It was released on September 25, 2015 via MCA Nashville.',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/61ppBUlKY0L._SS500_PJStripe-Robin-Large,TopLeft,0,0.jpg',
-    genreId: 4
+    genreId: 4,
+    artistId: 11
   },
   {
     id: 12,
@@ -147,7 +158,8 @@ const albumsToAdd = [
     price: 12.99,
     description: 'Road Less Traveled is the second studio album by American country music artist Lauren Alaina. The album was released on January 27, 2017, by Mercury Nashville and Interscope Records. It includes the number one single of the same name.',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/61RpJz%2BnNRL._SS500.jpg',
-    genreId: 4
+    genreId: 4,
+    artistId: 12
   },
 ];
 

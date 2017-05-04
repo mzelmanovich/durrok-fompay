@@ -3,7 +3,7 @@ const db = require('../../db');
 
 
 router.get('/albums/jumbo', (req, res, next) => {
-  db.models.Albums.findAll({where: {showJumbo: true}, include: [{all: true}]})
+  db.models.Albums.findAll({where: {jumboImg: {$ne: null}}, include: [{all: true}]})
   .then(albums => ( albums.length ? res.json(albums) : res.sendStatus(404)))
   .catch(next);
 });
