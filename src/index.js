@@ -9,6 +9,7 @@ import {setJumbotronData} from './actions/jumbotron';
 // import {setGenre} from './reducer/genresreducer';
 import GenreContainer from './components/GenreContainer.jsx';
 import GenreAlbums from './components/GenreAlbums.jsx';
+import SingleAlbum from './components/SingleAlbum.jsx';
 
 const root = document.getElementById('root');
 
@@ -39,6 +40,7 @@ const Routes = ({init}) => (
       <IndexRoute component={ GenreContainer } />
       <Route path="login" component={ Test3 } />
       <Route path = "genres/:genreId/albums" component={GenreAlbums} />
+      <Route path = "/albums/:albumId" component={SingleAlbum} />
     </Route>
   </Router>
 );

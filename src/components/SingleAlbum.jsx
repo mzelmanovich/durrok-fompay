@@ -2,15 +2,15 @@ import React, { PropTypes } from 'react';
 import { render } from "react-dom";
 import { Link } from "react-router";
 import { connect } from "react-redux";
-import { selectLoading, selectAlbumsByGenre } from '../selectors/albums';
-import { loadAllAlbums } from '../reducer/albumsreducer';
+import { selectLoading, selectSingleAlbum } from '../selectors/albums';
+import { loadSingleAlbums } from '../reducer/albumsreducer';
 
-class GenreAlbums extends React.Component {
+class SingleAlbum extends React.Component {
   componentDidMount() {
-    const { loading, albums, loadAllAlbums } = this.props;
+    const { loading, albums, loadSingleAlbums } = this.props;
 
     if (!loading && albums.length === 0) {
-      loadAllAlbums();
+      loadSingleAlbums();
     }
   }
 
@@ -35,27 +35,27 @@ class GenreAlbums extends React.Component {
   }
 }
 
-GenreAlbums.displayName = 'GenreAlbums';
-GenreAlbums.propTypes = {
+SingleAlbum.displayName = 'SingleAlbum';
+SingleAlbum.propTypes = {
   loading: PropTypes.bool,
   albums: PropTypes.array,
   params: PropTypes.shape({
-      genreId: PropTypes.string,
+      albumId: PropTypes.string,
   }),
-  loadAllAlbums: PropTypes.func,
+  loadSingleAlbums: PropTypes.func,
 };
-GenreAlbums.defaultProps = {
+SingleAlbum.defaultProps = {
   albums: [],
 };
 
 
 const mapStateToProps = (state, ownProps) => ({
     loading: selectLoading(state),
-    albums: selectAlbumsByGenre(state, parseInt(ownProps.params.genreId, 10)),
+    albums: selectSingleAlbum(state, parseInt(ownProps.params.albumId, 10)),
 });
 
 // const mapDispatchToProps = (dispatch) => ({
 //    loadAllAlbums: dispatch(loadAllAlbums()),
 //});
 
-export default connect(mapStateToProps, { loadAllAlbums })(GenreAlbums);
+export default connect(mapStateToProps, { loadSingleAlbums })(SingleAlbum);
