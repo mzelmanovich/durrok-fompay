@@ -21,10 +21,6 @@ const Album = conn.define('album', {
     type: Sequelize.STRING,
     defaultValue: null
   },
-  showJumbo: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
-  },
   jumboImg: {
     type: Sequelize.STRING,
     defaultValue: null
