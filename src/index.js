@@ -1,15 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import { Provider, connect } from 'react-redux';
+import { Provider, connect, OnEnter } from 'react-redux';
 import store from './store';
 import App from  './components/AppContainer.jsx';
-import JumbotronComponent from './components/JumbotronComponent.jsx';
+//import JumbotronComponent from './components/JumbotronComponent.jsx';
 import {setJumbotronData} from './actions/jumbotron';
+// import {setGenre} from './reducer/genresreducer';
+import GenreContainer from './components/GenreContainer.jsx';
+import GenreAlbums from './components/GenreAlbums.jsx';
 
 const root = document.getElementById('root');
 
-let Test3 = () => (<h1>hi1245</h1>);
+let Test2 = () => (<h1>hi1245</h1>);
+let Test3 = () => (<h1>Test3</h1>);
 
 const testCaroselData = [
   {
@@ -22,13 +26,19 @@ const testCaroselData = [
     h3: 'Katty Perry',
     p: 'Bon Appetit'
   },
+    {
+    src: 'https://s-media-cache-ak0.pinimg.com/736x/02/f6/e6/02f6e6495ea7d9813fe5dad14c669379.jpg',
+    h3: 'The Beatles',
+    p: "Sgt. Pepper's Longly Hearts Club Band"
+  },
 ];
 
 const Routes = ({init}) => (
   <Router history={ hashHistory }>
     <Route path="/" component={ App } onEnter={ init }>
-      <IndexRoute component={ JumbotronComponent } />
+      <IndexRoute component={ GenreContainer } />
       <Route path="login" component={ Test3 } />
+      <Route path = "genres/:genreId/albums" component={GenreAlbums} />
     </Route>
   </Router>
 );

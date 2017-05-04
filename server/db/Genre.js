@@ -4,7 +4,8 @@ const conn = require('./conn');
 const Genre = conn.define('genre', {
   name: {
     type: Sequelize.STRING,
-    unique: true
+    unique: true,
+    imgURL: Sequelize.STRING
   }
 
 });
