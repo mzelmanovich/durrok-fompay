@@ -1,15 +1,22 @@
 const artistsToAdd = [
-    {id: 1, firstName: 'Nsync', imgURL: 'test.jpg'},
-    {id: 2, firstName: 'Justin', lastName: 'Timberlake', imgURL: 'test2.tiff'},
-    {id: 3, firstName: 'Katy', lastName: 'Perry', imgURL: 'test2.tiff'},
-    {id: 4, firstName: 'Gorillaz', imgURL: 'test2.tiff'}
+    {id: 1, name: 'Katy Perry', genereId: 2},
+    {id: 2, name: 'Gorillaz', genereId: 3},
+    {id: 3, name: 'Zedd', genereId: 1},
+    {id: 4, name: 'Odeza', genereId: 1},
+    {id: 5, name: 'The Beatles', genereId: 3},
+    {id: 6, name: 'Lady Gaga', genereId: 2},
+    {id: 7, name: 'Justin Bieber', genereId: 2},
+    {id: 8, name: 'Pink Floyd', genereId: 3},
+    {id: 9, name: 'Blur', genereId: 3},
+    {id: 10, name: 'Blake Shelton', genereId: 4},
+    {id: 11, name: 'George StraitBlur', genereId: 4},
+    {id: 12, name: 'Lauren Alaina', genereId: 4},
 ];
 
 const usersToAdd = [
     {id: 1, userName: 'summerguan', firstName: 'Summer', lastName: 'Guan', email: 'summergun10@gmail.com', salt: '1234'},
     {id: 2, userName: 'danniwang', firstName: 'Danni', lastName: 'Wang', email: 'danni@gmail.com', salt: '1234'},
     {id: 3, userName: 'mazelmanovich', firstName: 'Mitch', lastName: 'Zelmanovich', email: '', salt: '1234'}
-
 ];
 
 
@@ -25,9 +32,6 @@ const genresToAdd = [
     {id: 4, name: 'Country', imgURL: 'http://www.billboard.com/files/styles/article_main_image/public/media/Brad-Paisley-live-nov-2016-billboard-4-1548.jpg'}
 ];
 
-const reviewsToAdd = [
-    {id: 1, rating: '5', title: 'Best Album Ever!', content: 'The title says it all, i simply love this band and this album. Bought this for my collection.'}
-];
 
 const paymentsToAdd = [
     {id: 1, cardType: 'mastercard', creditCardNumber: 123456789, name: 'Fake 123', expDate: new Date('01/01/2017')},
@@ -55,26 +59,24 @@ const albumsToAdd = [
     id: 3,
     name: 'Monkey Around',
     jumboImg: 'https://ksassets.timeincuk.net/wp/uploads/sites/55/2017/03/Gorillaz_2017-920x584.jpg',
-    showJumbo: true,
     year: '2017',
     price: 9.99,
     description: 'New Gorilla Album',
-    imgURL: "https://images-na.ssl-images-amazon.com/images/I/512q76cqy4L._SS500.jpg",
+    imgURL: 'https://images-na.ssl-images-amazon.com/images/I/512q76cqy4L._SS500.jpg',
     genreId: 1
   },
 
   {
     id: 5,
     jumboImg: 'https://s-media-cache-ak0.pinimg.com/736x/02/f6/e6/02f6e6495ea7d9813fe5dad14c669379.jpg',
-    showJumbo: true,
     name: "Sgt. Pepper's Lonly Hearts Club Band",
     year: '2017',
     price: 12.99,
     description: 'The Beatles in 2017',
-    imgURL: "https://images-na.ssl-images-amazon.com/images/I/815LGpEtiwL._SX522_.jpg",
+    imgURL: 'https://images-na.ssl-images-amazon.com/images/I/815LGpEtiwL._SX522_.jpg',
     genreId: 3
   },
-    {
+  {
     id: 6,
     name: 'Joanne',
     year: '2017',
@@ -83,7 +85,7 @@ const albumsToAdd = [
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/41WNJweHfkL._SS500.jpg',
     genreId: 2
   },
-      {
+  {
     id: 7,
     name: 'Purpose',
     year: '2015',
@@ -92,10 +94,9 @@ const albumsToAdd = [
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/51eR0TF0KML.jpg',
     genreId: 2
   },
-    {
+  {
     id: 4,
     jumboImg: 'http://assets.bonappetit.com/photos/59035f282278cd3dbd2c0d99/16:9/w_1200,c_limit/katy-perry-bon-appetit.jpg',
-    showJumbo: true,
     name: 'Bon Appetit',
     year: '2017',
     price: 9.99,
@@ -112,16 +113,16 @@ const albumsToAdd = [
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/71XAL%2BtmzbL._SX522_.jpg',
     genreId: 3
   },
-    {
+  {
     id: 9,
     name: 'The Best of Blur',
     year: '2000',
     price: 12.99,
-    description: "Blur: The Best Of is a greatest hits compilation album by English Britpop band Blur, first released in late 2000 and is the final Blur album by Food Records.",
+    description: 'Blur: The Best Of is a greatest hits compilation album by English Britpop band Blur, first released in late 2000 and is the final Blur album by Food Records.',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/51zNsPeshQL._SS500.jpg',
     genreId: 3
   },
-      {
+  {
     id: 10,
     name: 'Blake Shelton',
     year: '2016',
@@ -130,45 +131,31 @@ const albumsToAdd = [
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/51-Itu%2B58QL._SS500_PJStripe-Robin-Large,TopLeft,0,0.jpg',
     genreId: 4
   },
-      {
+  {
     id: 11,
     name: 'Cold Beer Conversation',
     year: '2015',
     price: 5.99,
-    description: "Cold Beer Conversation is the twenty-ninth studio album by American country music artist George Strait. It was released on September 25, 2015 via MCA Nashville.",
+    description: 'Cold Beer Conversation is the twenty-ninth studio album by American country music artist George Strait. It was released on September 25, 2015 via MCA Nashville.',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/61ppBUlKY0L._SS500_PJStripe-Robin-Large,TopLeft,0,0.jpg',
     genreId: 4
   },
-      {
+  {
     id: 12,
     name: 'Road Less Traveled',
     year: '2017',
     price: 12.99,
-    description: "Road Less Traveled is the second studio album by American country music artist Lauren Alaina. The album was released on January 27, 2017, by Mercury Nashville and Interscope Records. It includes the number one single of the same name.",
+    description: 'Road Less Traveled is the second studio album by American country music artist Lauren Alaina. The album was released on January 27, 2017, by Mercury Nashville and Interscope Records. It includes the number one single of the same name.',
     imgURL: 'https://images-na.ssl-images-amazon.com/images/I/61RpJz%2BnNRL._SS500.jpg',
     genreId: 4
   },
 ];
 
-const songsToAdd = [
-  {id: 1, name: 'Calmer', year: '2004', duration: 238, price: 1.99 * 1,
-    imgURL: null
-  },
-  {id: 2,
-    name: 'Venus',
-    year: '2004',
-    duration: 244,
-    price: 1.99 * 1,
-    imgURL: null
-  },
-  {id: 3,
-    name: 'Miss You',
-    year: '2003',
-    duration: 250,
-    price: 1.99 * 1,
-    imgURL: null
-  }
-];
+const reviewsToAdd = [];
+
+albumsToAdd.forEach(({id}) => {
+  reviewsToAdd.push({id, albumId: id, userId: 1, rating: 5, title: 'This roxs!', content: 'Music Rocked me So hard!'});
+});
 
 module.exports = {
   artistsToAdd,
@@ -177,6 +164,5 @@ module.exports = {
   genresToAdd,
   reviewsToAdd,
   paymentsToAdd,
-  albumsToAdd,
-  songsToAdd
+  albumsToAdd
 };

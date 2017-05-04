@@ -5,8 +5,8 @@ const Genre = conn.define('genre', {
   name: {
     type: Sequelize.STRING,
     unique: true,
-    imgURL: Sequelize.STRING
-  }
+  },
+  imgURL: Sequelize.STRING
 
 });
 
