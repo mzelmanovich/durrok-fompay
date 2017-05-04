@@ -12780,6 +12780,7 @@ var selectSingleAlbum = exports.selectSingleAlbum = function selectSingleAlbum(s
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.mapApiToCarrousel = undefined;
 
 var _react = __webpack_require__(1);
 
@@ -12844,6 +12845,15 @@ var mapStateToProps = function mapStateToProps(_ref3) {
   };
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(JumbotronComponent);
+var mapApiToCarrousel = exports.mapApiToCarrousel = function mapApiToCarrousel(apiArr) {
+  return apiArr.map(function (data) {
+    return {
+      src: data.jumboImg,
+      h3: data.artist ? data.artist.name : 'UNKNOWN',
+      p: data.name
+    };
+  });
+};
 
 /***/ }),
 /* 160 */
@@ -21769,15 +21779,30 @@ function warning(message) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setJumbotronData = undefined;
+exports.fetchJumbotron = exports.setJumbotronData = undefined;
 
 var _constants = __webpack_require__(157);
+
+var _JumbotronComponent = __webpack_require__(159);
+
+var _axios = __webpack_require__(151);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var setJumbotronData = exports.setJumbotronData = function setJumbotronData(data) {
   return {
     type: _constants.SET_JUMBOTRON,
     data: data
   };
+};
+
+var fetchJumbotron = exports.fetchJumbotron = function fetchJumbotron() {
+  return _axios2.default.get('/api/albums/jumbo').then(function (_ref) {
+    var data = _ref.data;
+    return data;
+  }).then(_JumbotronComponent.mapApiToCarrousel).catch(console.error);
 };
 
 /***/ }),
@@ -23195,20 +23220,6 @@ var Test3 = function Test3() {
   );
 };
 
-var testCaroselData = [{
-  src: 'https://ksassets.timeincuk.net/wp/uploads/sites/55/2017/03/Gorillaz_2017-920x584.jpg',
-  h3: 'Gorillaz',
-  p: '2017 New Album from $9.99'
-}, {
-  src: 'http://assets.bonappetit.com/photos/59035f282278cd3dbd2c0d99/16:9/w_1200,c_limit/katy-perry-bon-appetit.jpg',
-  h3: 'Katty Perry',
-  p: 'Bon Appetit'
-}, {
-  src: 'https://s-media-cache-ak0.pinimg.com/736x/02/f6/e6/02f6e6495ea7d9813fe5dad14c669379.jpg',
-  h3: 'The Beatles',
-  p: "Sgt. Pepper's Longly Hearts Club Band"
-}];
-
 var Routes = function Routes(_ref) {
   var init = _ref.init;
   return _react2.default.createElement(
@@ -23228,7 +23239,9 @@ var Routes = function Routes(_ref) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     init: function init() {
-      dispatch((0, _jumbotron.setJumbotronData)(testCaroselData));
+      (0, _jumbotron.fetchJumbotron)().then(function (data) {
+        return dispatch((0, _jumbotron.setJumbotronData)(data));
+      });
     }
   };
 };

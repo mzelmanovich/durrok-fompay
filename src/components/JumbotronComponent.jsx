@@ -14,13 +14,12 @@ const JumbotronComponent = ({carrouselItems}) => {
 			        <p>{p}</p>
 			      </Carousel.Caption>
 			    </Carousel.Item>);
-
   });
 
   return (<div className="jumbotron">
             <Carousel>
 	            {carrouselItems}
-          	</Carousel>
+        	</Carousel>
 	</div>);
 };
 
@@ -30,4 +29,11 @@ const mapStateToProps = ({jumbotron}) => {
   };
 };
 export default connect(mapStateToProps)(JumbotronComponent) ;
+
+export const mapApiToCarrousel = (apiArr) => apiArr
+.map(data => ({
+  src: data.jumboImg,
+  h3: data.artist ? data.artist.name : 'UNKNOWN',
+  p: data.name
+}));
 
