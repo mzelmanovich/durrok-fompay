@@ -29,7 +29,7 @@
 	padding-top:40px;
 	padding-bottom:80px;
 	background: center center;
-	height:1000px;
+	height:600px;
 	width:90%
 
 }
@@ -44,3 +44,17 @@
   padding: 1rem;
 }
 
+.thumbnail {
+    position: relative;
+}
+
+.caption {
+	font-size:20px;
+	clear: both;
+	position:relative;
+	top:-50px;
+	text-align: center;
+}
+.each-genre {
+	margin-bottom: 40px;
+}
