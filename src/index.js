@@ -1,13 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import { Provider, connect, OnEnter } from 'react-redux';
+import { Provider, connect} from 'react-redux';
 import store from './store';
 import App from  './components/AppContainer.jsx';
-//import JumbotronComponent from './components/JumbotronComponent.jsx';
-import {setJumbotronData, fetchJumbotron} from './actions/jumbotron';
-// import {setGenre} from './reducer/genresreducer';
-import GenreContainer from './components/GenreContainer.jsx';
+import {fetchJumbotron} from './actions/albums';
+import IndexContainer from './components/IndexContainer.jsx';
 import GenreAlbums from './components/GenreAlbums.jsx';
 import SingleAlbum from './components/SingleAlbum.jsx';
 
@@ -19,7 +17,7 @@ let Test3 = () => (<h1>Test3</h1>);
 const Routes = ({init}) => (
   <Router history={ hashHistory }>
     <Route path="/" component={ App } onEnter={ init }>
-      <IndexRoute component={ GenreContainer } />
+      <IndexRoute component={ IndexContainer } />
       <Route path="login" component={ Test3 } />
       <Route path = "genres/:genreId/albums" component={GenreAlbums} />
       <Route path = "/albums/:albumId" component={SingleAlbum} />
@@ -29,7 +27,7 @@ const Routes = ({init}) => (
 
 const mapDispatchToProps = (dispatch) => ({
   init: () => {
-    fetchJumbotron().then((data) => dispatch(setJumbotronData(data)));
+    dispatch(fetchJumbotron());
   }
 });
 

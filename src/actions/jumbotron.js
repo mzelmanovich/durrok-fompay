@@ -9,9 +9,10 @@ export const setJumbotronData = (data) => {
   };
 };
 
-export const fetchJumbotron = () => axios
+export const fetchJumbotron = () => dispatch => axios
     .get(`/api/albums/jumbo`)
     .then(({data}) => data)
     .then(mapApiToCarrousel)
+    .then(data => dispatch(setJumbotronData(data)))
     .catch(console.error);
 

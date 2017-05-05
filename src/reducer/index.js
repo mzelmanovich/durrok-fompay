@@ -1,6 +1,5 @@
 import { combineReducers} from 'redux';
-import jumbotron from './jumbotron';
-import albums from './albumsreducer';
-import genres from './genresreducer';
+import albums from './albums';
+// import genres from './genresreducer';
 
-export default combineReducers({jumbotron, albums, genres});
+export default combineReducers({albums});
