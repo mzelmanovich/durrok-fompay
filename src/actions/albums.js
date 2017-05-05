@@ -1,4 +1,5 @@
 import {SET_ALBUMS} from '../constants';
+import axios from 'axios';
 
 export const setAlbums = (data) => {
   return {
@@ -6,3 +7,22 @@ export const setAlbums = (data) => {
     data
   };
 };
+
+export const fetchJumbotron = () => dispatch => axios
+    .get(`/api/albums/jumbo`)
+    .then(({data}) => data)
+    .then(data => {
+      dispatch(setAlbums(data));
+      return data;
+    })
+    .catch(console.error);
+
+export const fetchAlbum = (id) => dispatch => axios
+    .get(`/api/albums/${id}`)
+    .then(({data}) => data)
+    .then(data => {
+      dispatch(setAlbums([data]));
+      return data;
+    })
+    .catch(console.error);
+

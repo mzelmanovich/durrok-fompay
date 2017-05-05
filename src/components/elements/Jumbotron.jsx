@@ -1,8 +1,7 @@
 import React  from 'react';
 import {Carousel} from 'react-bootstrap';
-import { connect } from 'react-redux';
 
-const JumbotronComponent = ({carrouselItems}) => {
+const Jumbotron = ({carrouselItems}) => {
   carrouselItems = carrouselItems || [];
   carrouselItems = carrouselItems.map(({src, h3, p}, i) => {
     return (<Carousel.Item key={i + 'carrousel'}>
@@ -14,20 +13,14 @@ const JumbotronComponent = ({carrouselItems}) => {
 			        <p>{p}</p>
 			      </Carousel.Caption>
 			    </Carousel.Item>);
-
   });
 
   return (<div className="jumbotron">
             <Carousel>
 	            {carrouselItems}
-          	</Carousel>
+        	</Carousel>
 	</div>);
 };
 
-const mapStateToProps = ({jumbotron}) => {
-  return {
-    carrouselItems: jumbotron
-  };
-};
-export default connect(mapStateToProps)(JumbotronComponent) ;
+export default Jumbotron ;
 

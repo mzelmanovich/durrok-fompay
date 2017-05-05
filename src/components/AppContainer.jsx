@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
+import React from 'react';
 import Footer from './Footer.jsx';
-import JumbotronComponent from './JumbotronComponent.jsx';
+import Jumboton from './elements/Jumbotron.jsx';
 
 
 const AppContainer = ({children}) => {
