@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { selectLoading, selectSingleAlbum } from '../selectors/albums';
-import { loadSingleAlbums } from '../reducer/albumsreducer';
 
 
 const SingleAlbum = ({album}) => {
@@ -26,4 +24,4 @@ const mapStateToProps = ({albums}) => {
 //    loadAllAlbums: dispatch(loadAllAlbums()),
 //});
 
-export default connect(mapStateToProps, { loadSingleAlbums })(SingleAlbum);
+export default connect(mapStateToProps)(SingleAlbum);
