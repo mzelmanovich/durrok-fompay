@@ -5,7 +5,7 @@ import { Provider, connect} from 'react-redux';
 import store from './store';
 import App from  './components/AppContainer.jsx';
 import {fetchJumbotron} from './actions/albums';
-import {fetchGenres, setGenres} from './actions/genres';
+import {fetchGenres, fetchAlbums} from './actions/genres';
 import IndexContainer from './components/IndexContainer.jsx';
 import GenreAlbums from './components/GenreAlbums.jsx';
 import SingleAlbum from './components/SingleAlbum.jsx';
@@ -15,23 +15,26 @@ const root = document.getElementById('root');
 let Test2 = () => (<h1>hi1245</h1>);
 let Test3 = () => (<h1>Test3</h1>);
 
-const Routes = ({init}) => (
+const Routes = ({index, genreAlbums}) => (
   <Router history={ hashHistory }>
     <Route path="/" component={ App } >
-      <IndexRoute component={ IndexContainer } onEnter={ init } />
-      <Route path="login/:id" component={ Test3 } onEnter={ init } />
-      <Route path = "genres/:genreId/albums" component={GenreAlbums} />
+      <IndexRoute component={ IndexContainer } onEnter={ index } />
+      <Route path="login/:id" component={ Test3 } />
+      <Route path = "genres/:genreId/albums" component={GenreAlbums} onEnter={ genreAlbums } />
       <Route path = "/albums/:albumId" component={SingleAlbum} />
     </Route>
   </Router>
 );
 
 const mapDispatchToProps = (dispatch) => ({
-  init: ({params}) => {
+  index: ({params}) => {
     dispatch(fetchJumbotron());
     dispatch(fetchGenres());
-    // dispatch(fetchGenres());
-  }
+  },
+  genreAlbums: ({params}) => {
+    dispatch(fetchAlbums(params.genreId));
+  },
+
 });
 
 const RoutesContainer = connect(null, mapDispatchToProps)(Routes);

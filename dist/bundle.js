@@ -21890,115 +21890,51 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(21);
 
 var _reactRouter = __webpack_require__(73);
 
 var _reactRedux = __webpack_require__(72);
 
-var _albums = __webpack_require__(95);
-
-var _albumsreducer = __webpack_require__(158);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var GenreAlbums = function (_React$Component) {
-  _inherits(GenreAlbums, _React$Component);
-
-  function GenreAlbums() {
-    _classCallCheck(this, GenreAlbums);
-
-    return _possibleConstructorReturn(this, (GenreAlbums.__proto__ || Object.getPrototypeOf(GenreAlbums)).apply(this, arguments));
-  }
-
-  _createClass(GenreAlbums, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _props = this.props,
-          loading = _props.loading,
-          albums = _props.albums,
-          loadAllAlbums = _props.loadAllAlbums;
-
-
-      if (!loading && albums.length === 0) {
-        loadAllAlbums();
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _props2 = this.props,
-          loading = _props2.loading,
-          albums = _props2.albums;
-
-
-      return _react2.default.createElement(
-        "div",
-        { className: "container-fluid center-block" },
-        loading && _react2.default.createElement(
-          "h4",
-          null,
-          "Loading..."
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "col-xs-12" },
-          albums.map(function (_ref) {
-            var id = _ref.id,
-                imgURL = _ref.imgURL,
-                name = _ref.name;
-            return _react2.default.createElement(
-              "div",
-              { key: id, className: "col-xs-4 thumb center-block" },
-              _react2.default.createElement(
-                _reactRouter.Link,
-                { to: "/albums/" + id },
-                _react2.default.createElement("img", { src: imgURL, className: "img-responsive center-block" })
-              ),
-              _react2.default.createElement(
-                _reactRouter.Link,
-                { to: "/albums/" + id, className: "col-xs-12", style: { textAlign: 'center', fontSize: '20px' } },
-                name
-              )
-            );
-          })
-        )
-      );
-    }
-  }]);
-
-  return GenreAlbums;
-}(_react2.default.Component);
-
-GenreAlbums.displayName = 'GenreAlbums';
-GenreAlbums.propTypes = {
-  loading: _react.PropTypes.bool,
-  albums: _react.PropTypes.array,
-  params: _react.PropTypes.shape({
-    genreId: _react.PropTypes.string
-  }),
-  loadAllAlbums: _react.PropTypes.func
-};
-GenreAlbums.defaultProps = {
-  albums: []
+var GenreAlbums = function GenreAlbums(_ref) {
+  var albums = _ref.albums;
+  return _react2.default.createElement(
+    'div',
+    { className: 'container-fluid center-block' },
+    _react2.default.createElement(
+      'div',
+      { className: 'col-xs-12' },
+      albums.map(function (_ref2) {
+        var id = _ref2.id,
+            imgURL = _ref2.imgURL,
+            name = _ref2.name;
+        return _react2.default.createElement(
+          'div',
+          { key: id, className: 'col-xs-4 thumb center-block' },
+          _react2.default.createElement(
+            _reactRouter.Link,
+            { to: '/albums/' + id },
+            _react2.default.createElement('img', { src: imgURL, className: 'img-responsive center-block' })
+          ),
+          _react2.default.createElement(
+            _reactRouter.Link,
+            { to: '/albums/' + id, className: 'col-xs-12', style: { textAlign: 'center', fontSize: '20px' } },
+            name
+          )
+        );
+      })
+    )
+  );
 };
 
-var mapStateToProps = function mapStateToProps(state, ownProps) {
+var mapStateToProps = function mapStateToProps(_ref3) {
+  var albums = _ref3.albums;
   return {
-    loading: (0, _albums.selectLoading)(state),
-    albums: (0, _albums.selectAlbumsByGenre)(state, parseInt(ownProps.params.genreId, 10))
+    albums: albums
   };
 };
 
@@ -22006,7 +21942,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 //    loadAllAlbums: dispatch(loadAllAlbums()),
 //});
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { loadAllAlbums: _albumsreducer.loadAllAlbums })(GenreAlbums);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(GenreAlbums);
 
 /***/ }),
 /* 260 */
@@ -23100,16 +23036,17 @@ var Test3 = function Test3() {
 };
 
 var Routes = function Routes(_ref) {
-  var init = _ref.init;
+  var index = _ref.index,
+      genreAlbums = _ref.genreAlbums;
   return _react2.default.createElement(
     _reactRouter.Router,
     { history: _reactRouter.hashHistory },
     _react2.default.createElement(
       _reactRouter.Route,
       { path: '/', component: _AppContainer2.default },
-      _react2.default.createElement(_reactRouter.IndexRoute, { component: _IndexContainer2.default, onEnter: init }),
-      _react2.default.createElement(_reactRouter.Route, { path: 'login/:id', component: Test3, onEnter: init }),
-      _react2.default.createElement(_reactRouter.Route, { path: 'genres/:genreId/albums', component: _GenreAlbums2.default }),
+      _react2.default.createElement(_reactRouter.IndexRoute, { component: _IndexContainer2.default, onEnter: index }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'login/:id', component: Test3 }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'genres/:genreId/albums', component: _GenreAlbums2.default, onEnter: genreAlbums }),
       _react2.default.createElement(_reactRouter.Route, { path: '/albums/:albumId', component: _SingleAlbum2.default })
     )
   );
@@ -23117,13 +23054,18 @@ var Routes = function Routes(_ref) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    init: function init(_ref2) {
+    index: function index(_ref2) {
       var params = _ref2.params;
 
       dispatch((0, _albums.fetchJumbotron)());
       dispatch((0, _genres.fetchGenres)());
-      // dispatch(fetchGenres());
+    },
+    genreAlbums: function genreAlbums(_ref3) {
+      var params = _ref3.params;
+
+      dispatch((0, _genres.fetchAlbums)(params.genreId));
     }
+
   };
 };
 
@@ -52639,9 +52581,11 @@ exports.default = genres;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchGenres = exports.setGenres = undefined;
+exports.fetchAlbums = exports.fetchGenres = exports.setGenres = undefined;
 
 var _constants = __webpack_require__(157);
+
+var _albums = __webpack_require__(574);
 
 var _axios = __webpack_require__(151);
 
@@ -52663,6 +52607,18 @@ var fetchGenres = exports.fetchGenres = function fetchGenres() {
       return data;
     }).then(function (data) {
       dispatch(setGenres(data));
+      return data;
+    }).catch(console.error);
+  };
+};
+
+var fetchAlbums = exports.fetchAlbums = function fetchAlbums(id) {
+  return function (dispatch) {
+    return _axios2.default.get('/api/genres/' + id + '/albums').then(function (_ref2) {
+      var data = _ref2.data;
+      return data;
+    }).then(function (data) {
+      dispatch((0, _albums.setAlbums)(data));
       return data;
     }).catch(console.error);
   };
