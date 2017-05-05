@@ -1,5 +1,5 @@
 import {SET_JUMBOTRON} from '../constants';
-import {mapApiToCarrousel} from '../components/JumbotronComponent.jsx';
+import {mapApiToCarrousel} from '../components/elements/Jumbotron.jsx';
 import axios from 'axios';
 
 export const setJumbotronData = (data) => {
