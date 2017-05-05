@@ -22020,13 +22020,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(21);
 
 var _reactRouter = __webpack_require__(73);
 
@@ -22038,97 +22034,37 @@ var _albumsreducer = __webpack_require__(158);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var SingleAlbum = function SingleAlbum(_ref) {
+  var album = _ref.album;
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SingleAlbum = function (_React$Component) {
-  _inherits(SingleAlbum, _React$Component);
-
-  function SingleAlbum() {
-    _classCallCheck(this, SingleAlbum);
-
-    return _possibleConstructorReturn(this, (SingleAlbum.__proto__ || Object.getPrototypeOf(SingleAlbum)).apply(this, arguments));
-  }
-
-  _createClass(SingleAlbum, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _props = this.props,
-          loading = _props.loading,
-          albums = _props.albums,
-          loadSingleAlbums = _props.loadSingleAlbums;
-
-
-      if (!loading && albums.length === 0) {
-        loadSingleAlbums();
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _props2 = this.props,
-          loading = _props2.loading,
-          albums = _props2.albums;
-
-
-      return _react2.default.createElement(
-        "div",
-        { className: "container-fluid center-block" },
-        loading && _react2.default.createElement(
-          "h4",
-          null,
-          "Loading..."
+  return _react2.default.createElement(
+    'div',
+    { className: 'container-fluid center-block' },
+    _react2.default.createElement(
+      'div',
+      { className: 'col-xs-12' },
+      _react2.default.createElement(
+        'div',
+        { className: 'col-xs-4 thumb center-block' },
+        _react2.default.createElement(
+          _reactRouter.Link,
+          { to: '/albums/' + album.id },
+          _react2.default.createElement('img', { src: album.imgURL, className: 'img-responsive center-block' })
         ),
         _react2.default.createElement(
-          "div",
-          { className: "col-xs-12" },
-          albums.map(function (_ref) {
-            var id = _ref.id,
-                imgURL = _ref.imgURL,
-                name = _ref.name;
-            return _react2.default.createElement(
-              "div",
-              { key: id, className: "col-xs-4 thumb center-block" },
-              _react2.default.createElement(
-                _reactRouter.Link,
-                { to: "/albums/" + id },
-                _react2.default.createElement("img", { src: imgURL, className: "img-responsive center-block" })
-              ),
-              _react2.default.createElement(
-                _reactRouter.Link,
-                { to: "/albums/" + id, className: "col-xs-12", style: { textAlign: 'center', fontSize: '20px' } },
-                name
-              )
-            );
-          })
+          _reactRouter.Link,
+          { to: '/albums/' + album.id, className: 'col-xs-12', style: { textAlign: 'center', fontSize: '20px' } },
+          album.name
         )
-      );
-    }
-  }]);
-
-  return SingleAlbum;
-}(_react2.default.Component);
-
-SingleAlbum.displayName = 'SingleAlbum';
-SingleAlbum.propTypes = {
-  loading: _react.PropTypes.bool,
-  albums: _react.PropTypes.array,
-  params: _react.PropTypes.shape({
-    albumId: _react.PropTypes.string
-  }),
-  loadSingleAlbums: _react.PropTypes.func
+      )
+    )
+  );
 };
-SingleAlbum.defaultProps = {
-  albums: []
-};
+var mapStateToProps = function mapStateToProps(_ref2) {
+  var albums = _ref2.albums;
 
-var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    loading: (0, _albums.selectLoading)(state),
-    albums: (0, _albums.selectSingleAlbum)(state, parseInt(ownProps.params.albumId, 10))
+    album: albums[0] || {}
   };
 };
 
@@ -23037,7 +22973,8 @@ var Test3 = function Test3() {
 
 var Routes = function Routes(_ref) {
   var index = _ref.index,
-      genreAlbums = _ref.genreAlbums;
+      genreAlbums = _ref.genreAlbums,
+      singleAlbum = _ref.singleAlbum;
   return _react2.default.createElement(
     _reactRouter.Router,
     { history: _reactRouter.hashHistory },
@@ -23047,7 +22984,7 @@ var Routes = function Routes(_ref) {
       _react2.default.createElement(_reactRouter.IndexRoute, { component: _IndexContainer2.default, onEnter: index }),
       _react2.default.createElement(_reactRouter.Route, { path: 'login/:id', component: Test3 }),
       _react2.default.createElement(_reactRouter.Route, { path: 'genres/:genreId/albums', component: _GenreAlbums2.default, onEnter: genreAlbums }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/albums/:albumId', component: _SingleAlbum2.default })
+      _react2.default.createElement(_reactRouter.Route, { path: '/albums/:albumId', component: _SingleAlbum2.default, onEnter: singleAlbum })
     )
   );
 };
@@ -23064,6 +23001,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       var params = _ref3.params;
 
       dispatch((0, _genres.fetchAlbums)(params.genreId));
+    },
+    singleAlbum: function singleAlbum(_ref4) {
+      var params = _ref4.params;
+
+      dispatch((0, _albums.fetchAlbum)(params.albumId));
     }
 
   };
@@ -52448,7 +52390,7 @@ module.exports = function(module) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchJumbotron = exports.setAlbums = undefined;
+exports.fetchAlbum = exports.fetchJumbotron = exports.setAlbums = undefined;
 
 var _constants = __webpack_require__(157);
 
@@ -52472,6 +52414,18 @@ var fetchJumbotron = exports.fetchJumbotron = function fetchJumbotron() {
       return data;
     }).then(function (data) {
       dispatch(setAlbums(data));
+      return data;
+    }).catch(console.error);
+  };
+};
+
+var fetchAlbum = exports.fetchAlbum = function fetchAlbum(id) {
+  return function (dispatch) {
+    return _axios2.default.get('/api/albums/' + id).then(function (_ref2) {
+      var data = _ref2.data;
+      return data;
+    }).then(function (data) {
+      dispatch(setAlbums([data]));
       return data;
     }).catch(console.error);
   };

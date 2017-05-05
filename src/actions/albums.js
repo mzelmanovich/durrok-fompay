@@ -17,3 +17,12 @@ export const fetchJumbotron = () => dispatch => axios
     })
     .catch(console.error);
 
+export const fetchAlbum = (id) => dispatch => axios
+    .get(`/api/albums/${id}`)
+    .then(({data}) => data)
+    .then(data => {
+      dispatch(setAlbums([data]));
+      return data;
+    })
+    .catch(console.error);
+
