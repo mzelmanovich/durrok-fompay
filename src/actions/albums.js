@@ -2,7 +2,6 @@ import {SET_ALBUMS} from '../constants';
 import axios from 'axios';
 
 export const setAlbums = (data) => {
-  console.log(data);
   return {
     type: SET_ALBUMS,
     data

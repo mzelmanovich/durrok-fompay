@@ -1,6 +1,7 @@
-export const mapToJumbo = (apiArr) =>
+export const mapToGrid = (apiArr) =>
 apiArr.map(data => ({
-  src: data.jumboImg,
-  h3: data.artist ? data.artist.name : 'UNKNOWN',
-  p: data.name
+  id: data.id,
+  src: data.imgURL,
+  p: data.name,
+  to: `/genres/${data.id}/albums`
 }));

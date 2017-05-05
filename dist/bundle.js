@@ -22019,6 +22019,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -22033,10 +22035,17 @@ var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
 
 var _albums = __webpack_require__(95);
 
+var _GridPhotoComponent = __webpack_require__(575);
+
+var _GridPhotoComponent2 = _interopRequireDefault(_GridPhotoComponent);
+
+var _genres = __webpack_require__(576);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var GenreContainer = function GenreContainer(_ref) {
-  var carrouselItems = _ref.carrouselItems;
+  var carrouselItems = _ref.carrouselItems,
+      gridItems = _ref.gridItems;
 
   return _react2.default.createElement(
     'div',
@@ -22045,86 +22054,21 @@ var GenreContainer = function GenreContainer(_ref) {
     _react2.default.createElement(
       'div',
       { className: 'row' },
-      _react2.default.createElement(
-        'div',
-        { className: 'col-sm-10 col-md-6 grid-photo' },
-        _react2.default.createElement(
-          _reactRouter.Link,
-          { 'data-id': '1', to: '/genres/1/albums' },
-          _react2.default.createElement('img', { style: { opacity: 0.5 }, src: 'http://www.billboard.com/files/styles/900_wide/public/media/EDM-workout-playlist-2017-billboard-summer-1548.jpg', className: 'col-sm-12' }),
-          _react2.default.createElement(
-            'div',
-            { className: 'caption' },
-            _react2.default.createElement(
-              'p',
-              null,
-              'Electronic'
-            )
-          )
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'col-sm-10  col-md-6 each-genre' },
-        _react2.default.createElement(
-          _reactRouter.Link,
-          { 'data-id': '2', to: '/genres/2/albums' },
-          _react2.default.createElement('img', { style: { opacity: 0.5 }, src: 'http://www.billboard.com/files/styles/1092x722/public/media/lady-gaga-rei-kawakubo-dress-2017-billboard-1548.jpg', className: 'col-sm-12' }),
-          _react2.default.createElement(
-            'div',
-            { className: 'caption' },
-            _react2.default.createElement(
-              'p',
-              null,
-              'POP'
-            )
-          )
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'col-sm-10  col-md-6 each-genre' },
-        _react2.default.createElement(
-          _reactRouter.Link,
-          { 'data-id': '3', to: '/genres/3/albums' },
-          _react2.default.createElement('img', { style: { opacity: 0.5 }, src: 'http://www.billboard.com/files/styles/article_main_image/public/media/guns-n-roses-press-photo-sept-live-billboard-1548.jpg', className: 'col-sm-12' }),
-          _react2.default.createElement(
-            'div',
-            { className: 'caption' },
-            _react2.default.createElement(
-              'p',
-              null,
-              'Rock'
-            )
-          )
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'col-sm-10  col-md-6 each-genre' },
-        _react2.default.createElement(
-          _reactRouter.Link,
-          { 'data-id': '4', to: '/genres/4/albums' },
-          _react2.default.createElement('img', { style: { opacity: 0.5 }, src: 'http://www.billboard.com/files/styles/article_main_image/public/media/Brad-Paisley-live-nov-2016-billboard-4-1548.jpg', className: 'col-sm-12' }),
-          _react2.default.createElement(
-            'div',
-            { className: 'caption' },
-            _react2.default.createElement(
-              'p',
-              null,
-              'COUNTRY'
-            )
-          )
-        )
-      )
+      gridItems.map(function (data, i) {
+        return _react2.default.createElement(_GridPhotoComponent2.default, _extends({}, data, { key: 'grid' + i }));
+      })
     )
   );
 };
 
 var mapStateToProps = function mapStateToProps(_ref2) {
-  var albums = _ref2.albums;
+  var albums = _ref2.albums,
+      genres = _ref2.genres;
+
+  console.log((0, _genres.mapToGrid)(genres), genres, albums);
   return {
-    carrouselItems: (0, _albums.mapToJumbo)(albums)
+    carrouselItems: (0, _albums.mapToJumbo)(albums),
+    gridItems: (0, _genres.mapToGrid)(genres)
   };
 };
 
@@ -23123,6 +23067,8 @@ var _AppContainer2 = _interopRequireDefault(_AppContainer);
 
 var _albums = __webpack_require__(574);
 
+var _genres = __webpack_require__(578);
+
 var _IndexContainer = __webpack_require__(260);
 
 var _IndexContainer2 = _interopRequireDefault(_IndexContainer);
@@ -23174,6 +23120,32 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     init: function init() {
       dispatch((0, _albums.fetchJumbotron)());
+      dispatch((0, _genres.setGenres)([{
+        id: 4,
+        name: 'Country',
+        imgURL: 'http://www.billboard.com/files/styles/article_main_image/public/media/Brad-Paisley-live-nov-2016-billboard-4-1548.jpg',
+        createdAt: '2017-05-05T01:21:33.771Z',
+        updatedAt: '2017-05-05T01:21:33.771Z'
+      }, {
+        id: 1,
+        name: 'Electronic',
+        imgURL: 'http://www.billboard.com/files/styles/900_wide/public/media/EDM-workout-playlist-2017-billboard-summer-1548.jpg',
+        createdAt: '2017-05-05T01:21:33.771Z',
+        updatedAt: '2017-05-05T01:21:33.771Z'
+      }, {
+        id: 2,
+        name: 'Pop Music',
+        imgURL: 'http://www.billboard.com/files/styles/1092x722/public/media/lady-gaga-rei-kawakubo-dress-2017-billboard-1548.jpg',
+        createdAt: '2017-05-05T01:21:33.771Z',
+        updatedAt: '2017-05-05T01:21:33.771Z'
+      }, {
+        id: 3,
+        name: 'Rock Music',
+        imgURL: 'http://www.billboard.com/files/styles/article_main_image/public/media/guns-n-roses-press-photo-sept-live-billboard-1548.jpg',
+        createdAt: '2017-05-05T01:21:33.771Z',
+        updatedAt: '2017-05-05T01:21:33.771Z'
+      }]));
+      // dispatch(fetchGenres());
     }
   };
 };
@@ -23232,11 +23204,13 @@ var _albums = __webpack_require__(280);
 
 var _albums2 = _interopRequireDefault(_albums);
 
+var _genres = __webpack_require__(577);
+
+var _genres2 = _interopRequireDefault(_genres);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import genres from './genresreducer';
-
-exports.default = (0, _redux.combineReducers)({ albums: _albums2.default });
+exports.default = (0, _redux.combineReducers)({ albums: _albums2.default, genres: _genres2.default });
 
 /***/ }),
 /* 282 */
@@ -52566,7 +52540,6 @@ var _axios2 = _interopRequireDefault(_axios);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var setAlbums = exports.setAlbums = function setAlbums(data) {
-  console.log(data);
   return {
     type: _constants.SET_ALBUMS,
     data: data
@@ -52580,6 +52553,140 @@ var fetchJumbotron = exports.fetchJumbotron = function fetchJumbotron() {
       return data;
     }).then(function (data) {
       dispatch(setAlbums(data));
+      return data;
+    }).catch(console.error);
+  };
+};
+
+/***/ }),
+/* 575 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRouter = __webpack_require__(73);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var GridPhotoComponent = function GridPhotoComponent(_ref) {
+    var to = _ref.to,
+        src = _ref.src,
+        p = _ref.p,
+        id = _ref.id;
+    return _react2.default.createElement(
+        'div',
+        { className: 'col-sm-10 col-md-6 grid-photo' },
+        _react2.default.createElement(
+            _reactRouter.Link,
+            { 'data-id': id, to: to },
+            _react2.default.createElement('img', { style: { opacity: 0.5 }, src: src, className: 'col-sm-12' }),
+            _react2.default.createElement(
+                'div',
+                { className: 'caption' },
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    p
+                )
+            )
+        )
+    );
+};
+
+exports.default = GridPhotoComponent;
+
+/***/ }),
+/* 576 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var mapToGrid = exports.mapToGrid = function mapToGrid(apiArr) {
+  return apiArr.map(function (data) {
+    return {
+      id: data.id,
+      src: data.imgURL,
+      p: data.name,
+      to: "/genres/" + data.id + "/albums"
+    };
+  });
+};
+
+/***/ }),
+/* 577 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _constants = __webpack_require__(157);
+
+var genres = function genres() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _constants.SET_GENRES:
+      state = action.data;
+      break;
+  }
+  return state;
+};
+
+exports.default = genres;
+
+/***/ }),
+/* 578 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchGenres = exports.setGenres = undefined;
+
+var _constants = __webpack_require__(157);
+
+var _axios = __webpack_require__(151);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var setGenres = exports.setGenres = function setGenres(data) {
+  console.log(data);
+  return {
+    type: _constants.SET_GENRES,
+    data: data
+  };
+};
+
+var fetchGenres = exports.fetchGenres = function fetchGenres() {
+  return function (dispatch) {
+    return _axios2.default.get('/api/genres').then(function (_ref) {
+      var data = _ref.data;
+      return data;
+    }).then(function (data) {
+      dispatch(setGenres(data));
       return data;
     }).catch(console.error);
   };

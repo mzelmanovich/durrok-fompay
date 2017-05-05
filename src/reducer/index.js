@@ -1,5 +1,5 @@
 import { combineReducers} from 'redux';
 import albums from './albums';
-// import genres from './genresreducer';
+import genres from './genres';
 
-export default combineReducers({albums});
+export default combineReducers({albums, genres});
