@@ -19,7 +19,7 @@ const Routes = ({init}) => (
   <Router history={ hashHistory }>
     <Route path="/" component={ App } >
       <IndexRoute component={ IndexContainer } onEnter={ init } />
-      <Route path="login" component={ Test3 } />
+      <Route path="login/:id" component={ Test3 } onEnter={ init } />
       <Route path = "genres/:genreId/albums" component={GenreAlbums} />
       <Route path = "/albums/:albumId" component={SingleAlbum} />
     </Route>
@@ -27,38 +27,9 @@ const Routes = ({init}) => (
 );
 
 const mapDispatchToProps = (dispatch) => ({
-  init: () => {
+  init: ({params}) => {
     dispatch(fetchJumbotron());
-    dispatch(setGenres([
-      {
-        id: 4,
-        name: 'Country',
-        imgURL: 'http://www.billboard.com/files/styles/article_main_image/public/media/Brad-Paisley-live-nov-2016-billboard-4-1548.jpg',
-        createdAt: '2017-05-05T01:21:33.771Z',
-        updatedAt: '2017-05-05T01:21:33.771Z'
-      },
-      {
-        id: 1,
-        name: 'Electronic',
-        imgURL: 'http://www.billboard.com/files/styles/900_wide/public/media/EDM-workout-playlist-2017-billboard-summer-1548.jpg',
-        createdAt: '2017-05-05T01:21:33.771Z',
-        updatedAt: '2017-05-05T01:21:33.771Z'
-      },
-      {
-        id: 2,
-        name: 'Pop Music',
-        imgURL: 'http://www.billboard.com/files/styles/1092x722/public/media/lady-gaga-rei-kawakubo-dress-2017-billboard-1548.jpg',
-        createdAt: '2017-05-05T01:21:33.771Z',
-        updatedAt: '2017-05-05T01:21:33.771Z'
-      },
-      {
-        id: 3,
-        name: 'Rock Music',
-        imgURL: 'http://www.billboard.com/files/styles/article_main_image/public/media/guns-n-roses-press-photo-sept-live-billboard-1548.jpg',
-        createdAt: '2017-05-05T01:21:33.771Z',
-        updatedAt: '2017-05-05T01:21:33.771Z'
-      }
-    ]));
+    dispatch(fetchGenres());
     // dispatch(fetchGenres());
   }
 });

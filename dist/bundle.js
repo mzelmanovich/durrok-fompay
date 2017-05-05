@@ -22065,7 +22065,6 @@ var mapStateToProps = function mapStateToProps(_ref2) {
   var albums = _ref2.albums,
       genres = _ref2.genres;
 
-  console.log((0, _genres.mapToGrid)(genres), genres, albums);
   return {
     carrouselItems: (0, _albums.mapToJumbo)(albums),
     gridItems: (0, _genres.mapToGrid)(genres)
@@ -23109,7 +23108,7 @@ var Routes = function Routes(_ref) {
       _reactRouter.Route,
       { path: '/', component: _AppContainer2.default },
       _react2.default.createElement(_reactRouter.IndexRoute, { component: _IndexContainer2.default, onEnter: init }),
-      _react2.default.createElement(_reactRouter.Route, { path: 'login', component: Test3 }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'login/:id', component: Test3, onEnter: init }),
       _react2.default.createElement(_reactRouter.Route, { path: 'genres/:genreId/albums', component: _GenreAlbums2.default }),
       _react2.default.createElement(_reactRouter.Route, { path: '/albums/:albumId', component: _SingleAlbum2.default })
     )
@@ -23118,33 +23117,11 @@ var Routes = function Routes(_ref) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    init: function init() {
+    init: function init(_ref2) {
+      var params = _ref2.params;
+
       dispatch((0, _albums.fetchJumbotron)());
-      dispatch((0, _genres.setGenres)([{
-        id: 4,
-        name: 'Country',
-        imgURL: 'http://www.billboard.com/files/styles/article_main_image/public/media/Brad-Paisley-live-nov-2016-billboard-4-1548.jpg',
-        createdAt: '2017-05-05T01:21:33.771Z',
-        updatedAt: '2017-05-05T01:21:33.771Z'
-      }, {
-        id: 1,
-        name: 'Electronic',
-        imgURL: 'http://www.billboard.com/files/styles/900_wide/public/media/EDM-workout-playlist-2017-billboard-summer-1548.jpg',
-        createdAt: '2017-05-05T01:21:33.771Z',
-        updatedAt: '2017-05-05T01:21:33.771Z'
-      }, {
-        id: 2,
-        name: 'Pop Music',
-        imgURL: 'http://www.billboard.com/files/styles/1092x722/public/media/lady-gaga-rei-kawakubo-dress-2017-billboard-1548.jpg',
-        createdAt: '2017-05-05T01:21:33.771Z',
-        updatedAt: '2017-05-05T01:21:33.771Z'
-      }, {
-        id: 3,
-        name: 'Rock Music',
-        imgURL: 'http://www.billboard.com/files/styles/article_main_image/public/media/guns-n-roses-press-photo-sept-live-billboard-1548.jpg',
-        createdAt: '2017-05-05T01:21:33.771Z',
-        updatedAt: '2017-05-05T01:21:33.771Z'
-      }]));
+      dispatch((0, _genres.fetchGenres)());
       // dispatch(fetchGenres());
     }
   };
@@ -52673,7 +52650,6 @@ var _axios2 = _interopRequireDefault(_axios);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var setGenres = exports.setGenres = function setGenres(data) {
-  console.log(data);
   return {
     type: _constants.SET_GENRES,
     data: data

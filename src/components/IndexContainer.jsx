@@ -22,7 +22,6 @@ const GenreContainer = ({carrouselItems, gridItems}) => {
 };
 
 const mapStateToProps = ({albums, genres}) => {
-  console.log(mapToGrid(genres), genres, albums);
   return {
     carrouselItems: mapToJumbo(albums),
     gridItems: mapToGrid(genres)

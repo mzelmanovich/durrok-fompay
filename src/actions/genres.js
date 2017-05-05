@@ -2,7 +2,6 @@ import {SET_GENRES} from '../constants';
 import axios from 'axios';
 
 export const setGenres = (data) => {
-  console.log(data);
   return {
     type: SET_GENRES,
     data
