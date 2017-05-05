@@ -52584,11 +52584,11 @@ var GridPhotoComponent = function GridPhotoComponent(_ref) {
         id = _ref.id;
     return _react2.default.createElement(
         'div',
-        { className: 'col-sm-10 col-md-6 grid-photo' },
+        { className: 'col-sm-10 col-md-6 each-genre' },
         _react2.default.createElement(
             _reactRouter.Link,
             { 'data-id': id, to: to },
-            _react2.default.createElement('img', { style: { opacity: 0.5 }, src: src, className: 'col-sm-12' }),
+            _react2.default.createElement('img', { style: { opacity: 0.5, height: 370, width: 560 }, src: src, className: 'col-sm-12' }),
             _react2.default.createElement(
                 'div',
                 { className: 'caption' },
