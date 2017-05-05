@@ -23137,10 +23137,7 @@ var _SingleAlbum2 = _interopRequireDefault(_SingleAlbum);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import JumbotronComponent from './components/JumbotronComponent.jsx';
 var root = document.getElementById('root');
-// import {setGenre} from './reducer/genresreducer';
-
 
 var Test2 = function Test2() {
   return _react2.default.createElement(
@@ -23164,8 +23161,8 @@ var Routes = function Routes(_ref) {
     { history: _reactRouter.hashHistory },
     _react2.default.createElement(
       _reactRouter.Route,
-      { path: '/', component: _AppContainer2.default, onEnter: init },
-      _react2.default.createElement(_reactRouter.IndexRoute, { component: _IndexContainer2.default }),
+      { path: '/', component: _AppContainer2.default },
+      _react2.default.createElement(_reactRouter.IndexRoute, { component: _IndexContainer2.default, onEnter: init }),
       _react2.default.createElement(_reactRouter.Route, { path: 'login', component: Test3 }),
       _react2.default.createElement(_reactRouter.Route, { path: 'genres/:genreId/albums', component: _GenreAlbums2.default }),
       _react2.default.createElement(_reactRouter.Route, { path: '/albums/:albumId', component: _SingleAlbum2.default })

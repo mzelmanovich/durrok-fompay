@@ -16,8 +16,8 @@ let Test3 = () => (<h1>Test3</h1>);
 
 const Routes = ({init}) => (
   <Router history={ hashHistory }>
-    <Route path="/" component={ App } onEnter={ init }>
-      <IndexRoute component={ IndexContainer } />
+    <Route path="/" component={ App } >
+      <IndexRoute component={ IndexContainer } onEnter={ init } />
       <Route path="login" component={ Test3 } />
       <Route path = "genres/:genreId/albums" component={GenreAlbums} />
       <Route path = "/albums/:albumId" component={SingleAlbum} />
