@@ -9,6 +9,14 @@
 	margin-bottom: 0px;
 }
 
+.footer {
+	display: block;
+	text-align: center;
+	padding: 1em;
+	margin-top: 150;
+	margin: 0 auto;
+}
+
 .homepage-navbar{
 	font-family:'Love Ya Like A Sister';
 	font-size:18px;
@@ -18,13 +26,6 @@
     top:80px;
 }
 
-/*.jumbotron-image {
-	position:relative;
-	text-align: center;
-	height: 50%;
-	width:50%;
-
-}*/
 .jumbotron {
 	padding-top:40px;
 	padding-bottom:80px;
@@ -36,12 +37,19 @@
 .row{
 	font-family:'Love Ya Like A Sister';
 	font-size:18px;
-   bottom:0;
-   width:100%;
-   height:60px;
-   right: 0;
-  left: 0;
-  padding: 1rem;
+   	bottom:0;
+   	width:100%;
+   	height:60px;
+  	 right: 0;
+  	left: 0;
+  	padding: 1rem;
+	line-height:2em;
+	color:black;
+}
+h1:after {
+	content:'';
+	display:block;
+	border:2px solid #d0d0d0;
 }
 
 .thumbnail {
@@ -49,12 +57,57 @@
 }
 
 .caption {
-	font-size:20px;
+	font-size:26px;
 	clear: both;
 	position:relative;
-	top:-50px;
 	text-align: center;
+	top:30;
+	left:150;
 }
 .each-genre {
-	margin-bottom: 40px;
+	margin-bottom: 80px;
 }
+
+.maindiv {
+  margin-top: 10px;
+  padding-bottom: 50px; 
+} 
+
+
+.GridPhoto {
+	position: relative;
+    width: 50%;
+	display:inline-block;
+}
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+.text {
+  background-color: rgba(71, 186, 193, 0.9);
+  color: white;
+  margin:0 auto;
+  font-size: 26px;
+  padding: 16px 32px;
+  white-space: nowrap;
+}
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+.GridPhoto:hover img {
+  opacity: 0.3;
+}
+.GridPhoto:hover .middle{
+  opacity: 1;
+}
+
