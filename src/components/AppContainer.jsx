@@ -10,17 +10,20 @@ const AppContainer = ({children}) => {
           <nav className="homepage-navbar">
             <ul className="nav nav-pills pull-right">
               <li role="presentation"><a href="#">Home</a></li>
-              <li role="presentation"><a href="/login">Log In</a></li>
-              <li role="presentation"><a href="/singup">Sign Up</a></li>
-              <li role="presentation"><a href="/cart">Cart</a></li>
+              <li role="presentation"><a href="/login"><i className="fa fa-sign-in"/> Log In</a></li>
+              <li role="presentation"><a href="/singup"><i className="fa fa-user-plus"/> Sign Up</a></li>
+              <li role="presentation"><a href="/cart"><i className="fa fa-shopping-cart fa-lg" /> Cart</a></li>
             </ul>
           </nav>
-          <h3 className="homepage-header">Durrok Fompay Music store</h3>
+          <div className="maindiv">
+          <img src ="./public/logo.png"/>
+          </div>
         </div>
-        <div>
+        <div className="maindiv">
         {children}
-        </div>
         <Footer />
+        </div>
+        
       </div>
   );
 };
