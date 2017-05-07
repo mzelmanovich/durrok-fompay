@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import Review from './Review/ReviewForm.jsx';
+import ReviewForm from './Review/ReviewForm.jsx';
 
 
-const SingleAlbum = ({album}) => {
+const SingleAlbum = ({album, authenticated}) => {
   if (album && !album.artist){
     album.artist = {};
   }
@@ -25,13 +25,14 @@ const SingleAlbum = ({album}) => {
         </div>
         </div>
         <div>
-        <Review />
+        {authenticated ? <ReviewForm /> : null}
         </div>
       </div>
   );};
-const mapStateToProps = ({albums}) => {
+const mapStateToProps = ({albums, loggedInUser}) => {
   return {
-    album: albums[0] || {}
+    album: albums[0] || {},
+    authenticated: !!loggedInUser.firstName
   };
 };
 

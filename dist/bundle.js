@@ -22439,7 +22439,8 @@ var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SingleAlbum = function SingleAlbum(_ref) {
-  var album = _ref.album;
+  var album = _ref.album,
+      authenticated = _ref.authenticated;
 
   if (album && !album.artist) {
     album.artist = {};
@@ -22506,15 +22507,17 @@ var SingleAlbum = function SingleAlbum(_ref) {
     _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(_ReviewForm2.default, null)
+      authenticated ? _react2.default.createElement(_ReviewForm2.default, null) : null
     )
   );
 };
 var mapStateToProps = function mapStateToProps(_ref2) {
-  var albums = _ref2.albums;
+  var albums = _ref2.albums,
+      loggedInUser = _ref2.loggedInUser;
 
   return {
-    album: albums[0] || {}
+    album: albums[0] || {},
+    authenticated: !!loggedInUser.firstName
   };
 };
 
