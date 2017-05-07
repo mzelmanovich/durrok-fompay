@@ -10,10 +10,6 @@ const Review = conn.define('review', {
       max: 5
     }
   },
-  title: {
-    type: Sequelize.TEXT,
-    defaultValue: null
-  },
   content: {
     type: Sequelize.TEXT,
     defaultValue: null

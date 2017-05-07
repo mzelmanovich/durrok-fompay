@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import Review from './Review/ReviewForm.jsx';
+import ReviewForm from './Review/ReviewForm.jsx';
 
 
-const SingleAlbum = ({album}) => {
+const SingleAlbum = ({album, authenticated}) => {
+  if (album && !album.artist){
+    album.artist = {};
+  }
   return (
         <div className="container-fluid center-block">
         <div className="col-xs-12">
@@ -14,21 +17,22 @@ const SingleAlbum = ({album}) => {
         </div>
         <div className="description">
         <h2><u>{album.name}</u></h2>
-        <p>By {album.artistName} </p>
+        <p>By {album.artist.name} </p>
           <p className="lead">{album.description}</p>
-          <br/>
+          <br />
           <h4>${album.price}</h4>
         <button className="btn btn-primary"><i className="fa fa-shopping-cart" /> Add to Cart </button>
         </div>
         </div>
         <div>
-        <Review />
+        {authenticated ? <ReviewForm /> : null}
         </div>
       </div>
   );};
-const mapStateToProps = ({albums}) => {
+const mapStateToProps = ({albums, loggedInUser}) => {
   return {
-    album: albums[0] || {}
+    album: albums[0] || {},
+    authenticated: !!loggedInUser.firstName
   };
 };
 

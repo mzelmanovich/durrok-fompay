@@ -16,8 +16,7 @@ apiArr.map(data => ({
 }));
 
 export const mapToGridAlbums = (apiArr) => {
-  console.log(apiArr);
-  if(apiArr.length > 0) {
+  if (apiArr.length > 0) {
     const newArray = apiArr[0].map(data => ({
       id: data.id,
       src: data.imgURL,
@@ -27,8 +26,7 @@ export const mapToGridAlbums = (apiArr) => {
     return newArray;
   }
   return [];
-}
-
+};
 
 
 // export const selectAlbumsByGenre = createSelector(

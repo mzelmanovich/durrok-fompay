@@ -22,6 +22,7 @@ router.post('/albums', (req, res, next) => {
   .catch(next);
 });
 
+
 router.get('/albums', (req, res, next) => {
   db.models.Albums.findAll()
   .then(albums => ( albums ? res.json(albums) : res.sendStatus(404)))
@@ -143,6 +144,22 @@ router.get('/albums/:id/reviews', (req, res, next) => {
   db.models.Albums.findById(id, {include: [{all: true}]})
   .then(album => ( album ? res.json(album.genre) : res.sendStatus(404)))
   .catch(next);
+});
+
+router.post('/albums/:id/reviews', (req, res, next) => {
+  if (req.isAuthenticated()){
+    return db.models.Reviews.create({
+      content: req.body.content,
+      rating: req.body.rating,
+      albumId: req.params.id,
+      userId: req.user.id
+    })
+	.then((newReview) => {
+  res.status(201).json(newReview);
+})
+	.catch(next);
+  }
+  return res.sendStatus(403);
 });
 
 module.exports = router;
