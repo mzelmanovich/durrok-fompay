@@ -5998,6 +5998,7 @@ var SET_ALBUM_JUMBOTRON = exports.SET_ALBUM_JUMBOTRON = 'SET_ALBUM_JUMBOTRON';
 var SET_ALBUMS = exports.SET_ALBUMS = 'SET_ALBUMS';
 var SET_GENRES = exports.SET_GENRES = 'SET_GENRES';
 var RECEIVE_REVIEW = exports.RECEIVE_REVIEW = 'RECEIVE_REVIEW';
+var SET_LOGGEDIN_USER = exports.SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER';
 
 /***/ }),
 /* 75 */
@@ -23548,9 +23549,13 @@ var _genres = __webpack_require__(284);
 
 var _genres2 = _interopRequireDefault(_genres);
 
+var _loggedInUser = __webpack_require__(580);
+
+var _loggedInUser2 = _interopRequireDefault(_loggedInUser);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (0, _redux.combineReducers)({ albums: _albums2.default, genres: _genres2.default });
+exports.default = (0, _redux.combineReducers)({ albums: _albums2.default, genres: _genres2.default, loggedInUser: _loggedInUser2.default });
 
 /***/ }),
 /* 286 */
@@ -52968,6 +52973,35 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 580 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _constants = __webpack_require__(74);
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var albums = function albums() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _constants.SET_LOGGEDIN_USER:
+      state = [].concat(_toConsumableArray(action.data));
+      break;
+  }
+  return state;
+};
+
+exports.default = albums;
 
 /***/ })
 /******/ ]);
