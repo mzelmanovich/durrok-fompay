@@ -23395,6 +23395,8 @@ var _AlbumsContainer = __webpack_require__(259);
 
 var _AlbumsContainer2 = _interopRequireDefault(_AlbumsContainer);
 
+var _user = __webpack_require__(581);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var root = document.getElementById('root');
@@ -23418,13 +23420,14 @@ var Routes = function Routes(_ref) {
   var index = _ref.index,
       genreAlbums = _ref.genreAlbums,
       singleAlbum = _ref.singleAlbum,
-      allAlbums = _ref.allAlbums;
+      allAlbums = _ref.allAlbums,
+      loginCheck = _ref.loginCheck;
   return _react2.default.createElement(
     _reactRouter.Router,
     { history: _reactRouter.hashHistory },
     _react2.default.createElement(
       _reactRouter.Route,
-      { path: '/', component: _AppContainer2.default },
+      { path: '/', component: _AppContainer2.default, onEnter: loginCheck },
       _react2.default.createElement(_reactRouter.IndexRoute, { component: _IndexContainer2.default, onEnter: index }),
       _react2.default.createElement(_reactRouter.Route, { path: 'login/:id', component: Test3 }),
       _react2.default.createElement(_reactRouter.Route, { path: 'genres/:genreId/albums', component: _GenreAlbums2.default, onEnter: genreAlbums }),
@@ -23457,6 +23460,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       var params = _ref5.params;
 
       dispatch((0, _albums.fetchAllAlbum)(params.albumId));
+    },
+    loginCheck: function loginCheck() {
+      dispatch((0, _user.fetchLoggedInUser)());
     }
 
   };
@@ -52987,21 +52993,58 @@ Object.defineProperty(exports, "__esModule", {
 
 var _constants = __webpack_require__(74);
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var albums = function albums() {
+var loggedInUser = function loggedInUser() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
   switch (action.type) {
     case _constants.SET_LOGGEDIN_USER:
-      state = [].concat(_toConsumableArray(action.data));
+      state = action.data;
       break;
   }
   return state;
 };
 
-exports.default = albums;
+exports.default = loggedInUser;
+
+/***/ }),
+/* 581 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchLoggedInUser = exports.setUser = undefined;
+
+var _constants = __webpack_require__(74);
+
+var _axios = __webpack_require__(152);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var setUser = exports.setUser = function setUser(data) {
+  return {
+    type: _constants.SET_LOGGEDIN_USER,
+    data: data
+  };
+};
+
+var fetchLoggedInUser = exports.fetchLoggedInUser = function fetchLoggedInUser() {
+  return function (dispatch) {
+    return _axios2.default.get('/api/users/me').then(function (_ref) {
+      var data = _ref.data;
+      return data;
+    }).then(function (data) {
+      dispatch(setUser(data));
+      return data;
+    }).catch(console.error);
+  };
+};
 
 /***/ })
 /******/ ]);

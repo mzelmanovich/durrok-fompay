@@ -4,11 +4,11 @@ const db = require('../../db');
 
 router.get('/users/me', (req, res, next) => {
   if (!req.user){
-    return res.json(null);
+    return res.json({});
   }
 
   db.models.Users.findById(req.user.id)
-  .then((user) => ( user ? res.json(user) : res.json(null)))
+  .then((user) => ( user ? res.json(user) : res.json({})))
   .catch(next);
 });
 

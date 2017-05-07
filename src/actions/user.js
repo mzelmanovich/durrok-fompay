@@ -8,7 +8,7 @@ export const setUser = (data) => {
   };
 };
 
-export const fetLoggedInUser = () => dispatch => axios
+export const fetchLoggedInUser = () => dispatch => axios
     .get(`/api/users/me`)
     .then(({data}) => data)
     .then(data => {
