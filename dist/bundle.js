@@ -5999,6 +5999,7 @@ var SET_ALBUMS = exports.SET_ALBUMS = 'SET_ALBUMS';
 var SET_GENRES = exports.SET_GENRES = 'SET_GENRES';
 var RECEIVE_REVIEW = exports.RECEIVE_REVIEW = 'RECEIVE_REVIEW';
 var SET_LOGGEDIN_USER = exports.SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER';
+var SET_STARS = exports.SET_STARS = 'SET_STARS';
 
 /***/ }),
 /* 75 */
@@ -21940,8 +21941,14 @@ var _Footer2 = _interopRequireDefault(_Footer);
 
 var _reactRedux = __webpack_require__(47);
 
+var _reactRouter = __webpack_require__(34);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var keepRoute = function keepRoute() {
+  var path = window.location.hash;
+  localStorage.setItem('lastPath', path);
+};
 var AppContainer = function AppContainer(_ref) {
   var children = _ref.children,
       user = _ref.user;
@@ -21971,7 +21978,7 @@ var AppContainer = function AppContainer(_ref) {
             { role: 'presentation' },
             _react2.default.createElement(
               'a',
-              { href: '/auth/google' },
+              { href: '/auth/google', onClick: keepRoute },
               _react2.default.createElement('i', { className: 'fa fa-google-plus-square' }),
               ' Google Login'
             )
@@ -23477,6 +23484,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       dispatch((0, _albums.fetchAllAlbum)(params.albumId));
     },
     loginCheck: function loginCheck() {
+      var lastPath = localStorage.getItem('lastPath');
+      if (lastPath && lastPath !== 'null') {
+        localStorage.setItem('lastPath', null);
+        _reactRouter.hashHistory.push(lastPath.split('#')[1]);
+      }
       dispatch((0, _user.fetchLoggedInUser)());
     }
 

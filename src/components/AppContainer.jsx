@@ -1,8 +1,12 @@
 import React from 'react';
 import Footer from './Footer.jsx';
 import {connect} from 'react-redux';
+import {hashHistory} from 'react-router';
 
-
+const keepRoute = () => {
+  const path = window.location.hash;
+  localStorage.setItem('lastPath', path);
+};
 const AppContainer = ({children, user}) => {
   return (
       <div className="container">
@@ -10,7 +14,7 @@ const AppContainer = ({children, user}) => {
           <nav className="homepage-navbar">
             <ul className="nav nav-pills pull-right">
               {user.firstName ? (<li role="presentation"><a href="#">{'Welcome: ' + user.firstName + '!'}</a></li>)
-              : <li role="presentation"><a href="/auth/google"><i className="fa fa-google-plus-square" /> Google Login</a></li>}
+              : <li role="presentation"><a href="/auth/google" onClick={keepRoute}><i className="fa fa-google-plus-square" /> Google Login</a></li>}
               <li role="presentation"><a href="#">Home</a></li>
               <li role="presentation"><a href="/#/cart"><i className="fa fa-shopping-cart fa-lg" /> Cart</a></li>
               {user.firstName ? <li role="presentation"><a href="/logout"><i className="fa fa-sign-out" /> Log Out</a></li> : null}
