@@ -12,7 +12,7 @@ const AppContainer = ({children}) => {
               <li role="presentation"><a href="#">Home</a></li>
               <li role="presentation"><a href="/login"><i className="fa fa-sign-in"/> Log In</a></li>
               <li role="presentation"><a href="/singup"><i className="fa fa-user-plus"/> Sign Up</a></li>
-              <li role="presentation"><a href="/cart"><i className="fa fa-shopping-cart fa-lg" /> Cart</a></li>
+              <li role="presentation"><a href="/#/cart"><i className="fa fa-shopping-cart fa-lg" /> Cart</a></li>
             </ul>
           </nav>
           <div className="maindiv">

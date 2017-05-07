@@ -5,3 +5,5 @@ apiArr.map(data => ({
   p: data.name,
   to: `/genres/${data.id}/albums`
 }));
+
+

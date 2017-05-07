@@ -26,3 +26,16 @@ export const fetchAlbum = (id) => dispatch => axios
     })
     .catch(console.error);
 
+    export const fetchAllAlbum = () => dispatch => axios
+    .get(`/api/albums`)
+    .then(({data}) => data)
+    .then(data => {
+      dispatch(setAlbums([data]));
+      return data;
+    })
+    .catch(console.error);
+
+
+
+
+
