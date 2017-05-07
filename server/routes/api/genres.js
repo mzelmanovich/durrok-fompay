@@ -5,7 +5,7 @@ const Genre = db.models.Genres;
 
 //GET REQUEST-list all genres
 router.get('/genres', (req, res, next) => {
-  Genre.findAll({ order: 'name'})
+  Genre.findAll()
     .then( genres => (genres ? res.send(genres).json() : res.sendStatus(404)))
     .catch(next);
 });
