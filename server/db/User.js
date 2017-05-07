@@ -2,13 +2,6 @@ const Sequelize = require('sequelize');
 const conn = require('./conn');
 
 const User = conn.define('user', {
-  userName: {
-    type: Sequelize.STRING,
-    unique: true
-  },
-  salt: {
-    type: Sequelize.STRING
-  },
   firstName: {
     type: Sequelize.STRING
   },
@@ -21,7 +14,8 @@ const User = conn.define('user', {
       isEmail: true,
       notEmpty: true
     }
-  }
+  },
+  googleId: Sequelize.STRING
 });
 
 module.exports = User;
