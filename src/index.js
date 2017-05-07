@@ -22,7 +22,6 @@ const Routes = ({index, genreAlbums, singleAlbum, allAlbums, loginCheck}) => (
   <Router history={ hashHistory }>
     <Route path="/" component={ App } onEnter ={loginCheck} >
       <IndexRoute component={ IndexContainer } onEnter={ index } />
-      <Route path="login/:id" component={ Test3 } />
       <Route path = "genres/:genreId/albums" component={GenreAlbums} onEnter={ genreAlbums } />
       <Route path = "/albums/:albumId" component={SingleAlbum} onEnter={ singleAlbum } />
       <Route path="/cart" component = {Cart} />
@@ -32,7 +31,7 @@ const Routes = ({index, genreAlbums, singleAlbum, allAlbums, loginCheck}) => (
 );
 
 const mapDispatchToProps = (dispatch) => ({
-  index: ({params}) => {
+  index: () => {
     dispatch(fetchJumbotron());
     dispatch(fetchGenres());
   },

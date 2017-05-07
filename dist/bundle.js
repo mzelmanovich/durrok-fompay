@@ -12721,7 +12721,6 @@ var mapToJumbo = exports.mapToJumbo = function mapToJumbo(apiArr) {
 };
 
 var mapToGridAlbums = exports.mapToGridAlbums = function mapToGridAlbums(apiArr) {
-  console.log(apiArr);
   if (apiArr.length > 0) {
     var newArray = apiArr[0].map(function (data) {
       return {
@@ -21939,14 +21938,13 @@ var _Footer = __webpack_require__(287);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _Jumbotron = __webpack_require__(160);
-
-var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
+var _reactRedux = __webpack_require__(47);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AppContainer = function AppContainer(_ref) {
-  var children = _ref.children;
+  var children = _ref.children,
+      user = _ref.user;
 
   return _react2.default.createElement(
     'div',
@@ -21960,6 +21958,24 @@ var AppContainer = function AppContainer(_ref) {
         _react2.default.createElement(
           'ul',
           { className: 'nav nav-pills pull-right' },
+          user.firstName ? _react2.default.createElement(
+            'li',
+            { role: 'presentation' },
+            _react2.default.createElement(
+              'a',
+              { href: '#' },
+              'Welcome: ' + user.firstName + '!'
+            )
+          ) : _react2.default.createElement(
+            'li',
+            { role: 'presentation' },
+            _react2.default.createElement(
+              'a',
+              { href: '/auth/google' },
+              _react2.default.createElement('i', { className: 'fa fa-google-plus-square' }),
+              ' Google Login'
+            )
+          ),
           _react2.default.createElement(
             'li',
             { role: 'presentation' },
@@ -21974,31 +21990,21 @@ var AppContainer = function AppContainer(_ref) {
             { role: 'presentation' },
             _react2.default.createElement(
               'a',
-              { href: '/login' },
-              _react2.default.createElement('i', { className: 'fa fa-sign-in' }),
-              ' Log In'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            { role: 'presentation' },
-            _react2.default.createElement(
-              'a',
-              { href: '/singup' },
-              _react2.default.createElement('i', { className: 'fa fa-user-plus' }),
-              ' Sign Up'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            { role: 'presentation' },
-            _react2.default.createElement(
-              'a',
               { href: '/#/cart' },
               _react2.default.createElement('i', { className: 'fa fa-shopping-cart fa-lg' }),
               ' Cart'
             )
-          )
+          ),
+          user.firstName ? _react2.default.createElement(
+            'li',
+            { role: 'presentation' },
+            _react2.default.createElement(
+              'a',
+              { href: '/logout' },
+              _react2.default.createElement('i', { className: 'fa fa-sign-out' }),
+              ' Log Out'
+            )
+          ) : null
         )
       ),
       _react2.default.createElement(
@@ -22016,7 +22022,13 @@ var AppContainer = function AppContainer(_ref) {
   );
 };
 
-exports.default = AppContainer;
+var mapStateToProps = function mapStateToProps(_ref2) {
+  var loggedInUser = _ref2.loggedInUser;
+  return {
+    user: loggedInUser
+  };
+};
+exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(AppContainer);
 
 /***/ }),
 /* 261 */
@@ -22429,6 +22441,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var SingleAlbum = function SingleAlbum(_ref) {
   var album = _ref.album;
 
+  if (album && !album.artist) {
+    album.artist = {};
+  }
   return _react2.default.createElement(
     'div',
     { className: 'container-fluid center-block' },
@@ -22465,7 +22480,7 @@ var SingleAlbum = function SingleAlbum(_ref) {
           'p',
           null,
           'By ',
-          album.artistName,
+          album.artist.name,
           ' '
         ),
         _react2.default.createElement(
@@ -23429,7 +23444,6 @@ var Routes = function Routes(_ref) {
       _reactRouter.Route,
       { path: '/', component: _AppContainer2.default, onEnter: loginCheck },
       _react2.default.createElement(_reactRouter.IndexRoute, { component: _IndexContainer2.default, onEnter: index }),
-      _react2.default.createElement(_reactRouter.Route, { path: 'login/:id', component: Test3 }),
       _react2.default.createElement(_reactRouter.Route, { path: 'genres/:genreId/albums', component: _GenreAlbums2.default, onEnter: genreAlbums }),
       _react2.default.createElement(_reactRouter.Route, { path: '/albums/:albumId', component: _SingleAlbum2.default, onEnter: singleAlbum }),
       _react2.default.createElement(_reactRouter.Route, { path: '/cart', component: _CartComponent2.default }),
@@ -23440,24 +23454,22 @@ var Routes = function Routes(_ref) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    index: function index(_ref2) {
-      var params = _ref2.params;
-
+    index: function index() {
       dispatch((0, _albums.fetchJumbotron)());
       dispatch((0, _genres.fetchGenres)());
     },
-    genreAlbums: function genreAlbums(_ref3) {
-      var params = _ref3.params;
+    genreAlbums: function genreAlbums(_ref2) {
+      var params = _ref2.params;
 
       dispatch((0, _genres.fetchAlbums)(params.genreId));
     },
-    singleAlbum: function singleAlbum(_ref4) {
-      var params = _ref4.params;
+    singleAlbum: function singleAlbum(_ref3) {
+      var params = _ref3.params;
 
       dispatch((0, _albums.fetchAlbum)(params.albumId));
     },
-    allAlbums: function allAlbums(_ref5) {
-      var params = _ref5.params;
+    allAlbums: function allAlbums(_ref4) {
+      var params = _ref4.params;
 
       dispatch((0, _albums.fetchAllAlbum)(params.albumId));
     },

@@ -1,31 +1,35 @@
 import React from 'react';
 import Footer from './Footer.jsx';
-import Jumboton from './elements/Jumbotron.jsx';
+import {connect} from 'react-redux';
 
 
-const AppContainer = ({children}) => {
+const AppContainer = ({children, user}) => {
   return (
       <div className="container">
         <div className="header clearfix">
           <nav className="homepage-navbar">
             <ul className="nav nav-pills pull-right">
+              {user.firstName ? (<li role="presentation"><a href="#">{'Welcome: ' + user.firstName + '!'}</a></li>)
+              : <li role="presentation"><a href="/auth/google"><i className="fa fa-google-plus-square" /> Google Login</a></li>}
               <li role="presentation"><a href="#">Home</a></li>
-              <li role="presentation"><a href="/login"><i className="fa fa-sign-in"/> Log In</a></li>
-              <li role="presentation"><a href="/singup"><i className="fa fa-user-plus"/> Sign Up</a></li>
               <li role="presentation"><a href="/#/cart"><i className="fa fa-shopping-cart fa-lg" /> Cart</a></li>
+              {user.firstName ? <li role="presentation"><a href="/logout"><i className="fa fa-sign-out" /> Log Out</a></li> : null}
             </ul>
           </nav>
           <div className="maindiv">
-          <img src ="./public/logo.png"/>
+          <img src ="./public/logo.png" />
           </div>
         </div>
         <div className="maindiv">
         {children}
         <Footer />
         </div>
-        
+
       </div>
   );
 };
 
-export default AppContainer;
+const mapStateToProps = ({loggedInUser}) => ({
+  user: loggedInUser
+});
+export default connect(mapStateToProps, null)(AppContainer);

@@ -5,6 +5,9 @@ import Review from './Review/ReviewForm.jsx';
 
 
 const SingleAlbum = ({album}) => {
+  if (album && !album.artist){
+    album.artist = {};
+  }
   return (
         <div className="container-fluid center-block">
         <div className="col-xs-12">
@@ -14,9 +17,9 @@ const SingleAlbum = ({album}) => {
         </div>
         <div className="description">
         <h2><u>{album.name}</u></h2>
-        <p>By {album.artistName} </p>
+        <p>By {album.artist.name} </p>
           <p className="lead">{album.description}</p>
-          <br/>
+          <br />
           <h4>${album.price}</h4>
         <button className="btn btn-primary"><i className="fa fa-shopping-cart" /> Add to Cart </button>
         </div>
