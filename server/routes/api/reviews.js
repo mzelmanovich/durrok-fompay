@@ -20,7 +20,7 @@ router.get('/reviews/:id', (req, res, next) => {
 // POST - /api/reviews/ - posts a new review
 router.post('/', (req, res, next) => {
   if (req.isAuthenticate()){
-    db.models.Reviews.create({
+    return db.models.Reviews.create({
       content: req.body.content,
       rating: req.body.rating,
       title: req.body.title,
@@ -32,6 +32,7 @@ router.post('/', (req, res, next) => {
 })
 	.catch(next);
   }
+  return res.sendStatus(403);
 });
 
 
