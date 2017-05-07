@@ -10,7 +10,7 @@ router.get('/albums/jumbo', (req, res, next) => {
 
 router.get('/albums/:id', (req, res, next) => {
   const {id} = req.params;
-  db.models.Albums.findById(id)
+  db.models.Albums.findById(id, {include: [{all: true}]})
   .then(album => ( album ? res.json(album) : res.sendStatus(404)))
   .catch(next);
 });
