@@ -138,4 +138,11 @@ router.delete('/albums/:id/artist', (req, res, next) => {
   .catch(next);
 });
 
+router.get('/albums/:id/reviews', (req, res, next) => {
+  const {id} = req.params;
+  db.models.Albums.findById(id, {include: [{all: true}]})
+  .then(album => ( album ? res.json(album.genre) : res.sendStatus(404)))
+  .catch(next);
+});
+
 module.exports = router;

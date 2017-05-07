@@ -125,3 +125,36 @@ margin-left:-5%;
 	margin-left:50;
 	background-color: rgba(71, 186, 193, 0.9);
 }
+
+.description{
+		font-size:20px;
+   	bottom:0;
+   	width:100%;
+   	height:60px;
+  	 right: 0;
+  	left: 0;
+  	padding: 1rem;
+	line-height:2em;
+	color:black;
+}
+
+.form-group {
+	width:50%;
+	margin-top:35%;
+}
+
+#genrealbum col-xs-4:hover img{
+	opacity:0.5;
+}
+.middle-sm {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+.col-xs-4:hover .middle-sm{
+  opacity: 1;
+}
