@@ -1,21 +1,21 @@
-import { SET_REVIEW } from '../constants';
+import { SET_STARS } from '../constants';
 import axios from 'axios';
 
 import { fetchAlbum } from './albums';
 
-export const setReview = review => ({
-    type: SET_REVIEW,
-    review
+export const setStarts =  (data) => ({
+    type: SET_STARS,
+    data
 });
 
 export const fetchReview = (id) => {
-  return dispatch => {
-    axios.get(`/api/reviews/${id}`)
-      .then(response => {
-        dispatch(setReview(response.data));
-      });
-  };
-};
+//   return dispatch => {
+//     axios.get(`/api/reviews/${id}`)
+//       .then(response => {
+//         dispatch(setReview(response.data));
+//       });
+//   };
+// };
 
 // export const addReview = (reviewData) => {
 //     console.log('this is the reviewdata', reviewData);
