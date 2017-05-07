@@ -13,7 +13,6 @@ router.get('/users/me', (req, res, next) => {
 });
 
 router.get('/users/:id', (req, res, next) => {
-  console.log(req.isAuthenticated());
   const {id} = req.params;
   db.models.Users.findById(id, {attributes: ['firstName', 'lastName']})
   .then((name) => ( name ? res.json(name) : res.sendStatus(404)))
