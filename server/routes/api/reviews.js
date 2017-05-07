@@ -19,11 +19,10 @@ router.get('/reviews/:id', (req, res, next) => {
 
 // POST - /api/reviews/ - posts a new review
 router.post('/', (req, res, next) => {
-  if (req.isAuthenticate()){
+  if (req.isAuthenticated()){
     return db.models.Reviews.create({
       content: req.body.content,
       rating: req.body.rating,
-      title: req.body.title,
       albumId: req.body.albumId,
       userId: req.user.id
     })

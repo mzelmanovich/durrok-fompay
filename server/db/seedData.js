@@ -164,7 +164,7 @@ const albumsToAdd = [
 const reviewsToAdd = [];
 
 albumsToAdd.forEach(({id}) => {
-  reviewsToAdd.push({id, albumId: id, userId: 1, rating: 5, title: 'This roxs!', content: 'Music Rocked me So hard!'});
+  reviewsToAdd.push({id, albumId: id, userId: 1, rating: 5, content: 'Music Rocked me So hard!'});
 });
 
 module.exports = {
