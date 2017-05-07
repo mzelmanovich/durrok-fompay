@@ -17,20 +17,22 @@ router.get('/reviews/:id', (req, res, next) => {
 });
 
 
-
 // POST - /api/reviews/ - posts a new review
 router.post('/', (req, res, next) => {
-	db.models.Reviews.create({
-        content: req.body.content,
-        rating: req.body.rating,
-        title: req.body.title,
-        albumId: req.body.albumId,
-        userId: req.body.userId
+  if (req.isAuthenticate()){
+    db.models.Reviews.create({
+      content: req.body.content,
+      rating: req.body.rating,
+      title: req.body.title,
+      albumId: req.body.albumId,
+      userId: req.user.id
     })
 	.then((newReview) => {
-		res.status(201).json(newReview);
-	})
+  res.status(201).json(newReview);
+})
 	.catch(next);
+  }
 });
+
 
 module.exports = router;
