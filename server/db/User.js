@@ -15,7 +15,7 @@ const User = conn.define('user', {
       notEmpty: true
     }
   },
-  googleId: Sequelize.STRING
+  socialId: Sequelize.STRING
 });
 
 module.exports = User;
