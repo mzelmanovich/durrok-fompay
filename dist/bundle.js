@@ -3244,7 +3244,7 @@ var SET_GENRES = exports.SET_GENRES = 'SET_GENRES';
 var RECEIVE_REVIEW = exports.RECEIVE_REVIEW = 'RECEIVE_REVIEW';
 var SET_LOGGEDIN_USER = exports.SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER';
 var SET_STARS = exports.SET_STARS = 'SET_STARS';
-var ADD_TO_CART = exports.ADD_TO_CART = 'ADD_TO_CART';
+var SET_CART = exports.SET_CART = 'SET_CART';
 
 /***/ }),
 /* 36 */
@@ -21778,7 +21778,7 @@ var fetchAlbums = exports.fetchAlbums = function fetchAlbums(id) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchLoggedInUser = exports.setUser = undefined;
+exports.fetchCart = exports.fetchLoggedInUser = exports.setCart = exports.setUser = undefined;
 
 var _constants = __webpack_require__(35);
 
@@ -21795,6 +21795,13 @@ var setUser = exports.setUser = function setUser(data) {
   };
 };
 
+var setCart = exports.setCart = function setCart(data) {
+  return {
+    type: _constants.SET_CART,
+    data: data
+  };
+};
+
 var fetchLoggedInUser = exports.fetchLoggedInUser = function fetchLoggedInUser() {
   return function (dispatch) {
     return _axios2.default.get('/api/users/me').then(function (_ref) {
@@ -21802,6 +21809,18 @@ var fetchLoggedInUser = exports.fetchLoggedInUser = function fetchLoggedInUser()
       return data;
     }).then(function (data) {
       dispatch(setUser(data));
+      return data;
+    }).catch(console.error);
+  };
+};
+
+var fetchCart = exports.fetchCart = function fetchCart() {
+  return function (dispatch) {
+    return _axios2.default.get('/api/users/me/cart').then(function (_ref2) {
+      var data = _ref2.data;
+      return data;
+    }).then(function (data) {
+      dispatch(setCart(data));
       return data;
     }).catch(console.error);
   };
@@ -23545,16 +23564,8 @@ var cart = function cart() {
   var action = arguments[1];
 
   switch (action.type) {
-    case _constants.ADD_TO_CART:
-      state = Object.assign({}, state);
-      state[action.data.id] = true;
-      var strArr = [];
-      for (var key in state) {
-        if (state[key]) {
-          strArr.push(key);
-        }
-      }
-      localStorage.setItem('cart', strArr.join(','));
+    case _constants.SET_CART:
+      state = action.data;
       break;
   }
   return state;
