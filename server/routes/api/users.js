@@ -22,6 +22,18 @@ router.post('/users/me/cart', (req, res, next) => {
   .catch(next);
 });
 
+router.get('/users/me/cart', (req, res, next) => {
+  if (!req.user){
+    return res.json({});
+  }
+  db.models.Users.findById(req.user.id, {include: [{all: true}]})
+  .then(({cart}) => {
+    return cart ? db.models.Orders.findById(cart.id || 0, {include: [{all: true}]}) : {};
+  })
+  .then((cart) => ( cart ? res.json(cart) : res.json({})))
+  .catch(next);
+});
+
 router.post('/users/me/checkout', (req, res, next) => {
   if (!req.user){
     return res.json({});
