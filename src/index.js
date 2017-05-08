@@ -19,6 +19,12 @@ window.test = (data) => {
   axios.post('/api/users/me/cart', data)
   .then(console.log);
 };
+
+window.test2 = (data) => {
+  axios.post('/api/users/me/checkout', data)
+  .then(console.log);
+};
+
 const root = document.getElementById('root');
 
 let Test2 = () => (<h1>hi1245</h1>);

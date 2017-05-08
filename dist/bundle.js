@@ -23412,6 +23412,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 window.test = function (data) {
   _axios2.default.post('/api/users/me/cart', data).then(console.log);
 };
+
+window.test2 = function (data) {
+  _axios2.default.post('/api/users/me/checkout', data).then(console.log);
+};
+
 var root = document.getElementById('root');
 
 var Test2 = function Test2() {

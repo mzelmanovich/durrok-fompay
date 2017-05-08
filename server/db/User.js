@@ -14,6 +14,23 @@ const instanceMethods = {
   .then((cart) => {
     return conn.model('order').findById(cart.id, {include: [{all: true}]});
   });
+  },
+
+  completeCart: function(){
+    if (this.cart){
+      this.cart.completedDate = new Date();
+      const {userId, id} = this.cart;
+      return this.cart.save()
+      .then(cart => cart.computePrice())
+      .then(() => this.setCart(null))
+      .then(() => conn.model('order').findById(id))
+      .then(order => {
+        order.userId = this.id;
+        return order.save();
+      })
+      .then(() => conn.model('user').findById(this.id, {include: [{all: true}]}));
+    }
+    return Promise.resolve(this);
   }
 };
 const User = conn.define('user', {
