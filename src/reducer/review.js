@@ -1,32 +1,38 @@
-import { RECEIVE_REVIEW } from '../constants';
+import { FETCH_ALL_REVIEWS, SET_REVIEWS } from '../constants';
 
 
-const initialReviewState = {
-  selectedReview: {
-    Author: {
-        name: ''
-    },
-    author_id: 1,
-    comment: '',
-    rating: 1,
-    title: ''
-  }
+// const initialReviewState = {
+//   // selectedReview: {
+//   //   Author: {
+//   //       name: ''
+//   //   },
+//   //   author_id: '',
+//   //   comment: '',
+//   //   rating: 1,
+//   //   title: ''
+//   // }
+// };
+
+const defaultState = {
+  reviews: [],
+  singleReview: {}
 };
 
-export default function (state = initialReviewState, action) {
+export default function (state = defaultState, action) {
 
   const newState = Object.assign({}, state);
 
   switch (action.type) {
-    case RECEIVE_REVIEW:
-      newState.selectedReview = action.review;
+    case FETCH_ALL_REVIEWS:
+      newState.reviews = action.allReviews;
       break;
 
-    default:
-      return state;
-
+    case SET_REVIEWS:
+    newState.reviews = action.data;
+    break;
+  default:
+    return state;
   }
 
   return newState;
-
 }

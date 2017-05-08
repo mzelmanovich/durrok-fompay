@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import ReviewForm from './Review/ReviewForm.jsx';
 
 
-const SingleAlbum = ({album, authenticated}) => {
-  if (album && !album.artist){
-    album.artist = {};
-  }
-  return (
+const SingleAlbum = ({album, authenticated }) => {
+  
+  if (album && album.artist && album.reviews){
+    
+    //album.artist = {};
+    //album.reviews =[];
+    return (
         <div className="container-fluid center-block">
         <div className="col-xs-12">
         <div className="col-xs-4 thumb center-block">
@@ -25,10 +27,33 @@ const SingleAlbum = ({album, authenticated}) => {
         </div>
         </div>
         <div>
+          <div className="col-lg-12">
+           <h2>Reviews</h2>
+           <ul className="list-group">
+              <li className ="list-group-item">{album.reviews[0].content}</li>
+              <div className="star" style={{width: ((album.reviews[0].rating/5)*100)+'px'}}>
+              <div style={{width: '100px'}}>
+              <i className="fa fa-star" aria-hidden="true"></i>
+              <i className="fa fa-star" aria-hidden="true"></i>
+              <i className="fa fa-star" aria-hidden="true"></i>
+              <i className="fa fa-star" aria-hidden="true"></i>
+              <i className="fa fa-star" aria-hidden="true"></i>
+            </div>
+            </div>
+            </ul>
+          </div>
+          </div>
         {authenticated ? <ReviewForm /> : null}
         </div>
-      </div>
-  );};
+    );
+  } else {
+    return (
+      <div className="container-fluid center-block">
+        </div>
+    );
+  }
+};
+  
 const mapStateToProps = ({albums, loggedInUser}) => {
   return {
     album: albums[0] || {},

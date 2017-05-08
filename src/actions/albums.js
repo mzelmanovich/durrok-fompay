@@ -21,6 +21,7 @@ export const fetchAlbum = (id) => dispatch => axios
     .get(`/api/albums/${id}`)
     .then(({data}) => data)
     .then(data => {
+      console.log(data)
       dispatch(setAlbums([data]));
       return data;
     })

@@ -141,8 +141,8 @@ router.delete('/albums/:id/artist', (req, res, next) => {
 
 router.get('/albums/:id/reviews', (req, res, next) => {
   const {id} = req.params;
-  db.models.Albums.findById(id, {include: [{all: true}]})
-  .then(album => ( album ? res.json(album.genre) : res.sendStatus(404)))
+  db.models.Reviews.findAll({where: {albumId: id}, include: [{all: true}]})
+  .then(reviews => ( reviews ? res.json(reviews) : res.sendStatus(404)))
   .catch(next);
 });
 
