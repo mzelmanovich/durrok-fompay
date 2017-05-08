@@ -30,6 +30,7 @@ Albums.belongsTo(Genres);
 Users.hasMany(Orders);
 Users.hasMany(Payments);
 Users.hasMany(Reviews);
+Users.hasOne(Orders, {as: 'cart'});
 
 
 //Review Association

@@ -12,7 +12,13 @@ import SingleAlbum from './components/SingleAlbum.jsx';
 import Cart from './components/CartComponent.jsx';
 import AlbumsContainer from './components/AlbumsContainer.jsx';
 import {fetchLoggedInUser} from './actions/user';
+import axios from 'axios';
 
+
+window.test = (data) => {
+  axios.post('/api/users/me/cart', data)
+  .then(console.log);
+};
 const root = document.getElementById('root');
 
 let Test2 = () => (<h1>hi1245</h1>);
