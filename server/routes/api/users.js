@@ -16,18 +16,8 @@ router.post('/users/me/cart', (req, res, next) => {
   if (!req.user){
     return res.json({});
   }
-
   db.models.Users.findById(req.user.id, {include: [{all: true}]})
-  .then((user) => {
-    return user ? user.createCart(req.body) : null;
-  })
-  .then(() => db.models.Users.findById(req.user.id, {include: [{all: true}]}))
-  .then((user) => {
-    console.log(123);
-    const promArr = [];
-    user.cart.albumString.forEach(id => promArr.push(user.cart.addAlbum(id)));
-    return Promise.all(promArr).then(() => db.models.Orders.findById(user.cart.id, {include: [{all: true}]}));
-  })
+  .then((user) => user.refreshCart(req.body))
   .then((cart) => ( cart ? res.json(cart) : res.json({})))
   .catch(next);
 });
