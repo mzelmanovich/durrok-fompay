@@ -7,9 +7,14 @@ const passport = require('passport');
 const session = require('express-session');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const db = require('./db');
+const googleConfig = process.env.GOOGLE_CLIENT_ID ? {
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: process.env.GOOGLE_CALLBACK_UL
+} : require('../config').googleAuth;
 
 passport.use(new GoogleStrategy(
-  require('../config').googleAuth,
+  googleConfig,
   function(accessToken, refreshToken, profile, done) {
     return done(null, profile);
   }
