@@ -7,6 +7,7 @@ import App from  './components/AppContainer.jsx';
 import {fetchJumbotron, fetchAlbum, fetchAllAlbum} from './actions/albums';
 import {fetchGenres, fetchAlbums} from './actions/genres';
 import IndexContainer from './components/IndexContainer.jsx';
+import Login from './components/Login.jsx'
 import GenreAlbums from './components/GenreAlbums.jsx';
 import SingleAlbum from './components/SingleAlbum.jsx';
 import Cart from './components/CartComponent.jsx';
@@ -22,6 +23,7 @@ const Routes = ({index, genreAlbums, singleAlbum, allAlbums, loginCheck}) => (
   <Router history={ hashHistory }>
     <Route path="/" component={ App } onEnter ={loginCheck} >
       <IndexRoute component={ IndexContainer } onEnter={ index } />
+      <Route path="login" component={Login} />
       <Route path = "genres/:genreId/albums" component={GenreAlbums} onEnter={ genreAlbums } />
       <Route path = "/albums/:albumId" component={SingleAlbum} onEnter={ singleAlbum } />
       <Route path="/cart" component = {Cart} />

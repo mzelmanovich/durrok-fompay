@@ -11,7 +11,7 @@ const GenreContainer = ({carrouselItems, gridItems}) => {
     <div className="container center">
         <Jumbotron carrouselItems={carrouselItems} />
       <div className="row">
-        <h1>Genres</h1>   
+        <h1>Genres</h1>
         {gridItems.map((data, i) => {
           return (
             <GridPhotoComponent {...data} key ={'grid' + i} />

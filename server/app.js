@@ -6,10 +6,18 @@ const routes = require('./routes');
 const passport = require('passport');
 const session = require('express-session');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const db = require('./db');
 
 passport.use(new GoogleStrategy(
   require('../config').googleAuth,
+  function(accessToken, refreshToken, profile, done) {
+    return done(null, profile);
+  }
+));
+
+passport.use(new FacebookStrategy(
+  require('../config').facebookAuth,
   function(accessToken, refreshToken, profile, done) {
     return done(null, profile);
   }
@@ -45,8 +53,15 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
   }
 );
 
+app.get('/auth/facebook', passport.authenticate('facebook',  { scope:  ['email'] }));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
+
 passport.serializeUser(function(user, done) {
-  db.models.Users.findOne({where: {googleId: user.id}})
+  db.models.Users.findOne({where: {socialId: user.id}})
   .then(dbUser => {
     if (dbUser){
       return dbUser;
@@ -55,7 +70,7 @@ passport.serializeUser(function(user, done) {
       firstName: user.name.givenName,
       lastName: user.name.familyName,
       email: user.emails[0].value,
-      googleId: user.id
+      socialId: user.id
     });
   })
   .then(found => done(null, found.id))
