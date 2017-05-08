@@ -14,7 +14,8 @@ const artistsToAdd = [
 ];
 
 const usersToAdd = [
-    {id: 1, firstName: 'Summer', lastName: 'Guan', email: 'summergun10@gmail.com', googleId: '100494953576356654376'}
+    {id: 1, firstName: 'Summer', lastName: 'Guan', email: 'summergun10@gmail.com', googleId: '100494953576356654376'},
+  {id: 2, firstName: 'Mitch', lastName: 'Z', email: 'mitch@gmail.com', googleId: '123'}
 ];
 
 
@@ -231,7 +232,14 @@ const reviewsToAdd = [
     userId: 1,
     rating: 2,
     content: 'Meh!'
-  }
+  },
+    {
+    id: 11,
+    albumId: 1,
+    userId: 2,
+    rating: 3,
+    content: 'Another Amazing!'
+  },
 
 
 ];

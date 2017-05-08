@@ -3,6 +3,7 @@ import Footer from './Footer.jsx';
 import {connect} from 'react-redux';
 
 
+
 const AppContainer = ({children, user}) => {
   return (
       <div className="container">
@@ -16,6 +17,7 @@ const AppContainer = ({children, user}) => {
               {user.firstName ? <li role="presentation"><a href="/logout"><i className="fa fa-sign-out" /> Log Out</a></li> : null}
             </ul>
           </nav>
+    
           <div className="maindiv">
           <img src ="./public/logo.png" />
           </div>

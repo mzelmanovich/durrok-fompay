@@ -6,7 +6,7 @@ import store from './store';
 import App from  './components/AppContainer.jsx';
 import {fetchJumbotron, fetchAlbum, fetchAllAlbum} from './actions/albums';
 import {fetchGenres, fetchAlbums} from './actions/genres';
-import {getSingleAlbumReviews, addSingleAlbumReview} from './actions/review';
+import {fetchReviews, addSingleAlbumReview} from './actions/review';
 import IndexContainer from './components/IndexContainer.jsx';
 import GenreAlbums from './components/GenreAlbums.jsx';
 import SingleAlbum from './components/SingleAlbum.jsx';
@@ -41,18 +41,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
   singleAlbum: ({params}) => {
     dispatch(fetchAlbum(params.albumId));
+    dispatch(fetchReviews(params.albumId));
   },
   allAlbums: ({params}) => {
     dispatch(fetchAllAlbum(params.albumId));
   },
   loginCheck: () => {
     dispatch(fetchLoggedInUser());
-  },
-  addReview: (albumId, content, rating, userId) => {
-    dispatch(addSingleAlbumReview( albumId, content, rating, userId)) ;
-  },
-  getReviews: (albumId) => {
-    dispatch(getSingleAlbumReviews(albumId));
   }
 
 });

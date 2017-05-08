@@ -15,7 +15,7 @@ export const fetchallreviews = allReviews => ({
     allReviews
 });
 
-export const fetchReview = (id) => {
+export const fetchReviews = (id) => {
   return dispatch => {
     axios.get(`/api/albums/${id}/reviews`)
       .then(response => {
