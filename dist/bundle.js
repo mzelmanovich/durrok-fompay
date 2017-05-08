@@ -4311,6 +4311,7 @@ var SET_GENRES = exports.SET_GENRES = 'SET_GENRES';
 var RECEIVE_REVIEW = exports.RECEIVE_REVIEW = 'RECEIVE_REVIEW';
 var SET_LOGGEDIN_USER = exports.SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER';
 var SET_STARS = exports.SET_STARS = 'SET_STARS';
+var ADD_TO_CART = exports.ADD_TO_CART = 'ADD_TO_CART';
 
 /***/ }),
 /* 49 */
@@ -22392,11 +22393,14 @@ var _ReviewForm = __webpack_require__(289);
 
 var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
 
+var _cart = __webpack_require__(582);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SingleAlbum = function SingleAlbum(_ref) {
   var album = _ref.album,
-      authenticated = _ref.authenticated;
+      authenticated = _ref.authenticated,
+      onClick = _ref.onClick;
 
   if (album && !album.artist) {
     album.artist = {};
@@ -22454,7 +22458,7 @@ var SingleAlbum = function SingleAlbum(_ref) {
         ),
         _react2.default.createElement(
           'button',
-          { className: 'btn btn-primary' },
+          { className: 'btn btn-primary', onClick: onClick(album) },
           _react2.default.createElement('i', { className: 'fa fa-shopping-cart' }),
           ' Add to Cart '
         )
@@ -22477,11 +22481,18 @@ var mapStateToProps = function mapStateToProps(_ref2) {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//    loadAllAlbums: dispatch(loadAllAlbums()),
-//});
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    onClick: function onClick(album) {
+      return function (event) {
+        event.preventDefault();
+        dispatch((0, _cart.addToCart)(album));
+      };
+    }
+  };
+};
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(SingleAlbum);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SingleAlbum);
 
 /***/ }),
 /* 265 */
@@ -23535,9 +23546,13 @@ var _loggedInUser = __webpack_require__(286);
 
 var _loggedInUser2 = _interopRequireDefault(_loggedInUser);
 
+var _cart = __webpack_require__(583);
+
+var _cart2 = _interopRequireDefault(_cart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (0, _redux.combineReducers)({ albums: _albums2.default, genres: _genres2.default, loggedInUser: _loggedInUser2.default });
+exports.default = (0, _redux.combineReducers)({ albums: _albums2.default, genres: _genres2.default, loggedInUser: _loggedInUser2.default, cart: _cart2.default });
 
 /***/ }),
 /* 286 */
@@ -53048,6 +53063,62 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 582 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addToCart = undefined;
+
+var _constants = __webpack_require__(48);
+
+var addToCart = exports.addToCart = function addToCart(album) {
+  return {
+    type: _constants.ADD_TO_CART,
+    data: album
+  };
+};
+
+/***/ }),
+/* 583 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _constants = __webpack_require__(48);
+
+var cart = function cart() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _constants.ADD_TO_CART:
+      state = Object.assign({}, state);
+      state[action.data.id] = true;
+      var strArr = [];
+      for (var key in state) {
+        if (state[key]) {
+          strArr.push(key);
+        }
+      }
+      localStorage.setItem('cart', strArr.join(','));
+      break;
+  }
+  return state;
+};
+
+exports.default = cart;
 
 /***/ })
 /******/ ]);

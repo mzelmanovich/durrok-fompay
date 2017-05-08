@@ -2,9 +2,10 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import ReviewForm from './Review/ReviewForm.jsx';
+import {addToCart} from '../actions/cart';
 
 
-const SingleAlbum = ({album, authenticated}) => {
+const SingleAlbum = ({album, authenticated, onClick}) => {
   if (album && !album.artist){
     album.artist = {};
   }
@@ -21,7 +22,7 @@ const SingleAlbum = ({album, authenticated}) => {
           <p className="lead">{album.description}</p>
           <br />
           <h4>${album.price}</h4>
-        <button className="btn btn-primary"><i className="fa fa-shopping-cart" /> Add to Cart </button>
+        <button className="btn btn-primary" onClick={onClick(album)}><i className="fa fa-shopping-cart" /> Add to Cart </button>
         </div>
         </div>
         <div>
@@ -36,8 +37,11 @@ const mapStateToProps = ({albums, loggedInUser}) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//    loadAllAlbums: dispatch(loadAllAlbums()),
-//});
+const mapDispatchToProps = (dispatch) => ({
+  onClick: album => (event) => {
+    event.preventDefault();
+    dispatch(addToCart(album));
+  }
+});
 
-export default connect(mapStateToProps)(SingleAlbum);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleAlbum);
