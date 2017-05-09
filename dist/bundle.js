@@ -6059,7 +6059,6 @@ var deserializeCart = exports.deserializeCart = function deserializeCart() {
   var ids = localStorage.cart.split(',').filter(function (id) {
     return id.length > 0;
   });
-  console.log(ids);
   ids = ids.map(function (id) {
     return _axios2.default.get('/api/albums/' + id).then(function (_ref2) {
       var data = _ref2.data;
