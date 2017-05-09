@@ -1,4 +1,5 @@
 import {ADD_TO_CART, REMOVE_FROM_CART} from '../constants';
+import {setCart} from './user';
 import {fetchCart} from './user';
 
 import axios from 'axios';
@@ -7,26 +8,6 @@ export const addToCart = (album) => ({
   type: ADD_TO_CART,
   data: album
 });
-
-export const saveOfflineCart = () => dispatch =>
-deserializeCart()
-.then(({albums}) => albums.length ?
-axios.post('/api/users/me/cart', albums)
-.then(() => dispatch(fetchCart())) : null)
-.then(console.log);
-
-
-export const putInCart = ({id}) => dispatch => {
-  axios.put('/api/users/me/cart', {albumId: id})
-  .then(() => dispatch(fetchCart()))
-  .catch(console.log);
-};
-
-export const removeFromCart = ({id}) => dispatch => {
-  axios.delete('/api/users/me/cart', {data: {albumId: id}})
-  .then(() => dispatch(fetchCart()))
-  .catch(console.log);
-};
 
 
 export const serializeCart = (albums) => {
@@ -63,4 +44,29 @@ export const removeFromOfflineCart = (album) => dispatch => {
     dispatch(setCart({albums}));
 
   });
+};
+
+export const saveOfflineCart = () => dispatch =>
+deserializeCart()
+.then(({albums}) => albums.length ?
+axios.post('/api/users/me/cart', albums)
+.then(() => dispatch(fetchCart())) : null)
+.then(console.log);
+
+export const putInCart = ({id}) => (dispatch, state) => {
+  if (state().loggedInUser.firstName){
+    return axios.put('/api/users/me/cart', {albumId: id})
+  .then(() => dispatch(fetchCart()))
+  .catch(console.log);
+  }
+  dispatch(addToOffLineCart({id}));
+};
+
+export const removeFromCart = ({id}) => (dispatch, state) => {
+  if (state().loggedInUser.firstName){
+    return axios.delete('/api/users/me/cart', {data: {albumId: id}})
+  .then(() => dispatch(fetchCart()))
+  .catch(console.log);
+  }
+  dispatch(removeFromOfflineCart({id}));
 };

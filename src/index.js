@@ -72,7 +72,8 @@ const mapDispatchToProps = (dispatch) => ({
       localStorage.setItem('lastPath', null);
       hashHistory.push(lastPath.split('#')[1]);
     }
-    dispatch(fetchLoggedInUser());
+    dispatch(fetchLoggedInUser())
+    .then(() => dispatch(fetchCart()));
   }
 
 });
