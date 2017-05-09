@@ -38,3 +38,5 @@ jspm_packages
 
 #configs
 config.json
+
+dist
