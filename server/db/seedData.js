@@ -2,14 +2,14 @@ const artistsToAdd = [
     {id: 1, name: 'Katy Perry', genreId: 2},
     {id: 2, name: 'Gorillaz', genreId: 3},
     {id: 3, name: 'Zedd', genreId: 1},
-    {id: 4, name: 'Odeza', genreId: 1},
+    {id: 4, name: 'Odesza', genreId: 1},
     {id: 5, name: 'The Beatles', genreId: 3},
     {id: 6, name: 'Lady Gaga', genreId: 2},
     {id: 7, name: 'Justin Bieber', genreId: 2},
     {id: 8, name: 'Pink Floyd', genreId: 3},
     {id: 9, name: 'Blur', genreId: 3},
     {id: 10, name: 'Blake Shelton', genreId: 4},
-    {id: 11, name: 'George StraitBlur', genreId: 4},
+    {id: 11, name: 'George Strait', genreId: 4},
     {id: 12, name: 'Lauren Alaina', genreId: 4},
 ];
 
@@ -58,7 +58,7 @@ const albumsToAdd = [
   },
   {
     id: 3,
-    name: 'Monkey Around',
+    name: 'Humanz',
     jumboImg: 'https://ksassets.timeincuk.net/wp/uploads/sites/55/2017/03/Gorillaz_2017-920x584.jpg',
     year: '2017',
     price: 9.99,

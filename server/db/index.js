@@ -9,7 +9,6 @@ const Genres = require('./Genre');
 const Payments = require('./Payment');
 
 //Order Association
-Orders.belongsTo( Payments );
 Orders.belongsToMany( Songs, {through: 'OrderSongs'} );
 Orders.belongsToMany( Albums, {through: 'OrderAlbums'} );
 Orders.belongsTo(Users);
@@ -27,9 +26,9 @@ Albums.belongsTo(Artists);
 Albums.belongsTo(Genres);
 
 // User Associations
-Users.hasMany(Orders);
-Users.hasMany(Payments);
+Users.hasMany(Orders, {as: 'orders', foreignKey: 'userId'});
 Users.hasMany(Reviews);
+Users.hasOne(Orders, {as: 'cart', foreignKey: 'cartId', targetKey: 'cartId'});
 
 
 //Review Association
@@ -46,11 +45,6 @@ Artists.belongsTo( Genres );
 Genres.hasMany( Artists );
 Genres.hasMany( Songs );
 Genres.hasMany( Albums );
-
-//Payment Association
-Payments.belongsTo( Users );
-Payments.hasOne( Orders );
-
 
 const sync = force => conn.sync({ force });
 
