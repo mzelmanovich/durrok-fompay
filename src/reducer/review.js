@@ -1,18 +1,5 @@
 import { FETCH_ALL_REVIEWS, SET_REVIEWS } from '../constants';
 
-
-// const initialReviewState = {
-//   // selectedReview: {
-//   //   Author: {
-//   //       name: ''
-//   //   },
-//   //   author_id: '',
-//   //   comment: '',
-//   //   rating: 1,
-//   //   title: ''
-//   // }
-// };
-
 const defaultState = {
   reviews: [],
   singleReview: {}

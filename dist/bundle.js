@@ -22474,10 +22474,6 @@ var mapStateToProps = function mapStateToProps(_ref3) {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//    loadAllAlbums: dispatch(loadAllAlbums()),
-//});
-
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(GenreAlbums);
 
 /***/ }),
@@ -23849,18 +23845,6 @@ exports.default = function () {
 };
 
 var _constants = __webpack_require__(28);
-
-// const initialReviewState = {
-//   // selectedReview: {
-//   //   Author: {
-//   //       name: ''
-//   //   },
-//   //   author_id: '',
-//   //   comment: '',
-//   //   rating: 1,
-//   //   title: ''
-//   // }
-// };
 
 var defaultState = {
   reviews: [],

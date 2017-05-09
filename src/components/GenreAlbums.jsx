@@ -24,8 +24,4 @@ const mapStateToProps = ({albums}) => ({
   albums
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//    loadAllAlbums: dispatch(loadAllAlbums()),
-//});
-
 export default connect(mapStateToProps)(GenreAlbums);
