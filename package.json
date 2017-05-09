@@ -13,6 +13,7 @@
     "bootstrap": "^3.3.7",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
+    "moment": "^2.18.1",
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",

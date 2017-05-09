@@ -15,6 +15,7 @@ import AlbumsContainer from './components/AlbumsContainer.jsx';
 import OrderConfirmation from './components/OrderConfirmation.jsx';
 import {fetchLoggedInUser, fetchCart} from './actions/user';
 import {saveOfflineCart} from './actions/cart';
+import OrderContainer from './components/OrderContainer.jsx';
 import axios from 'axios';
 
 
@@ -45,6 +46,7 @@ const Routes = ({index, genreAlbums, singleAlbum, allAlbums, loginCheck, getCart
       <Route path="/cart" component = {Cart} onEnter={getCart} />
       <Route path="/albums" component ={AlbumsContainer} onEnter={allAlbums} />
       <Route path="/confirmation" component ={OrderConfirmation} />
+      <Route path="/orders" component={OrderContainer} />
     </Route>
   </Router>
 );
