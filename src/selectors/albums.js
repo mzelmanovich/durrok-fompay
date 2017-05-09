@@ -28,6 +28,21 @@ export const mapToGridAlbums = (apiArr) => {
   return [];
 };
 
+export const mapToReviews = (apiArr) => {
+ 
+  if (apiArr.length > 0){
+    const newArray = apiArr[0].map( data => ({
+      content: data.content,
+      firstName: data.firstName,
+      rating: data.rating
+    }));
+    return newArray;
+  }
+  return [];
+}
+
+
+
 
 // export const selectAlbumsByGenre = createSelector(
 //     [selectAlbums, selectGenreId],

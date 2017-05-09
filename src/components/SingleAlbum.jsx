@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import ReviewForm from './Review/ReviewForm.jsx';
+import ReviewDisplay from './Review/ReviewDisplay.jsx';
 import {putInCart, removeFromCart} from '../actions/cart';
 
 const SingleAlbum = ({album, authenticated, onClick}) => {
@@ -27,12 +28,14 @@ const SingleAlbum = ({album, authenticated, onClick}) => {
         <button className="btn btn-primary" onClick={onClick(album)}><i className="fa fa-shopping-cart" /> Add to Cart </button>
         </div>
         </div>
-
         <div>
-        {authenticated ? <ReviewForm /> : null}
+          <ReviewDisplay />
+        {authenticated ? <ReviewForm albumId={album.id} /> : null}
         </div>
-      </div>
-  );};
+        </div>
+  );
+};
+
 const mapStateToProps = ({albums, loggedInUser}) => {
   return {
     album: albums[0] || {},

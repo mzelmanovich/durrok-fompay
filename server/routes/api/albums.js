@@ -141,8 +141,8 @@ router.delete('/albums/:id/artist', (req, res, next) => {
 
 router.get('/albums/:id/reviews', (req, res, next) => {
   const {id} = req.params;
-  db.models.Albums.findById(id, {include: [{all: true}]})
-  .then(album => ( album ? res.json(album.genre) : res.sendStatus(404)))
+  db.models.Reviews.findAll({where: {albumId: id}, include: [{all: true}]})
+  .then(reviews => ( reviews ? res.json(reviews) : res.sendStatus(404)))
   .catch(next);
 });
 
@@ -150,9 +150,9 @@ router.post('/albums/:id/reviews', (req, res, next) => {
   if (req.isAuthenticated()){
     return db.models.Reviews.create({
       content: req.body.content,
-      rating: req.body.rating,
+      rating: req.body.rating * 1,
       albumId: req.params.id,
-      userId: req.user.id
+      userId: req.user.id * 1
     })
 	.then((newReview) => {
   res.status(201).json(newReview);

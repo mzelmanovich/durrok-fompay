@@ -38,7 +38,6 @@ app.use(routes);
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, '..', 'index.html')));
 
 app.get('/logout', function(req, res){
-  console.log('logging out');
   req.logout();
   res.redirect('/');
 });

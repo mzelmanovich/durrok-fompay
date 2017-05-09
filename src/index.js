@@ -6,6 +6,7 @@ import store from './store';
 import App from  './components/AppContainer.jsx';
 import {fetchJumbotron, fetchAlbum, fetchAllAlbum} from './actions/albums';
 import {fetchGenres, fetchAlbums} from './actions/genres';
+import {fetchReviews, addSingleAlbumReview} from './actions/review';
 import IndexContainer from './components/IndexContainer.jsx';
 import GenreAlbums from './components/GenreAlbums.jsx';
 import SingleAlbum from './components/SingleAlbum.jsx';
@@ -32,8 +33,6 @@ window.test2 = (data) => {
 
 const root = document.getElementById('root');
 
-let Test2 = () => (<h1>hi1245</h1>);
-let Test3 = () => (<h1>Test3</h1>);
 
 const Routes = ({index, genreAlbums, singleAlbum, allAlbums, loginCheck, getCart}) => (
   <Router history={ hashHistory }>
@@ -57,6 +56,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   singleAlbum: ({params}) => {
     dispatch(fetchAlbum(params.albumId));
+    dispatch(fetchReviews(params.albumId));
   },
   allAlbums: ({params}) => {
     dispatch(fetchAllAlbum(params.albumId));

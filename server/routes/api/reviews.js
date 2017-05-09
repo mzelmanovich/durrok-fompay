@@ -1,5 +1,16 @@
 const router = require('express').Router();
 const db = require('../../db');
+const Albums = db.models.Albums;
+const User = db.models.Users;
+
+router.param('albumId', (req, res, next, albumId) => {
+  Albums.findById(albumId)
+  .then(foundAlbums => {
+    req.albums = foundAlbums;
+    next();
+  })
+  .catch(next);
+})
 
 // GET /api/reviews/ - gets all the reviews
 router.get('/reviews', (req, res, next) => {
@@ -8,10 +19,10 @@ router.get('/reviews', (req, res, next) => {
     .catch(next);
 });
 
-//GET /api/reviews/:reviewId - gets a single review
+
 router.get('/reviews/:id', (req, res, next) => {
   const id = req.params.id;
-  db.models.Reviews.findById(id)
+  db.models.Reviews.findById(id,{include:[{all:true}]})
   .then(review => ( review ? res.send(review).json() : res.sendStatus(404)))
   .catch(next);
 });

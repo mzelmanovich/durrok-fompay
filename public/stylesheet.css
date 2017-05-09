@@ -8,7 +8,16 @@
 	margin-top: 10px;
 	margin-bottom: 0px;
 }
-
+.sidebar-wrapper {
+    margin-left: -150px;
+    left: 70px;
+    width: 150px;
+    background: #222;
+    position: fixed;
+    height: 100%;
+    z-index: 10000;
+    transition: all .4s ease 0s;
+}
 .footer {
 	display: block;
 	text-align: center;
@@ -157,4 +166,15 @@ margin-left:-5%;
 }
 .col-xs-4:hover .middle-sm{
   opacity: 1;
+}
+
+.star{
+	overflow:hidden;
+	height: 20px;
+	margin-top:20px
+}
+.fa-star{
+	width: 20px;
+	height: 20px;
+	color: #e2ad0a;
 }

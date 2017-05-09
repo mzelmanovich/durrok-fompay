@@ -14,7 +14,8 @@ const artistsToAdd = [
 ];
 
 const usersToAdd = [
-    {id: 1, firstName: 'Summer', lastName: 'Guan', email: 'summergun10@gmail.com', googleId: '100494953576356654376'}
+    {id: 1, firstName: 'Summer', lastName: 'Guan', email: 'summergun10@gmail.com', googleId: '100494953576356654376'},
+  {id: 2, firstName: 'Mitch', lastName: 'Z', email: 'mitch@gmail.com', googleId: '123'}
 ];
 
 
@@ -161,11 +162,91 @@ const albumsToAdd = [
   },
 ];
 
-const reviewsToAdd = [];
+const reviewsToAdd = [
+  {
+    id: 1,
+    albumId: 1,
+    userId: 1,
+    rating: 4,
+    content: 'Amazing!'
+  },
+  {
+    id: 2,
+    albumId: 2,
+    userId: 1,
+    rating: 5,
+    content: 'Groudbreaking!'
+  },
+    {
+    id: 3,
+    albumId: 3,
+    userId: 1,
+    rating: 4,
+    content: 'Test4!'
+  },
+    {
+    id: 4,
+    albumId: 4,
+    userId: 1,
+    rating: 2,
+    content: 'woohoo!'
+  },
+    {
+    id: 5,
+    albumId: 5,
+    userId: 1,
+    rating: 5,
+    content: 'classy!'
+  },
+    {
+    id: 6,
+    albumId: 6,
+    userId: 1,
+    rating: 5,
+    content: 'Empowering!'
+  },
+    {
+    id: 7,
+    albumId: 7,
+    userId: 1,
+    rating: 3,
+    content: 'Hate it!'
+  },
+    {
+    id: 8,
+    albumId: 8,
+    userId: 1,
+    rating: 5,
+    content: 'My favorite of all time!'
+  },
+    {
+    id: 9,
+    albumId: 9,
+    userId: 1,
+    rating: 4,
+    content: 'The best!!'
+  },
+    {
+    id: 10,
+    albumId: 3,
+    userId: 1,
+    rating: 2,
+    content: 'Meh!'
+  },
+    {
+    id: 11,
+    albumId: 1,
+    userId: 2,
+    rating: 3,
+    content: 'Another Amazing!'
+  },
 
-albumsToAdd.forEach(({id}) => {
-  reviewsToAdd.push({id, albumId: id, userId: 1, rating: 5, content: 'Music Rocked me So hard!'});
-});
+
+];
+
+// albumsToAdd.forEach(({id}) => {
+//   reviewsToAdd.push({id, albumId: id, userId: 1, rating: 2, content: 'Music Rocked me So hard!'});
+// });
 
 module.exports = {
   artistsToAdd,
