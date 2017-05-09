@@ -52,10 +52,7 @@ const Cart = ({firstName = 'Guest', albums = [], remove}) => {
                           <td />
                           <td />
                           <td />
-                          <td>
-                          <button type="button" className="btn btn-default">
-                              <Link to={`/albums`}><span className="glyphicon glyphicon-shopping-cart" /> Continue Shopping </Link>
-                          </button></td>
+                          <td></td>
                           <td>
                           <button type="button" className="btn btn-warning">
                            <Link to="/cart/checkout"><i className="fa fa-credit-card-alt" aria-hidden="true" /> Checkout</Link>
