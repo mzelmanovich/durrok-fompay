@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import ReviewForm from './Review/ReviewForm.jsx';
+import {putInCart, removeFromCart} from '../actions/cart';
 
-
-const SingleAlbum = ({album, authenticated}) => {
+const SingleAlbum = ({album, authenticated, onClick}) => {
   if (album && !album.artist){
     album.artist = {};
   }
@@ -20,10 +20,11 @@ const SingleAlbum = ({album, authenticated}) => {
         <p>By {album.artist.name} </p>
           <p className="lead">{album.description}</p>
           <br />
-          <h4>${album.price}</h4>
-        <button className="btn btn-primary"><i className="fa fa-shopping-cart" /> Add to Cart </button>
+          <h4>${(album.price * 1).toFixed(2)}</h4>
+        <button className="btn btn-primary" onClick={onClick(album)}><i className="fa fa-shopping-cart" /> Add to Cart </button>
         </div>
         </div>
+        <iframe src={`https://embed.spotify.com/?uri=spotify:album:${album.spotId}`} width="300" height="380" frameboder="0" allowTransparency="true" />
         <div>
         {authenticated ? <ReviewForm /> : null}
         </div>
@@ -36,8 +37,11 @@ const mapStateToProps = ({albums, loggedInUser}) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//    loadAllAlbums: dispatch(loadAllAlbums()),
-//});
+const mapDispatchToProps = (dispatch) => ({
+  onClick: album => (event) => {
+    event.preventDefault();
+    dispatch(putInCart(album));
+  }
+});
 
-export default connect(mapStateToProps)(SingleAlbum);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleAlbum);
