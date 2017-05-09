@@ -22184,6 +22184,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(AlbumsContainer);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.keepRoute = undefined;
 
 var _react = __webpack_require__(1);
 
@@ -22199,7 +22200,7 @@ var _reactRouter = __webpack_require__(27);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var keepRoute = function keepRoute() {
+var keepRoute = exports.keepRoute = function keepRoute() {
   var path = window.location.hash;
   localStorage.setItem('lastPath', path);
 };
@@ -22316,6 +22317,8 @@ var _reactRouter = __webpack_require__(27);
 var _reactRedux = __webpack_require__(34);
 
 var _cart = __webpack_require__(76);
+
+var _AppContainer = __webpack_require__(262);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22527,9 +22530,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     checkOut: function checkOut() {
       return function (event) {
+        (0, _AppContainer.keepRoute)();
         event.preventDefault();
         dispatch((0, _cart.checkOut)());
-        _reactRouter.hashHistory.push('/orders');
       };
     }
   };

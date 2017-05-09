@@ -1,7 +1,8 @@
 import React from 'react';
-import {Link, hashHistory} from 'react-router';
+import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {removeFromCart, checkOut} from '../actions/cart';
+import {keepRoute} from './AppContainer.jsx';
 
 const CartRow = ({album: {id, imgURL, name, price}, remove}) => (<tr>
                           <td className="col-xs-6 col-md-4">
@@ -79,9 +80,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(removeFromCart(album));
   },
   checkOut: () => (event) => {
+    keepRoute();
     event.preventDefault();
     dispatch(checkOut());
-    hashHistory.push('/orders');
   }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

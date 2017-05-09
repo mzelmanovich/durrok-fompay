@@ -3,7 +3,7 @@ import Footer from './Footer.jsx';
 import {connect} from 'react-redux';
 import {hashHistory} from 'react-router';
 
-const keepRoute = () => {
+export const keepRoute = () => {
   const path = window.location.hash;
   localStorage.setItem('lastPath', path);
 };

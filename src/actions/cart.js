@@ -1,6 +1,5 @@
 import {ADD_TO_CART, REMOVE_FROM_CART} from '../constants';
-import {setCart} from './user';
-import {fetchCart, fetchLoggedInUser} from './user';
+import {setCart, fetchCart, fetchLoggedInUser} from './user';
 import axios from 'axios';
 import {hashHistory} from 'react-router';
 
