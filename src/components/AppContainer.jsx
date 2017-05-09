@@ -17,6 +17,7 @@ const AppContainer = ({children, user, albumCount}) => {
               : <li role="presentation"><a href="/auth/google" onClick={keepRoute}><i className="fa fa-google-plus-square" /> Google Login</a></li>}
               <li role="presentation"><a href="#">Home</a></li>
               <li role="presentation"><a href="/#/cart"><i className="fa fa-shopping-cart fa-lg" /> Cart ({albumCount || 0})</a></li>
+               {user.firstName ? <li role="presentation"><a href="/#/orders"><i className="fa fa-barcode" /> Orders </a></li> : null}
               {user.firstName ? <li role="presentation"><a href="/logout"><i className="fa fa-sign-out" /> Log Out</a></li> : null}
             </ul>
           </nav>

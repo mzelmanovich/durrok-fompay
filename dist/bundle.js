@@ -22265,6 +22265,16 @@ var AppContainer = function AppContainer(_ref) {
             { role: 'presentation' },
             _react2.default.createElement(
               'a',
+              { href: '/#/orders' },
+              _react2.default.createElement('i', { className: 'fa fa-barcode' }),
+              ' Orders '
+            )
+          ) : null,
+          user.firstName ? _react2.default.createElement(
+            'li',
+            { role: 'presentation' },
+            _react2.default.createElement(
+              'a',
               { href: '/logout' },
               _react2.default.createElement('i', { className: 'fa fa-sign-out' }),
               ' Log Out'
