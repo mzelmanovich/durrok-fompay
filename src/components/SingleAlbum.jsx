@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import ReviewForm from './Review/ReviewForm.jsx';
+import ReviewDisplay from './Review/ReviewDisplay.jsx';
 
 
 const SingleAlbum = ({album, authenticated }) => {
@@ -28,7 +29,8 @@ const SingleAlbum = ({album, authenticated }) => {
         </div>
        
         <div>
-        {authenticated ? <ReviewForm /> : null}
+          <ReviewDisplay />
+        {authenticated ? <ReviewForm albumId={album.id}/> : null}
         </div>
         </div>
     );

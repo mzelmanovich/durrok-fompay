@@ -19,16 +19,6 @@ router.get('/reviews', (req, res, next) => {
     .catch(next);
 });
 
-//Get all reviews for a single album
-// router.get('/:albumId', (req, res, next) => {
-//   console.log(req.params);
-//   db.models.Reviews.findAll({where:{albumid: req.params.albumId}, include:[User] })
-//   .then(reviewsArr => {res.send(reviewsArr)})
-//      .then(console.log('hello summer'))
-//   .catch(next);
-// });
-
-// GET /api/reviews/:reviewId - gets a single review
 
 router.get('/reviews/:id', (req, res, next) => {
   const id = req.params.id;

@@ -48,7 +48,6 @@ router.put('/genres/:id', (req, res, next) => {
   Genre.findById(id)
 		.then(genre => {
       genre.name = req.body.name;
-      // console.log(req.body);
       return genre.save(req.body);
     })
 		.then(newGenre => res.send(newGenre))

@@ -1,8 +1,5 @@
 import { SET_REVIEWS, FETCH_ALL_REVIEWS } from '../constants';
 import axios from 'axios';
-
-
-
 import { fetchAlbum } from './albums';
 
 export const setReviews = reviews => ({
@@ -24,24 +21,13 @@ export const fetchReviews = (id) => {
   };
 };
 
-// export const getSingleAlbumReviews = (albumId) => dispatch=> 
-// axios.get( 'api/reviews/${albumId}')
-// .then(( selectedReviews )=> dispatch(fetchallreviews(selectedReviews.data)))
-// .catch(console.error) ;
-
-export const addSingleAlbumReview = (albumId, content, rating, userId) => dispatch => 
-axios.post('api/reviews/${albumId}',{text: content, rating, userId})
-.then(( newReview)=> dispatch(setReview(newReview.data)))
+export const addSingleAlbumReview = (content, rating, albumId ) => dispatch => 
+axios.post(`api/albums/${albumId}/reviews`, {content, rating})
+.then(() => dispatch(fetchReviews(albumId)))
 .catch(console.error) ;
 
 
-// export const addReview = (reviewData) => {
-//     console.log('this is the reviewdata', reviewData);
-//     return dispatch => {
-//         axios.post(`/api/reviews`, reviewData)
-//         .then(() => dispatch(fetchAlbum(reviewData.albumId)));
-//     };
-// };
+
 
 
 

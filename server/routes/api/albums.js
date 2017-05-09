@@ -150,9 +150,9 @@ router.post('/albums/:id/reviews', (req, res, next) => {
   if (req.isAuthenticated()){
     return db.models.Reviews.create({
       content: req.body.content,
-      rating: req.body.rating,
+      rating: req.body.rating * 1,
       albumId: req.params.id,
-      userId: req.user.id
+      userId: req.user.id * 1
     })
 	.then((newReview) => {
   res.status(201).json(newReview);

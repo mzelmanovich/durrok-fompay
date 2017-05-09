@@ -16,8 +16,6 @@ import {fetchLoggedInUser} from './actions/user';
 
 const root = document.getElementById('root');
 
-let Test2 = () => (<h1>hi1245</h1>);
-let Test3 = () => (<h1>Test3</h1>);
 
 const Routes = ({index, genreAlbums, singleAlbum, allAlbums, loginCheck}) => (
   <Router history={ hashHistory }>

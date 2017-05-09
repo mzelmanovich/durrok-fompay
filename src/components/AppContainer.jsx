@@ -16,8 +16,7 @@ const AppContainer = ({children, user}) => {
               <li role="presentation"><a href="/#/cart"><i className="fa fa-shopping-cart fa-lg" /> Cart</a></li>
               {user.firstName ? <li role="presentation"><a href="/logout"><i className="fa fa-sign-out" /> Log Out</a></li> : null}
             </ul>
-          </nav>
-    
+          </nav>  
           <div className="maindiv">
           <img src ="./public/logo.png" />
           </div>
