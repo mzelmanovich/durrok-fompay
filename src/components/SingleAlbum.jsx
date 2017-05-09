@@ -24,6 +24,7 @@ const SingleAlbum = ({album, authenticated, onClick}) => {
         <button className="btn btn-primary" onClick={onClick(album)}><i className="fa fa-shopping-cart" /> Add to Cart </button>
         </div>
         </div>
+        <iframe src={`https://embed.spotify.com/?uri=spotify:album:${album.spotId}`} width="300" height="380" frameboder="0" allowTransparency="true" />
         <div>
         {authenticated ? <ReviewForm /> : null}
         </div>

@@ -3246,6 +3246,7 @@ var SET_LOGGEDIN_USER = exports.SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER';
 var SET_STARS = exports.SET_STARS = 'SET_STARS';
 var SET_CART = exports.SET_CART = 'SET_CART';
 var REMOVE_FROM_CART = exports.REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+var SET_SPOTIFY = exports.SET_SPOTIFY = 'SET_SPOTIFY';
 
 /***/ }),
 /* 36 */
@@ -12361,7 +12362,7 @@ module.exports = g;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchAllAlbum = exports.fetchAlbum = exports.fetchJumbotron = exports.setAlbums = undefined;
+exports.fetchAlbum = exports.getSpotify = exports.fetchAllAlbum = exports.fetchJumbotron = exports.setAlbums = undefined;
 
 var _constants = __webpack_require__(35);
 
@@ -12390,9 +12391,9 @@ var fetchJumbotron = exports.fetchJumbotron = function fetchJumbotron() {
   };
 };
 
-var fetchAlbum = exports.fetchAlbum = function fetchAlbum(id) {
+var fetchAllAlbum = exports.fetchAllAlbum = function fetchAllAlbum() {
   return function (dispatch) {
-    return _axios2.default.get('/api/albums/' + id).then(function (_ref2) {
+    return _axios2.default.get('/api/albums').then(function (_ref2) {
       var data = _ref2.data;
       return data;
     }).then(function (data) {
@@ -12402,13 +12403,29 @@ var fetchAlbum = exports.fetchAlbum = function fetchAlbum(id) {
   };
 };
 
-var fetchAllAlbum = exports.fetchAllAlbum = function fetchAllAlbum() {
+var getSpotify = exports.getSpotify = function getSpotify(album) {
   return function (dispatch) {
-    return _axios2.default.get('/api/albums').then(function (_ref3) {
+    return _axios2.default.get('https://api.spotify.com/v1/search?q=album:' + album.name + ' artist:' + album.artist.name + '&type=album').then(function (_ref3) {
       var data = _ref3.data;
+      return data.albums.items[0].id;
+    }).then(function (spotId) {
+      album.spotId = spotId;
+      console.log(spotId);
+      dispatch(setAlbums([album]));
+      return album;
+    }).catch(function () {
+      return dispatch(setAlbums([album]));
+    });
+  };
+};
+
+var fetchAlbum = exports.fetchAlbum = function fetchAlbum(id) {
+  return function (dispatch) {
+    return _axios2.default.get('/api/albums/' + id).then(function (_ref4) {
+      var data = _ref4.data;
       return data;
     }).then(function (data) {
-      dispatch(setAlbums([data]));
+      dispatch(getSpotify(data));
       return data;
     }).catch(console.error);
   };
@@ -22525,6 +22542,7 @@ var SingleAlbum = function SingleAlbum(_ref) {
         )
       )
     ),
+    _react2.default.createElement('iframe', { src: 'https://embed.spotify.com/?uri=spotify:album:' + album.spotId, width: '300', height: '380', frameboder: '0', allowTransparency: 'true' }),
     _react2.default.createElement(
       'div',
       null,
@@ -23614,6 +23632,9 @@ var albums = function albums() {
 
   switch (action.type) {
     case _constants.SET_ALBUMS:
+      state = [].concat(_toConsumableArray(action.data));
+      break;
+    case _constants.SET_SPOTIFY:
       state = [].concat(_toConsumableArray(action.data));
       break;
   }
