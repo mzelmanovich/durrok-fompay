@@ -22495,7 +22495,7 @@ var SingleAlbum = function SingleAlbum(_ref) {
           'h4',
           null,
           '$',
-          album.price
+          (album.price * 1).toFixed(2)
         ),
         _react2.default.createElement(
           'button',
