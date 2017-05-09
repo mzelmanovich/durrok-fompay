@@ -3,10 +3,10 @@ import {Carousel} from 'react-bootstrap';
 
 const Jumbotron = ({carrouselItems}) => {
   carrouselItems = carrouselItems || [];
-  carrouselItems = carrouselItems.map(({src, h3, p}, i) => {
+  carrouselItems = carrouselItems.map(({src, h3, p, click = () => {}}, i) => {
     return (<Carousel.Item key={i + 'carrousel'}>
 	            <div className="jumbotron-image">
-			      <img width={910} height={500} alt="900x500" src={src} />
+			      <img width={910} height={500} alt="900x500" src={src} onClick={click} />
 			     </div>
 			      <Carousel.Caption>
 			        <h3>{h3}</h3>

@@ -12971,6 +12971,10 @@ module.exports = function bind(fn, thisArg) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.mapToReviews = exports.mapToGridAlbums = exports.mapToJumbo = exports.selectSingleAlbum = exports.selectAlbumsByGenre = exports.selectGenreId = exports.selectAlbums = exports.selectLoading = undefined;
+
+var _reactRouter = __webpack_require__(27);
+
 var selectLoading = exports.selectLoading = function selectLoading(state) {
   return state.albums.loading;
 };
@@ -12998,7 +13002,10 @@ var mapToJumbo = exports.mapToJumbo = function mapToJumbo(apiArr) {
     return {
       src: data.jumboImg,
       h3: data.artist ? data.artist.name : 'UNKNOWN',
-      p: data.name
+      p: data.name,
+      click: function click() {
+        return _reactRouter.hashHistory.push('/albums/' + data.id);
+      }
     };
   });
 };
@@ -24349,7 +24356,9 @@ var Jumbotron = function Jumbotron(_ref) {
 		carrouselItems = carrouselItems.map(function (_ref2, i) {
 				var src = _ref2.src,
 				    h3 = _ref2.h3,
-				    p = _ref2.p;
+				    p = _ref2.p,
+				    _ref2$click = _ref2.click,
+				    click = _ref2$click === undefined ? function () {} : _ref2$click;
 
 				return _react2.default.createElement(
 						_reactBootstrap.Carousel.Item,
@@ -24357,7 +24366,7 @@ var Jumbotron = function Jumbotron(_ref) {
 						_react2.default.createElement(
 								'div',
 								{ className: 'jumbotron-image' },
-								_react2.default.createElement('img', { width: 910, height: 500, alt: '900x500', src: src })
+								_react2.default.createElement('img', { width: 910, height: 500, alt: '900x500', src: src, onClick: click })
 						),
 						_react2.default.createElement(
 								_reactBootstrap.Carousel.Caption,

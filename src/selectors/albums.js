@@ -1,3 +1,4 @@
+import {hashHistory} from 'react-router';
 export const selectLoading = (state) => state.albums.loading;
 export const selectAlbums = (state) => state.albums.allAlbums;
 export const selectGenreId = (state, genreId) => genreId;
@@ -12,7 +13,8 @@ export const mapToJumbo = (apiArr) =>
 apiArr.map(data => ({
   src: data.jumboImg,
   h3: data.artist ? data.artist.name : 'UNKNOWN',
-  p: data.name
+  p: data.name,
+  click: () => hashHistory.push('/albums/' + data.id)
 }));
 
 export const mapToGridAlbums = (apiArr) => {
@@ -29,7 +31,7 @@ export const mapToGridAlbums = (apiArr) => {
 };
 
 export const mapToReviews = (apiArr) => {
- 
+
   if (apiArr.length > 0){
     const newArray = apiArr[0].map( data => ({
       content: data.content,
@@ -39,9 +41,7 @@ export const mapToReviews = (apiArr) => {
     return newArray;
   }
   return [];
-}
-
-
+};
 
 
 // export const selectAlbumsByGenre = createSelector(
