@@ -22505,6 +22505,11 @@ var SingleAlbum = function SingleAlbum(_ref) {
       ),
       _react2.default.createElement(
         'div',
+        { className: 'col-xs-4 thumb center-block' },
+        _react2.default.createElement('iframe', { src: 'https://embed.spotify.com/?uri=spotify:album:' + album.spotId, width: '300', height: '380', frameboder: '0', allowTransparency: 'true' })
+      ),
+      _react2.default.createElement(
+        'div',
         { className: 'description' },
         _react2.default.createElement(
           'h2',
@@ -22542,7 +22547,6 @@ var SingleAlbum = function SingleAlbum(_ref) {
         )
       )
     ),
-    _react2.default.createElement('iframe', { src: 'https://embed.spotify.com/?uri=spotify:album:' + album.spotId, width: '300', height: '380', frameboder: '0', allowTransparency: 'true' }),
     _react2.default.createElement(
       'div',
       null,
