@@ -21820,6 +21820,7 @@ var fetchCart = exports.fetchCart = function fetchCart() {
       var data = _ref2.data;
       return data;
     }).then(function (data) {
+      console.log(data);
       dispatch(setCart(data));
       return data;
     }).catch(console.error);
@@ -22040,7 +22041,6 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(AppContainer);
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = Cart;
 
 var _react = __webpack_require__(1);
 
@@ -22048,17 +22048,80 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(32);
 
+var _reactRedux = __webpack_require__(43);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Cart() {
+var CartRow = function CartRow(_ref) {
+    var _ref$album = _ref.album,
+        id = _ref$album.id,
+        imgURL = _ref$album.imgURL,
+        name = _ref$album.name,
+        price = _ref$album.price;
+    return _react2.default.createElement(
+        'tr',
+        null,
+        _react2.default.createElement(
+            'td',
+            { className: 'col-xs-6 col-md-4' },
+            _react2.default.createElement(
+                'span',
+                { className: 'media' },
+                _react2.default.createElement(
+                    _reactRouter.Link,
+                    { to: '/albums/' + id },
+                    _react2.default.createElement('img', { className: 'img-thumb', width: '80', height: '80', src: imgURL })
+                )
+            ),
+            _react2.default.createElement(
+                'button',
+                { type: 'button', id: 'close', className: 'btn btn-info btn-sm' },
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'X'
+                )
+            )
+        ),
+        _react2.default.createElement(
+            'td',
+            { className: 'col-xs-2' },
+            _react2.default.createElement(
+                'a',
+                { href: '#/albums/' + id },
+                name
+            )
+        ),
+        _react2.default.createElement(
+            'td',
+            { className: 'col-sm-1 col-md-1 text-left' },
+            _react2.default.createElement(
+                'strong',
+                null,
+                '$',
+                (price * 1).toFixed(2)
+            )
+        )
+    );
+};
+var Cart = function Cart(_ref2) {
+    var _ref2$firstName = _ref2.firstName,
+        firstName = _ref2$firstName === undefined ? 'Guest' : _ref2$firstName,
+        _ref2$albums = _ref2.albums,
+        albums = _ref2$albums === undefined ? [] : _ref2$albums;
 
+    var sub = albums.reduce(function (total, album) {
+        return total + album.price * 1;
+    }, 0).toFixed(2) || 0 .toFixed(2);
+    var tax = (0.07 * sub).toFixed(2);
     return _react2.default.createElement(
         'div',
         { id: 'cart', className: 'container' },
         _react2.default.createElement(
             'h2',
             null,
-            'Summer\'s Cart:'
+            firstName,
+            '\'s Cart:'
         ),
         _react2.default.createElement('br', null),
         _react2.default.createElement('br', null),
@@ -22090,71 +22153,16 @@ function Cart() {
                             _react2.default.createElement(
                                 'th',
                                 null,
-                                'Pirce'
-                            ),
-                            _react2.default.createElement(
-                                'th',
-                                null,
-                                'Total'
+                                'Price'
                             )
                         )
                     ),
                     _react2.default.createElement(
                         'tbody',
                         null,
-                        _react2.default.createElement(
-                            'tr',
-                            null,
-                            _react2.default.createElement(
-                                'td',
-                                { className: 'col-xs-6 col-md-4' },
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'media' },
-                                    _react2.default.createElement(
-                                        _reactRouter.Link,
-                                        { to: '/albums/6' },
-                                        _react2.default.createElement('img', { className: 'img-thumb', width: '80', height: '80', src: 'https://images-na.ssl-images-amazon.com/images/I/41WNJweHfkL._SS500.jpg' })
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'button',
-                                    { type: 'button', id: 'close', className: 'btn btn-info btn-sm' },
-                                    _react2.default.createElement(
-                                        'span',
-                                        null,
-                                        'X'
-                                    )
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                { className: 'col-xs-2' },
-                                _react2.default.createElement(
-                                    'a',
-                                    { href: '#/albums/6' },
-                                    'Joanne'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                { className: 'col-sm-1 col-md-1 text-left' },
-                                _react2.default.createElement(
-                                    'strong',
-                                    null,
-                                    '$8.99'
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'td',
-                                { className: 'col-sm-1 col-md-1 text-left' },
-                                _react2.default.createElement(
-                                    'strong',
-                                    null,
-                                    '$8.99'
-                                )
-                            )
-                        )
+                        albums.map(function (album) {
+                            return _react2.default.createElement(CartRow, { album: album, key: album.id });
+                        })
                     ),
                     _react2.default.createElement(
                         'tfoot',
@@ -22173,7 +22181,7 @@ function Cart() {
                                     null,
                                     'Subtotal',
                                     _react2.default.createElement('br', null),
-                                    'Estimated shipping fee'
+                                    'Tax'
                                 ),
                                 _react2.default.createElement(
                                     'h3',
@@ -22190,15 +22198,18 @@ function Cart() {
                                     _react2.default.createElement(
                                         'strong',
                                         null,
-                                        '$8.99',
+                                        '$',
+                                        sub,
                                         _react2.default.createElement('br', null),
-                                        '$8.99'
+                                        '$',
+                                        tax
                                     )
                                 ),
                                 _react2.default.createElement(
                                     'h3',
                                     null,
-                                    '$8.99'
+                                    '$',
+                                    (sub * 1.07).toFixed(2)
                                 )
                             )
                         ),
@@ -22243,7 +22254,18 @@ function Cart() {
             )
         )
     );
-}
+};
+
+var mapStateToProps = function mapStateToProps(_ref3) {
+    var cart = _ref3.cart,
+        loggedInUser = _ref3.loggedInUser;
+
+    return {
+        firstName: loggedInUser.firstName,
+        albums: cart.albums
+    };
+};
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Cart);
 
 /***/ }),
 /* 262 */
@@ -23458,7 +23480,8 @@ var Routes = function Routes(_ref) {
       genreAlbums = _ref.genreAlbums,
       singleAlbum = _ref.singleAlbum,
       allAlbums = _ref.allAlbums,
-      loginCheck = _ref.loginCheck;
+      loginCheck = _ref.loginCheck,
+      getCart = _ref.getCart;
   return _react2.default.createElement(
     _reactRouter.Router,
     { history: _reactRouter.hashHistory },
@@ -23468,7 +23491,7 @@ var Routes = function Routes(_ref) {
       _react2.default.createElement(_reactRouter.IndexRoute, { component: _IndexContainer2.default, onEnter: index }),
       _react2.default.createElement(_reactRouter.Route, { path: 'genres/:genreId/albums', component: _GenreAlbums2.default, onEnter: genreAlbums }),
       _react2.default.createElement(_reactRouter.Route, { path: '/albums/:albumId', component: _SingleAlbum2.default, onEnter: singleAlbum }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/cart', component: _CartComponent2.default }),
+      _react2.default.createElement(_reactRouter.Route, { path: '/cart', component: _CartComponent2.default, onEnter: getCart }),
       _react2.default.createElement(_reactRouter.Route, { path: '/albums', component: _AlbumsContainer2.default, onEnter: allAlbums })
     )
   );
@@ -23494,6 +23517,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       var params = _ref4.params;
 
       dispatch((0, _albums.fetchAllAlbum)(params.albumId));
+    },
+    getCart: function getCart() {
+      dispatch((0, _user.fetchCart)());
     },
     loginCheck: function loginCheck() {
       var lastPath = localStorage.getItem('lastPath');

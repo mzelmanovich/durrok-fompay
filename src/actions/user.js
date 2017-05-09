@@ -29,6 +29,7 @@ export const fetchCart = () => dispatch => axios
     .get(`/api/users/me/cart`)
     .then(({data}) => data)
     .then(data => {
+      console.log(data);
       dispatch(setCart(data));
       return data;
     })
