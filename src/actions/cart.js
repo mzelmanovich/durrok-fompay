@@ -21,7 +21,7 @@ export const deserializeCart = () => {
     localStorage.setItem('cart', '');
     cart = localStorage.getItem('cart');
   }
-  let ids = localStorage.getItem('cart').split(',').filter(id => id.length > 0);
+  let ids = localStorage.cart.split(',').filter(id => id.length > 0);
   console.log(ids);
   ids = ids.map((id) => axios.get('/api/albums/' + id).then(({data}) => data));
   return Promise.all(ids).then((albums) => ({albums})).catch(() => ({albums: []}));
