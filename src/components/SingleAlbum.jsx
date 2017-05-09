@@ -23,7 +23,6 @@ const SingleAlbum = ({album, authenticated, onClick}) => {
         <h2><u>{album.name}</u></h2>
         <p>By {album.artist.name} </p>
           <p className="lead">{album.description}</p>
-          <br />
           <h4>${(album.price * 1).toFixed(2)}</h4>
         <button className="btn btn-primary" onClick={onClick(album)}><i className="fa fa-shopping-cart" /> Add to Cart </button>
         </div>

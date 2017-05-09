@@ -22312,8 +22312,6 @@ var Cart = function Cart(_ref2) {
               'tr',
               null,
               _react2.default.createElement('td', null),
-              _react2.default.createElement('td', null),
-              _react2.default.createElement('td', null),
               _react2.default.createElement(
                 'td',
                 null,
@@ -22634,7 +22632,6 @@ var SingleAlbum = function SingleAlbum(_ref) {
           { className: 'lead' },
           album.description
         ),
-        _react2.default.createElement('br', null),
         _react2.default.createElement(
           'h4',
           null,
@@ -23569,6 +23566,10 @@ var _AlbumsContainer = __webpack_require__(261);
 
 var _AlbumsContainer2 = _interopRequireDefault(_AlbumsContainer);
 
+var _OrderConfirmation = __webpack_require__(587);
+
+var _OrderConfirmation2 = _interopRequireDefault(_OrderConfirmation);
+
 var _user = __webpack_require__(154);
 
 var _axios = __webpack_require__(49);
@@ -23608,7 +23609,8 @@ var Routes = function Routes(_ref) {
       _react2.default.createElement(_reactRouter.Route, { path: 'genres/:genreId/albums', component: _GenreAlbums2.default, onEnter: genreAlbums }),
       _react2.default.createElement(_reactRouter.Route, { path: '/albums/:albumId', component: _SingleAlbum2.default, onEnter: singleAlbum }),
       _react2.default.createElement(_reactRouter.Route, { path: '/cart', component: _CartComponent2.default, onEnter: getCart }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/albums', component: _AlbumsContainer2.default, onEnter: allAlbums })
+      _react2.default.createElement(_reactRouter.Route, { path: '/albums', component: _AlbumsContainer2.default, onEnter: allAlbums }),
+      _react2.default.createElement(_reactRouter.Route, { path: '/confirmation', component: _OrderConfirmation2.default })
     )
   );
 };
@@ -53431,6 +53433,118 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 587 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = OrderConfirmation;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import { browserHistory } from 'react-router';
+
+
+function OrderConfirmation() {
+
+    var style = {
+        width: '100%',
+        margin: 20
+    };
+
+    var headerStyle = {
+        padding: 20
+    };
+
+    return _react2.default.createElement(
+        'div',
+        { className: 'panel panel-info' },
+        _react2.default.createElement(
+            'div',
+            { className: 'panel-heading' },
+            'Thanks for your order! '
+        ),
+        _react2.default.createElement(
+            'div',
+            { className: 'panel-body' },
+            _react2.default.createElement(
+                'p',
+                null,
+                'Hope you enjoyed your shopping experiences in Durrok Fompay!'
+            )
+        ),
+        _react2.default.createElement(
+            'table',
+            { className: 'table-order' },
+            _react2.default.createElement(
+                'thead',
+                null,
+                _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                        'th',
+                        null,
+                        'Order'
+                    ),
+                    _react2.default.createElement(
+                        'th',
+                        null,
+                        'Album'
+                    ),
+                    _react2.default.createElement(
+                        'th',
+                        null,
+                        'ArtistName'
+                    ),
+                    _react2.default.createElement(
+                        'th',
+                        null,
+                        'Price'
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                'tbody',
+                null,
+                _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                        'th',
+                        { scope: 'row' },
+                        '1'
+                    ),
+                    _react2.default.createElement(
+                        'td',
+                        null,
+                        'Joanne'
+                    ),
+                    _react2.default.createElement(
+                        'td',
+                        null,
+                        'Lady Gaga'
+                    ),
+                    _react2.default.createElement(
+                        'td',
+                        null,
+                        '$8.99'
+                    )
+                )
+            )
+        )
+    );
+}
 
 /***/ })
 /******/ ]);
