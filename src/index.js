@@ -14,6 +14,7 @@ import Cart from './components/CartComponent.jsx';
 import AlbumsContainer from './components/AlbumsContainer.jsx';
 import OrderConfirmation from './components/OrderConfirmation.jsx';
 import {fetchLoggedInUser, fetchCart} from './actions/user';
+import {saveOfflineCart} from './actions/cart';
 import axios from 'axios';
 
 
@@ -73,6 +74,7 @@ const mapDispatchToProps = (dispatch) => ({
       hashHistory.push(lastPath.split('#')[1]);
     }
     dispatch(fetchLoggedInUser())
+    .then(() => dispatch(saveOfflineCart()))
     .then(() => dispatch(fetchCart()));
   }
 

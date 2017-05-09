@@ -16,9 +16,10 @@ export const serializeCart = (albums) => {
 };
 
 export const deserializeCart = () => {
-  let ids = localStorage.getItem('cart').split(',');
+  let ids = localStorage.getItem('cart').split(',').filter(id => id.length > 0);
+  console.log(ids);
   ids = ids.map((id) => axios.get('/api/albums/' + id).then(({data}) => data));
-  return Promise.all(ids).then((albums) => ({albums}));
+  return Promise.all(ids).then((albums) => ({albums})).catch(() => ({albums: []}));
 };
 
 export const addToOffLineCart = (album) => dispatch => {
@@ -46,12 +47,20 @@ export const removeFromOfflineCart = (album) => dispatch => {
   });
 };
 
-export const saveOfflineCart = () => dispatch =>
-deserializeCart()
-.then(({albums}) => albums.length ?
-axios.post('/api/users/me/cart', albums)
-.then(() => dispatch(fetchCart())) : null)
-.then(console.log);
+export const saveOfflineCart = () => (dispatch, state) =>
+{
+  if (state().loggedInUser.firstName){
+    return deserializeCart()
+    .then(({albums}) => {
+      console.log(albums);
+      localStorage.setItem('cart', '');
+      const haveAlbums = ( albums.length > 0 );
+      if (haveAlbums){
+        return axios.post('/api/users/me/cart', albums.map(({id}) => id));
+      }
+    });
+  }
+};
 
 export const putInCart = ({id}) => (dispatch, state) => {
   if (state().loggedInUser.firstName){
