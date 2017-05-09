@@ -16,6 +16,11 @@ export const serializeCart = (albums) => {
 };
 
 export const deserializeCart = () => {
+  let cart = localStorage.getItem('cart');
+  if (!cart){
+    localStorage.setItem('cart', '');
+    cart = localStorage.getItem('cart');
+  }
   let ids = localStorage.getItem('cart').split(',').filter(id => id.length > 0);
   console.log(ids);
   ids = ids.map((id) => axios.get('/api/albums/' + id).then(({data}) => data));
