@@ -12,6 +12,7 @@ import GenreAlbums from './components/GenreAlbums.jsx';
 import SingleAlbum from './components/SingleAlbum.jsx';
 import Cart from './components/CartComponent.jsx';
 import AlbumsContainer from './components/AlbumsContainer.jsx';
+import OrderConfirmation from './components/OrderConfirmation.jsx';
 import {fetchLoggedInUser, fetchCart} from './actions/user';
 import axios from 'axios';
 
@@ -42,6 +43,7 @@ const Routes = ({index, genreAlbums, singleAlbum, allAlbums, loginCheck, getCart
       <Route path = "/albums/:albumId" component={SingleAlbum} onEnter={ singleAlbum } />
       <Route path="/cart" component = {Cart} onEnter={getCart} />
       <Route path="/albums" component ={AlbumsContainer} onEnter={allAlbums} />
+      <Route path="/confirmation" component ={OrderConfirmation} />
     </Route>
   </Router>
 );

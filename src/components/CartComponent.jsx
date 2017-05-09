@@ -42,9 +42,7 @@ const Cart = ({firstName = 'Guest', albums = [], remove}) => {
                 </tbody>
                  <tfoot>
                       <tr>
-                          <td />
-                          <td />
-                          <td />
+                          <td/>
                           <td><h5>Subtotal<br />Tax</h5><h3>Total</h3></td>
                           <td className="text-right"><h5><strong>${sub}<br />${tax}</strong></h5><h3>${(sub * 1.07).toFixed(2)}</h3></td>
                       </tr>
