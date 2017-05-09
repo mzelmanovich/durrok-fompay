@@ -45,6 +45,11 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchAllAlbum(params.albumId));
   },
   loginCheck: () => {
+    const lastPath = localStorage.getItem('lastPath');
+    if (lastPath && lastPath !== 'null'){
+      localStorage.setItem('lastPath', null);
+      hashHistory.push(lastPath.split('#')[1]);
+    }
     dispatch(fetchLoggedInUser());
   }
 

@@ -3,13 +3,13 @@ import axios from 'axios';
 import { fetchAlbum } from './albums';
 
 export const setReviews = reviews => ({
-    type: SET_REVIEWS,
-    data: reviews
+  type: SET_REVIEWS,
+  data: reviews
 });
 
 export const fetchallreviews = allReviews => ({
-    type: FETCH_ALL_REVIEWS,
-    allReviews
+  type: FETCH_ALL_REVIEWS,
+  allReviews
 });
 
 export const fetchReviews = (id) => {
@@ -21,13 +21,8 @@ export const fetchReviews = (id) => {
   };
 };
 
-export const addSingleAlbumReview = (content, rating, albumId ) => dispatch => 
+export const addSingleAlbumReview = (content, rating, albumId ) => dispatch =>
 axios.post(`api/albums/${albumId}/reviews`, {content, rating})
 .then(() => dispatch(fetchReviews(albumId)))
 .catch(console.error) ;
-
-
-
-
-
 

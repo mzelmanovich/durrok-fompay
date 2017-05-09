@@ -4,3 +4,4 @@ export const SET_GENRES = 'SET_GENRES';
 export const FETCH_ALL_REVIEWS = 'FETCH_REVIEWS';
 export const SET_REVIEWS = 'SET_REVIEWS';
 export const SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER';
+export const SET_STARS = 'SET_STARS';
