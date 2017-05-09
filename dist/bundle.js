@@ -23454,6 +23454,10 @@ window.test = function (data) {
   _axios2.default.post('/api/users/me/cart', data).then(console.log);
 };
 
+window.test3 = function (data) {
+  _axios2.default.put('/api/users/me/cart', { albumId: data }).then(console.log);
+};
+
 window.test2 = function (data) {
   _axios2.default.post('/api/users/me/checkout', data).then(console.log);
 };

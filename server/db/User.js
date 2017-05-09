@@ -9,7 +9,7 @@ const instanceMethods = {
        return !user.cart ? user.createCart() : user.cart;
      })
      .then((cart) => {
-       return cart.setAlbums(albumArr).then(() => cart);
+       return (Array.isArray(albumArr) ? cart.setAlbums(albumArr) : cart.addAlbum(albumArr)).then(() => cart);
      })
   .then((cart) => {
     return conn.model('order').findById(cart.id, {include: [{all: true}]});

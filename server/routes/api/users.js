@@ -22,6 +22,16 @@ router.post('/users/me/cart', (req, res, next) => {
   .catch(next);
 });
 
+router.put('/users/me/cart', (req, res, next) => {
+  const {albumId} = req.body;
+  if (!req.user){
+    return res.json({});
+  }
+  db.models.Users.findById(req.user.id, {include: [{all: true}]})
+  .then((user) => user.refreshCart(albumId))
+  .then((cart) => ( cart ? res.json(cart) : res.json({})))
+  .catch(next);
+});
 router.get('/users/me/cart', (req, res, next) => {
   if (!req.user){
     return res.json({});

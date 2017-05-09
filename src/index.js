@@ -20,6 +20,11 @@ window.test = (data) => {
   .then(console.log);
 };
 
+window.test3 = (data) => {
+  axios.put('/api/users/me/cart', {albumId: data})
+  .then(console.log);
+};
+
 window.test2 = (data) => {
   axios.post('/api/users/me/checkout', data)
   .then(console.log);
