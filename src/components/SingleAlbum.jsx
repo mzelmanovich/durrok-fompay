@@ -15,6 +15,9 @@ const SingleAlbum = ({album, authenticated, onClick}) => {
           <Link to={`/albums/${album.id}`}><img src={album.imgURL} className="img-responsive center-block" /></Link>
           <Link to={`/albums/${album.id}`} className="col-xs-12" style={{textAlign: 'center', fontSize: '20px'}}>{album.name}</Link>
         </div>
+        <div className="col-xs-4 thumb center-block">
+        <iframe src={`https://embed.spotify.com/?uri=spotify:album:${album.spotId}`} width="300" height="380" frameboder="0" allowTransparency="true" />
+        </div>
         <div className="description">
         <h2><u>{album.name}</u></h2>
         <p>By {album.artist.name} </p>
@@ -24,7 +27,7 @@ const SingleAlbum = ({album, authenticated, onClick}) => {
         <button className="btn btn-primary" onClick={onClick(album)}><i className="fa fa-shopping-cart" /> Add to Cart </button>
         </div>
         </div>
-        <iframe src={`https://embed.spotify.com/?uri=spotify:album:${album.spotId}`} width="300" height="380" frameboder="0" allowTransparency="true" />
+
         <div>
         {authenticated ? <ReviewForm /> : null}
         </div>
