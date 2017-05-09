@@ -5,3 +5,4 @@ export const RECEIVE_REVIEW = 'RECEIVE_REVIEW';
 export const SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER';
 export const SET_STARS = 'SET_STARS';
 export const SET_CART = 'SET_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';

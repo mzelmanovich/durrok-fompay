@@ -3245,6 +3245,7 @@ var RECEIVE_REVIEW = exports.RECEIVE_REVIEW = 'RECEIVE_REVIEW';
 var SET_LOGGEDIN_USER = exports.SET_LOGGEDIN_USER = 'SET_LOGGEDIN_USER';
 var SET_STARS = exports.SET_STARS = 'SET_STARS';
 var SET_CART = exports.SET_CART = 'SET_CART';
+var REMOVE_FROM_CART = exports.REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 /***/ }),
 /* 36 */
@@ -21820,7 +21821,6 @@ var fetchCart = exports.fetchCart = function fetchCart() {
       var data = _ref2.data;
       return data;
     }).then(function (data) {
-      console.log(data);
       dispatch(setCart(data));
       return data;
     }).catch(console.error);
@@ -21945,7 +21945,8 @@ var keepRoute = function keepRoute() {
 };
 var AppContainer = function AppContainer(_ref) {
   var children = _ref.children,
-      user = _ref.user;
+      user = _ref.user,
+      albumCount = _ref.albumCount;
 
   return _react2.default.createElement(
     'div',
@@ -21993,7 +21994,9 @@ var AppContainer = function AppContainer(_ref) {
               'a',
               { href: '/#/cart' },
               _react2.default.createElement('i', { className: 'fa fa-shopping-cart fa-lg' }),
-              ' Cart'
+              ' Cart (',
+              albumCount || 0,
+              ')'
             )
           ),
           user.firstName ? _react2.default.createElement(
@@ -22024,9 +22027,11 @@ var AppContainer = function AppContainer(_ref) {
 };
 
 var mapStateToProps = function mapStateToProps(_ref2) {
-  var loggedInUser = _ref2.loggedInUser;
+  var loggedInUser = _ref2.loggedInUser,
+      cart = _ref2.cart;
   return {
-    user: loggedInUser
+    user: loggedInUser,
+    albumCount: cart.albums ? cart.albums.length : null
   };
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(AppContainer);
@@ -22050,6 +22055,8 @@ var _reactRouter = __webpack_require__(32);
 
 var _reactRedux = __webpack_require__(43);
 
+var _cart = __webpack_require__(282);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CartRow = function CartRow(_ref) {
@@ -22057,7 +22064,8 @@ var CartRow = function CartRow(_ref) {
         id = _ref$album.id,
         imgURL = _ref$album.imgURL,
         name = _ref$album.name,
-        price = _ref$album.price;
+        price = _ref$album.price,
+        remove = _ref.remove;
     return _react2.default.createElement(
         'tr',
         null,
@@ -22075,7 +22083,7 @@ var CartRow = function CartRow(_ref) {
             ),
             _react2.default.createElement(
                 'button',
-                { type: 'button', id: 'close', className: 'btn btn-info btn-sm' },
+                { type: 'button', id: 'close', className: 'btn btn-info btn-sm', onClick: remove },
                 _react2.default.createElement(
                     'span',
                     null,
@@ -22108,7 +22116,8 @@ var Cart = function Cart(_ref2) {
     var _ref2$firstName = _ref2.firstName,
         firstName = _ref2$firstName === undefined ? 'Guest' : _ref2$firstName,
         _ref2$albums = _ref2.albums,
-        albums = _ref2$albums === undefined ? [] : _ref2$albums;
+        albums = _ref2$albums === undefined ? [] : _ref2$albums,
+        remove = _ref2.remove;
 
     var sub = albums.reduce(function (total, album) {
         return total + album.price * 1;
@@ -22161,7 +22170,7 @@ var Cart = function Cart(_ref2) {
                         'tbody',
                         null,
                         albums.map(function (album) {
-                            return _react2.default.createElement(CartRow, { album: album, key: album.id });
+                            return _react2.default.createElement(CartRow, { album: album, key: album.id, remove: remove(album) });
                         })
                     ),
                     _react2.default.createElement(
@@ -22265,7 +22274,18 @@ var mapStateToProps = function mapStateToProps(_ref3) {
         albums: cart.albums
     };
 };
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(Cart);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        remove: function remove(album) {
+            return function (event) {
+                event.preventDefault();
+                dispatch((0, _cart.removeFromCart)(album));
+            };
+        }
+    };
+};
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Cart);
 
 /***/ }),
 /* 262 */
@@ -22527,7 +22547,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     onClick: function onClick(album) {
       return function (event) {
         event.preventDefault();
-        dispatch((0, _cart.addToCart)(album));
+        dispatch((0, _cart.putInCart)(album));
       };
     }
   };
@@ -23382,14 +23402,40 @@ module.exports = function spread(callback) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addToCart = undefined;
+exports.removeFromCart = exports.putInCart = exports.addToCart = undefined;
 
 var _constants = __webpack_require__(35);
+
+var _user = __webpack_require__(257);
+
+var _axios = __webpack_require__(95);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var addToCart = exports.addToCart = function addToCart(album) {
   return {
     type: _constants.ADD_TO_CART,
     data: album
+  };
+};
+
+var putInCart = exports.putInCart = function putInCart(_ref) {
+  var id = _ref.id;
+  return function (dispatch) {
+    _axios2.default.put('/api/users/me/cart', { albumId: id }).then(function () {
+      return dispatch((0, _user.fetchCart)());
+    }).catch(console.log);
+  };
+};
+
+var removeFromCart = exports.removeFromCart = function removeFromCart(_ref2) {
+  var id = _ref2.id;
+  return function (dispatch) {
+    _axios2.default.delete('/api/users/me/cart', { data: { albumId: id } }).then(function () {
+      return dispatch((0, _user.fetchCart)());
+    }).catch(console.log);
   };
 };
 
@@ -23595,7 +23641,7 @@ var cart = function cart() {
 
   switch (action.type) {
     case _constants.SET_CART:
-      state = action.data;
+      state = Object.assign({}, action.data);
       break;
   }
   return state;

@@ -32,6 +32,20 @@ router.put('/users/me/cart', (req, res, next) => {
   .then((cart) => ( cart ? res.json(cart) : res.json({})))
   .catch(next);
 });
+
+router.delete('/users/me/cart', (req, res, next) => {
+  const {albumId} = req.body;
+  if (!req.user){
+    return res.json({});
+  }
+  console.log(albumId);
+  db.models.Users.findById(req.user.id, {include: [{all: true}]})
+  .then((user) => user.cart.removeAlbum(albumId))
+  .then((cart) => ( cart ? res.json(cart) : res.json({})))
+  .catch(next);
+});
+
+
 router.get('/users/me/cart', (req, res, next) => {
   if (!req.user){
     return res.json({});

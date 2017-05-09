@@ -1,15 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import {removeFromCart} from '../actions/cart';
 
-const CartRow = ({album: {id, imgURL, name, price}}) => (<tr>
+const CartRow = ({album: {id, imgURL, name, price}, remove}) => (<tr>
                           <td className="col-xs-6 col-md-4">
                                   <span className="media">
                                 <Link to={`/albums/` + id}>
                                   <img className="img-thumb" width="80" height="80" src={imgURL} />
                                 </Link>
                                 </span>
-                                 <button type="button" id="close" className="btn btn-info btn-sm">
+                                 <button type="button" id="close" className="btn btn-info btn-sm" onClick={remove}>
                                   <span>X</span>
                                   </button>
                             </td>
@@ -18,7 +19,7 @@ const CartRow = ({album: {id, imgURL, name, price}}) => (<tr>
 
                               <td className="col-sm-1 col-md-1 text-left"><strong>${(price * 1).toFixed(2)}</strong></td>
                     </tr>);
-const Cart = ({firstName = 'Guest', albums = []}) => {
+const Cart = ({firstName = 'Guest', albums = [], remove}) => {
   const sub = albums.reduce((total, album) => (total + (album.price * 1)), 0).toFixed(2) || (0).toFixed(2);
   const tax = (0.07 * sub).toFixed(2);
   return (
@@ -37,7 +38,7 @@ const Cart = ({firstName = 'Guest', albums = []}) => {
                       </tr>
                   </thead>
                   <tbody>
-                  {albums.map(album => (<CartRow album={album} key={album.id} />))}
+                  {albums.map(album => (<CartRow album={album} key={album.id} remove={remove(album)} />))}
                 </tbody>
                  <tfoot>
                       <tr>
@@ -76,4 +77,11 @@ const mapStateToProps = ({cart, loggedInUser}) => {
     albums: cart.albums
   };
 };
-export default connect(mapStateToProps)(Cart);
+
+const mapDispatchToProps = dispatch => ({
+  remove: album => (event) => {
+    event.preventDefault();
+    dispatch(removeFromCart(album));
+  }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

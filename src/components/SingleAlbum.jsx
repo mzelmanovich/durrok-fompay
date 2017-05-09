@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import ReviewForm from './Review/ReviewForm.jsx';
-import {addToCart} from '../actions/cart';
-
+import {putInCart, removeFromCart} from '../actions/cart';
 
 const SingleAlbum = ({album, authenticated, onClick}) => {
   if (album && !album.artist){
@@ -40,7 +39,7 @@ const mapStateToProps = ({albums, loggedInUser}) => {
 const mapDispatchToProps = (dispatch) => ({
   onClick: album => (event) => {
     event.preventDefault();
-    dispatch(addToCart(album));
+    dispatch(putInCart(album));
   }
 });
 
