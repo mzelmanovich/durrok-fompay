@@ -10,7 +10,7 @@ const db = require('./db');
 const googleConfig = process.env.GOOGLE_CLIENT_ID ? {
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: process.env.GOOGLE_CALLBACK_UL
+  callbackURL: process.env.GOOGLE_CALLBACK_URL
 } : require('../config').googleAuth;
 
 passport.use(new GoogleStrategy(
