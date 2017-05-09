@@ -1,7 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link, hashHistory} from 'react-router';
 import {connect} from 'react-redux';
-import {removeFromCart} from '../actions/cart';
+import {removeFromCart, checkOut} from '../actions/cart';
 
 const CartRow = ({album: {id, imgURL, name, price}, remove}) => (<tr>
                           <td className="col-xs-6 col-md-4">
@@ -19,7 +19,7 @@ const CartRow = ({album: {id, imgURL, name, price}, remove}) => (<tr>
 
                               <td className="col-sm-1 col-md-1 text-left"><strong>${(price * 1).toFixed(2)}</strong></td>
                     </tr>);
-const Cart = ({firstName = 'Guest', albums = [], remove}) => {
+const Cart = ({firstName = 'Guest', albums = [], remove, checkOut}) => {
   const sub = albums.reduce((total, album) => (total + (album.price * 1)), 0).toFixed(2) || (0).toFixed(2);
   const tax = (0.07 * sub).toFixed(2);
   return (
@@ -42,7 +42,7 @@ const Cart = ({firstName = 'Guest', albums = [], remove}) => {
                 </tbody>
                  <tfoot>
                       <tr>
-                          <td/>
+                          <td />
                           <td><h5>Subtotal<br />Tax</h5><h3>Total</h3></td>
                           <td className="text-right"><h5><strong>${sub}<br />${tax}</strong></h5><h3>${(sub * 1.07).toFixed(2)}</h3></td>
                       </tr>
@@ -50,10 +50,10 @@ const Cart = ({firstName = 'Guest', albums = [], remove}) => {
                           <td />
                           <td />
                           <td />
-                          <td></td>
+                          <td />
                           <td>
-                          <button type="button" className="btn btn-warning">
-                           <Link to="/cart/checkout"><i className="fa fa-credit-card-alt" aria-hidden="true" /> Checkout</Link>
+                          <button type="button" className="btn btn-warning" onClick={checkOut()}>
+                           <i className="fa fa-credit-card-alt" aria-hidden="true" /> Checkout
                             <span className="glyphicon glyphicon-play" />
                           </button></td>
                       </tr>
@@ -77,6 +77,11 @@ const mapDispatchToProps = dispatch => ({
   remove: album => (event) => {
     event.preventDefault();
     dispatch(removeFromCart(album));
+  },
+  checkOut: () => (event) => {
+    event.preventDefault();
+    dispatch(checkOut());
+    hashHistory.push('/orders');
   }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

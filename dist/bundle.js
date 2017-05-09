@@ -6021,7 +6021,7 @@ var routes = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_prop_types__["one
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.removeFromCart = exports.putInCart = exports.saveOfflineCart = exports.removeFromOfflineCart = exports.addToOffLineCart = exports.deserializeCart = exports.serializeCart = exports.addToCart = undefined;
+exports.removeFromCart = exports.putInCart = exports.saveOfflineCart = exports.removeFromOfflineCart = exports.addToOffLineCart = exports.deserializeCart = exports.serializeCart = exports.checkOut = exports.addToCart = undefined;
 
 var _constants = __webpack_require__(28);
 
@@ -6030,6 +6030,8 @@ var _user = __webpack_require__(155);
 var _axios = __webpack_require__(49);
 
 var _axios2 = _interopRequireDefault(_axios);
+
+var _reactRouter = __webpack_require__(27);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6040,6 +6042,20 @@ var addToCart = exports.addToCart = function addToCart(album) {
   };
 };
 
+var checkOut = exports.checkOut = function checkOut() {
+  return function (dispatch, state) {
+    if (state().loggedInUser.firstName) {
+      return _axios2.default.post('/api/users/me/checkout').then(function () {
+        return dispatch((0, _user.fetchLoggedInUser)());
+      }).then(function () {
+        return dispatch((0, _user.fetchCart)());
+      }).then(function () {
+        return _reactRouter.hashHistory.push('/orders');
+      }).then(console.log);
+    }
+    window.location = '/auth/google';
+  };
+};
 var serializeCart = exports.serializeCart = function serializeCart(albums) {
   albums = albums.map(function (_ref) {
     var id = _ref.id;
@@ -22361,7 +22377,8 @@ var Cart = function Cart(_ref2) {
       firstName = _ref2$firstName === undefined ? 'Guest' : _ref2$firstName,
       _ref2$albums = _ref2.albums,
       albums = _ref2$albums === undefined ? [] : _ref2$albums,
-      remove = _ref2.remove;
+      remove = _ref2.remove,
+      checkOut = _ref2.checkOut;
 
   var sub = albums.reduce(function (total, album) {
     return total + album.price * 1;
@@ -22476,13 +22493,9 @@ var Cart = function Cart(_ref2) {
                 null,
                 _react2.default.createElement(
                   'button',
-                  { type: 'button', className: 'btn btn-warning' },
-                  _react2.default.createElement(
-                    _reactRouter.Link,
-                    { to: '/cart/checkout' },
-                    _react2.default.createElement('i', { className: 'fa fa-credit-card-alt', 'aria-hidden': 'true' }),
-                    ' Checkout'
-                  ),
+                  { type: 'button', className: 'btn btn-warning', onClick: checkOut() },
+                  _react2.default.createElement('i', { className: 'fa fa-credit-card-alt', 'aria-hidden': 'true' }),
+                  ' Checkout',
                   _react2.default.createElement('span', { className: 'glyphicon glyphicon-play' })
                 )
               )
@@ -22510,6 +22523,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return function (event) {
         event.preventDefault();
         dispatch((0, _cart.removeFromCart)(album));
+      };
+    },
+    checkOut: function checkOut() {
+      return function (event) {
+        event.preventDefault();
+        dispatch((0, _cart.checkOut)());
+        _reactRouter.hashHistory.push('/orders');
       };
     }
   };

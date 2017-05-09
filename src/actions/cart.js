@@ -1,8 +1,8 @@
 import {ADD_TO_CART, REMOVE_FROM_CART} from '../constants';
 import {setCart} from './user';
-import {fetchCart} from './user';
-
+import {fetchCart, fetchLoggedInUser} from './user';
 import axios from 'axios';
+import {hashHistory} from 'react-router';
 
 export const addToCart = (album) => ({
   type: ADD_TO_CART,
@@ -10,6 +10,16 @@ export const addToCart = (album) => ({
 });
 
 
+export const checkOut = () => (dispatch, state) => {
+  if (state().loggedInUser.firstName){
+    return axios.post('/api/users/me/checkout')
+  .then(() => dispatch(fetchLoggedInUser()))
+  .then(() => dispatch(fetchCart()))
+  .then(() =>     hashHistory.push('/orders'))
+  .then(console.log);
+  }
+  window.location = '/auth/google';
+};
 export const serializeCart = (albums) => {
   albums = albums.map(({id}) => id).filter(item => item > 0);
   localStorage.setItem('cart', albums.join(','));
