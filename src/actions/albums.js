@@ -31,7 +31,6 @@ export const getSpotify = (album) => dispatch => axios
 .then(({data}) => data.albums.items[0].id)
 .then(spotId => {
   album.spotId = spotId;
-  console.log(spotId);
   dispatch(setAlbums([album]));
   return album;
 })

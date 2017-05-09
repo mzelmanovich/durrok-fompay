@@ -1,4 +1,5 @@
 import {SET_LOGGEDIN_USER, SET_CART} from '../constants';
+import {addToOffLineCart} from './cart';
 import axios from 'axios';
 
 export const setUser = (data) => {
@@ -15,7 +16,7 @@ export const setCart = (data) => {
   };
 };
 
-export const fetchLoggedInUser = () => dispatch => axios
+export const fetchLoggedInUser = () => (dispatch, state) => axios
     .get(`/api/users/me`)
     .then(({data}) => data)
     .then(data => {
@@ -25,7 +26,9 @@ export const fetchLoggedInUser = () => dispatch => axios
     .catch(console.error);
 
 
-export const fetchCart = () => dispatch => axios
+export const fetchCart = () => (dispatch, state) => {
+  if (state().loggedInUser.firstName){
+    return axios
     .get(`/api/users/me/cart`)
     .then(({data}) => data)
     .then(data => {
@@ -33,4 +36,7 @@ export const fetchCart = () => dispatch => axios
       return data;
     })
     .catch(console.error);
+  }
+  return dispatch(addToOffLineCart(-1));
+};
 
