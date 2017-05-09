@@ -14,30 +14,13 @@ export default function OrderConfirmation () {
   }
 
    return ( 
-                <div className="panel panel-info">
+                <div className="order panel-info">
                     <div className="panel-heading">Thanks for your order! </div>
                     <div className="panel-body">
-                    <p>Hope you enjoyed your shopping experiences in Durrok Fompay!</p>
-                    </div>
-                        <table className = "table-order" >
-                            <thead>
-                            <tr>
-                                <th>Order</th>
-                                <th>Album</th>
-                                <th >ArtistName</th>
-                                <th>Price</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Joanne</td>
-                                <td>Lady Gaga</td>
-                                <td>$8.99</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        </div>
+                    <p>Hope you enjoyed your shopping at Durrok Fompay!</p>   
+                    <p> Your order #12345 is completed on 2017/05/09</p>               
+                  </div>
+                 </div>
 
   )
 }
